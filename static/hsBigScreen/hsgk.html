@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="css/hsgk.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+</head>
+
+
+<body>
+<!--head-->
+<div class="head">
+    <div class="time" id="nowTime">当前时间：2019年01月01日 12：00：00</div>
+    <div class="nav">
+        <ul>
+            <li class="active01"><a href="hsgk.html">槐泗概况</a></li>
+            <li><a href="djyl.html">党建引领</a></li>
+            <li><a href="xzsp.html">行政审批</a></li>
+        </ul>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="zhzf.html">综合执法</a></li>
+            <li><a href="grid.html">网格治理</a></li>
+            <li><a href="zhzx.html">指挥中心</a></li>
+        </ul>
+    </div>
+</div>
+<!--/head end-->
+
+<div id="hv-wrapper">
+    <div class="box box1">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">槐泗历史沿革</div>
+                <div class="conditionBox">
+                    <div class="list">
+                        <span>唐至清初</span>
+                        <div class="list_con">
+                            <p>自唐至清初，均属江都县。清雍正九年（1731）始属甘泉县。民国期间复属江都县。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1943-06</span>
+                        <div class="list_con">
+                            <p>民国 32 年（1943）6 月，建立起来中国共产党领导的甘泉县民主政权，地属甘泉县。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1949-01</span>
+                        <div class="list_con">
+                            <p>1949年 1 月，境内解放，槐泗隶属扬州市，1950 年划属江都县。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1956-03</span>
+                        <div class="list_con">
+                            <p>1956 年 3 月划入邗江县</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1958-01</span>
+                        <div class="list_con">
+                            <p>1958 年成立人民公社划归扬州市。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1963-01</span>
+                        <div class="list_con">
+                            <p>1963 年复属邗江县。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1983-05</span>
+                        <div class="list_con">
+                            <p>1983 年 5 月，体制改革，改公社为乡。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>1993-11</span>
+                        <div class="list_con">
+                            <p>1993 年11 月，撤乡建镇，设槐泗镇、酒甸镇。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>2000-12</span>
+                        <div class="list_con">
+                            <p>2000 年底，邗江撤县建区。</p>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <span>2003-10</span>
+                        <div class="list_con">
+                            <p>2003 年 10 月，由槐泗、酒甸两镇合并组建新槐泗镇。</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box box2">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">槐泗镇总体规划图（2016年-2030年）</div>
+                <div class="conditionBox">
+                    <div class="zt"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box box3">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">槐泗镇主要经济指标完成情况</div>
+                <div class="conditionBox">
+                    <p style="color: #5bc7ff;">经济指标/亿</p>
+                    <div id="xzsp_xnjc2" style="width:100%;height:350px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box box4">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">槐泗镇市场主体数量</div>
+                <div class="conditionBox">
+                    <p style="color: #5bc7ff;">市场主体数量统计</p>
+                    <div id="xzsp_sqcl" style="width:100%;height:300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sp">
+        <video class="video" width="1920px" height="1080px"  poster="images/vediobg.jpg" controls>
+            <source src="xcp.mp4" type="video/mp4"></source>
+            <source src="xcp.ogv" type="video/ogg"></source>
+            <source src="xcp.webm" type="video/webm"></source>
+            <object width="" height="" type="application/x-shockwave-flash" data="xcp.swf">
+                <param name="movie" value="xcp.swf" />
+                <param name="flashvars" value="autostart=true&amp;file=xcp.swf" />
+            </object>
+        </video>
+    </div>
+    <div class="box box5">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">槐泗镇四上企业名录</div>
+                <div class="conditionBox">
+                    <div class="tablebox">
+                        <div class="tbl-header">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>单位名称</th>
+                                    <th>注册资本金</th>
+                                    <th>行业类别</th>
+                                </tr>
+                                </thead>
+                                <tbody style="opacity:0;"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="tbl-body">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                <tr>
+                                    <th>单位名称</th>
+                                    <th>注册资本金</th>
+                                    <th>行业类别</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tips">“四上企业”是指规模以上工业企业、资质等级建筑业企业、限额以上批零住餐企业、国家重点服务业企业等这四类规模以上企业的统称。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box box6">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">汽车产业园区</div>
+                <div class="sliderBox1">
+                    <div class="slider1">
+                        <div class="scroll_img">
+                            <div class="cyy08"></div>
+                            <p>扬州虹扬科技发展有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy09"></div>
+                            <p>扬州虹扬科技发展有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy01"></div>
+                            <p>江苏科宇装饰工程有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy02"></div>
+                            <p>神州交通工程集团有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy03"></div>
+                            <p>神州交通工程集团有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy04"></div>
+                            <p>通安科技园</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy05"></div>
+                            <p>潍柴（扬州）亚星股份有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy06"></div>
+                            <p>潍柴（扬州）亚星股份有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy07"></div>
+                            <p>潍柴（扬州）亚星股份有限公司</p>
+                        </div>
+
+                        <div class="scroll_img">
+                            <div class="cyy10"></div>
+                            <p>神扬州虹扬科技发展有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy11"></div>
+                            <p>扬州金威环保科技有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy12"></div>
+                            <p>扬州金威环保科技有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy01"></div>
+                            <p>江苏科宇装饰工程有限公司</p>
+                        </div>
+                        <div class="scroll_img">
+                            <div class="cyy02"></div>
+                            <p>神州交通工程集团有限公司</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="box box7">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">瘦西湖道口片区</div>
+                <div class="sliderBox2">
+                    <div class="slider2">
+                        <div class="scroll_img2">
+                            <div class="sxh01"></div>
+                            <p>槐泗社区卫生服务中心</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh02"></div>
+                            <p>槐泗社区卫生服务中心</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh03"></div>
+                            <p>敬老院</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh04"></div>
+                            <p>敬老院</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh05"></div>
+                            <p>酒甸中心幼儿园</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh06"></div>
+                            <p>酒甸中心幼儿园</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh01"></div>
+                            <p>槐泗社区卫生服务中心</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh02"></div>
+                            <p>槐泗社区卫生服务中心</p>
+                        </div>
+                        <div class="scroll_img2">
+                            <div class="sxh03"></div>
+                            <p>敬老院</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box box8">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">沿河沿湖景区</div>
+                <div class="sliderBox3">
+                    <div class="slider3">
+                        <div class="scroll_img3">
+                            <div class="yh01"></div>
+                            <p>古运河</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh02"></div>
+                            <p>淮扬运河（邗江段）--流芳亭</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh03"></div>
+                            <p>郊野公园</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh04"></div>
+                            <p>万亩良田</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh05"></div>
+                            <p>西经湾生态旅游度假岛</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh06"></div>
+                            <p>西经湾生态旅游度假岛</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh01"></div>
+                            <p>古运河</p>
+                        </div>
+                        <div class="scroll_img3">
+                            <div class="yh02"></div>
+                            <p>淮扬运河（邗江段）--流芳亭</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box box9">
+        <div class="container">
+            <i class="icon1"></i>
+            <i class="icon2"></i>
+            <i class="icon3"></i>
+            <i class="icon4"></i>
+            <div class="contentWrapper">
+                <div class="mainTitle">美丽乡村建设</div>
+                <div class="sliderBox4">
+                    <div class="scroll_img4">
+                        <div class="js01"></div>
+                        <p>凤来公园</p>
+                    </div>
+                    <div class="scroll_img4" style="display: none">
+                        <div class="js02"></div>
+                        <p>凤来公园</p>
+                    </div>
+                    <div class="scroll_img4" style="display: none">
+                        <div class="js03"></div>
+                        <p>林桥公园</p>
+                    </div>
+                    <div class="scroll_img4" style="display: none">
+                        <div class="js04"></div>
+                        <p>林桥公园</p>
+                    </div>
+                    <div class="scroll_img4" style="display: none">
+                        <div class="js05"></div>
+                        <p>林桥公园</p>
+                    </div>
+                    <div class="scroll_img4" style="display: none">
+                        <div class="js06"></div>
+                        <p>运河彩色稻田</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<script type="text/javascript">
+
+    //自然人信息列表滚动
+    var MyMarhq = '';
+    clearInterval(MyMarhq);
+    $('.tbl-body tbody').empty();
+    $('.tbl-header tbody').empty();
+    var str = '';
+    var Items = [{"itemName":"扬州市扬子钣金制造有限公司","itemPerson":"8000万元","itemUnit":"工业"},
+        {"itemName":"扬州市万里客车配件厂","itemPerson":"280万元","itemUnit":"工业"},
+        {"itemName":"扬州虹扬科技发展有限公司","itemPerson":"2674.6万美元","itemUnit":"工业"},
+        {"itemName":"扬州市邗江万鑫印染辅料制衣厂","itemPerson":"200万元","itemUnit":"工业"},
+        {"itemName":"扬州金威机械有限公司","itemPerson":"5000万元","itemUnit":"工业"},
+        {"itemName":"扬州金威环保科技有限公司","itemPerson":"28037万元","itemUnit":"工业"},
+        {"itemName":"扬州凯勒机械有限公司","itemPerson":"3200万元","itemUnit":"工业"},
+        {"itemName":"扬州加气混凝土有限公司","itemPerson":"3000万元","itemUnit":"工业"},
+        {"itemName":"扬州市邗江彩韵制衣有限公司","itemPerson":"200万元","itemUnit":"工业"},
+        {"itemName":"扬州市环亚汽车配件钣金厂","itemPerson":"40万元","itemUnit":"工业"},
+        {"itemName":"江苏友恒机械有限公司","itemPerson":"1200万元","itemUnit":"工业"},
+        {"itemName":"扬州市凯文家居生活用品有限公司","itemPerson":"50万元","itemUnit":"工业"},
+        {"itemName":"扬州统一机械有限公司","itemPerson":"300万元","itemUnit":"工业"}]
+    $.each(Items,function (i, item) {
+        str = '<tr>'+
+            '<td><p title="'+item.itemName+'">'+item.itemName+'</p></td>'+
+            '<td><p title="'+item.itemPerson+'">'+item.itemPerson+'</p></td>'+
+
+            '<td><p title="'+item.itemUnit+'">'+item.itemUnit+'</p></td>'+
+            '</tr>'
+
+        $('.tbl-body tbody').append(str);
+        $('.tbl-header tbody').append(str);
+    });
+
+    if(Items.length > 10){
+        $('.tbl-body tbody').html($('.tbl-body tbody').html()+$('.tbl-body tbody').html());
+        $('.tbl-body').css('top', '0');
+        var tblTop = 0;
+        var speedhq = 50; // 数值越大越慢
+        var outerHeight = $('.tbl-body tbody').find("tr").outerHeight();
+        function Marqueehq(){
+            if(tblTop <= -outerHeight*Items.length){
+                tblTop = 0;
+            } else {
+                tblTop -= 1;
+            }
+            $('.tbl-body').css('top', tblTop+'px');
+        }
+
+        MyMarhq = setInterval(Marqueehq,speedhq);
+
+        // 鼠标移上去取消事件
+        $(".tbl-header tbody").hover(function (){
+            clearInterval(MyMarhq);
+        },function (){
+            clearInterval(MyMarhq);
+            MyMarhq = setInterval(Marqueehq,speedhq);
+        })
+    }
+
+
+    //本周与上周工作时段取号趋势
+    var xzsp_xnjc2 = echarts.init(document.getElementById('xzsp_xnjc2'));
+    var colors = ['rgba(137, 189, 27)', 'rgb(221,114,178)', 'rgb(53,178,247)','rgb(255,133,133)','rgb(53,108,247)'];
+    option_xnjc2 = {
+        color: colors,
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            top:'10%',
+            containLabel: true
+        },
+        legend: {
+            data:['GDP','公共财政预算收入','实现固定资产投资','入库税收','完成开业开票销售'],
+            textStyle: {
+                fontSize: 24,
+                color: '#FFFFFF'
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel:{
+
+                    fontSize: 24
+                },
+                data: ['2016','2017','2018'],
+                axisLine: {
+                    lineStyle: {
+                        color: '#FFFFFF'
+                    }
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '',
+                min: 0,
+                max: 70,
+                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[0]
+                    }
+                },
+                axisLabel:{
+
+                    fontSize: 22
+                },
+
+                splitLine: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                name: '',
+                min: 0,
+                max: 5,
+                position: 'right',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[1]
+                    }
+                },
+                axisLabel:{
+
+                    fontSize: 22
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                name: '',
+                min: 0,
+                max: 70,
+                position: 'left',
+                offset: 40,
+                axisLine: {
+                    lineStyle: {
+                        color: colors[2]
+                    }
+                },
+                axisLabel:{
+
+                    fontSize: 22
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                name: '',
+                min: 0,
+                max: 5,
+                position: 'right',
+                offset: 30,
+                axisLine: {
+                    lineStyle: {
+                        color: colors[3]
+                    }
+                },
+                axisLabel:{
+
+                    fontSize: 22
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+            ,
+            {
+                type: 'value',
+                name: '',
+                min: 0,
+                max: 70,
+                position: 'left',
+                offset: 80,
+                axisLine: {
+                    lineStyle: {
+                        color: colors[4]
+                    }
+                },
+                axisLabel:{
+
+                    fontSize: 22
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [
+            {
+                name:'GDP',
+                type:'line',
+                data:[40.2, 48.3, 55.8]
+            },
+            {
+                name:'公共财政预算收入',
+                type:'line',
+                yAxisIndex: 1,
+                data:[1.19, 1.64, 2.34]
+            },
+            {
+                name:'实现固定资产投资',
+                type:'line',
+                yAxisIndex: 2,
+                data:[18.9, 24.4, 36.4]
+            },
+            {
+                name:'入库税收',
+                type:'line',
+                yAxisIndex: 3,
+                data:[2.5, 3.3, 4.13]
+            },
+            {
+                name:'完成开业开票销售',
+                type:'line',
+                yAxisIndex: 4,
+                data:[52, 65.6, 70]
+            }
+        ]
+    };
+
+    // 	option_xnjc2 = {
+    // 			backgroundColor: 'rgba(0,0,0,0)',
+    // // 			title: {
+    // // 				text: '红黄牌趋势',
+    // // 				textStyle: {
+    // // 					fontWeight: 'normal',
+    // // 					fontSize: 16,
+    // // 					color: '#F1F1F3'
+    // // 				},
+    // // 				left: '6%'
+    // // 			},
+    // 			tooltip: {
+    // 				trigger: 'axis',
+    // 				axisPointer: {
+    // 					lineStyle: {
+    // 						color: '#57617B'
+    // 					}
+    // 				}
+    // 			},
+    // 			legend: {
+    // 				icon: 'rect',
+    // 				itemWidth: 15,
+    // 				itemHeight: 10,
+    // 				itemGap: 13,
+    // 				data: ['2016', '2017','2018'],
+    // 				right: '4%',
+    // 				textStyle: {
+    // 					fontSize: 14,
+    // 					color: '#F1F1F3'
+    // 				}
+    // 			},
+    // 			grid: {
+    // 				left: '3%',
+    // 				right: '4%',
+    // 				bottom: '3%',
+    // 				top:'5%',
+    // 				containLabel: true
+    // 			},
+    // 			xAxis: [{
+    // 				type: 'category',
+    // 				boundaryGap: false,
+    // 				axisTick: {
+    // 					show: false
+    // 				},
+    // 				axisLine: {
+    // 					lineStyle: {
+    // 						color: '#FFFFFF'
+    // 					}
+    // 				},
+    // 				data: ['2016','2017','2018']
+    // 			}, {
+    // 				axisPointer: {
+    // 					show: false
+    // 				},
+    // 				axisLine: {
+    // 					lineStyle: {
+    // 						color: '#57617B'
+    // 					}
+    // 				},
+    // 				axisTick: {
+    // 					show: false
+    // 				},
+    //
+    // 			}],
+    // 			yAxis: [{
+    // 				type: 'value',
+    // 				name: '',
+    // 					nameTextStyle:{
+    // 						color: "#6CABD7",
+    // 						fontSize: 14
+    // 					},
+    // 				axisTick: {
+    // 					show: false
+    // 				},
+    // 				axisLine: {
+    // 					lineStyle: {
+    // 						color: '#FFFFFF'
+    // 					}
+    // 				},
+    // 				axisLabel: {
+    // 					margin: 10,
+    // 					textStyle: {
+    // 						fontSize: 14
+    // 					}
+    // 				},
+    // 				splitLine: {
+    // 					lineStyle: {
+    // 						color: '#57617B'
+    // 					}
+    // 				}
+    // 			}],
+    // 			series: [{
+    // 				name: 'GDP',
+    // 				type: 'line',
+    // 				smooth: false,
+    // 				symbol: 'circle',
+    // 				symbolSize: 5,
+    // 				showSymbol: false,
+    // 				lineStyle: {
+    // 					normal: {
+    // 						width: 1
+    // 					}
+    // 				},
+    // 				areaStyle: {
+    // 					normal: {
+    // 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+    // 							offset: 0,
+    // 							color: 'rgba(137, 189, 27, 0.8)'
+    // 						}, {
+    // 							offset: 1,
+    // 							color: 'rgba(137, 189, 27, 0)'
+    // 						}], false),
+    // 						shadowColor: 'rgba(0, 0, 0, 0.1)',
+    // 						shadowBlur: 20
+    // 					}
+    // 				},
+    // 				itemStyle: {
+    // 					normal: {
+    // 						color: 'rgb(137,189,27)',
+    // 						borderColor: 'rgba(137,189,2,0.27)',
+    // 						borderWidth: 12
+    //
+    // 					}
+    // 				},
+    // 				data: [40.2, 48.3, 55.8]
+    // 			}, {
+    // 				name: '公共财政预算收入',
+    // 				type: 'line',
+    // 				smooth: false,
+    // 				symbol: 'circle',
+    // 				symbolSize: 5,
+    // 				showSymbol: false,
+    // 				lineStyle: {
+    // 					normal: {
+    // 						width: 1
+    // 					}
+    // 				},
+    // 				areaStyle: {
+    // 					normal: {
+    // 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+    // 							offset: 0,
+    // 							color: 'rgba(221,114,178, 0.8)'
+    // 						}, {
+    // 							offset: 1,
+    // 							color: 'rgba(221,114,178, 0)'
+    // 						}], false),
+    // 						shadowColor: 'rgba(0, 0, 0, 0.1)',
+    // 						shadowBlur: 10
+    // 					}
+    // 				},
+    // 				itemStyle: {
+    // 					normal: {
+    // 						color: 'rgb(221,114,178)',
+    // 						borderColor: 'rgba(221,114,178,0.2)',
+    // 						borderWidth: 12
+    //
+    // 					}
+    // 				},
+    // 				data: [1.19, 1.64, 2.34]
+    // 			} ,{
+    // 				name: '固定资产投资',
+    // 				type: 'line',
+    // 				smooth: false,
+    // 				symbol: 'circle',
+    // 				symbolSize: 5,
+    // 				showSymbol: false,
+    // 				lineStyle: {
+    // 					normal: {
+    // 						width: 1
+    // 					}
+    // 				},
+    // 				areaStyle: {
+    // 					normal: {
+    // 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+    // 							offset: 0,
+    // 							color: 'rgba(53,178,247, 0.8)'
+    // 						}, {
+    // 							offset: 1,
+    // 							color: 'rgba(53,178,247, 0)'
+    // 						}], false),
+    // 						shadowColor: 'rgba(0, 0, 0, 0.1)',
+    // 						shadowBlur: 10
+    // 					}
+    // 				},
+    // 				itemStyle: {
+    // 					normal: {
+    // 						color: 'rgb(53,178,247)',
+    // 						borderColor: 'rgba(53,178,247,0.2)',
+    // 						borderWidth: 12
+    //
+    // 					}
+    // 				},
+    // 				data: [18.9, 24.4, 36.4]
+    // 			} ,{
+    // 				name: '入库税收',
+    // 				type: 'line',
+    // 				smooth: false,
+    // 				symbol: 'circle',
+    // 				symbolSize: 5,
+    // 				showSymbol: false,
+    // 				lineStyle: {
+    // 					normal: {
+    // 						width: 1
+    // 					}
+    // 				},
+    // 				areaStyle: {
+    // 					normal: {
+    // 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+    // 							offset: 0,
+    // 							color: 'rgba(255,133,133, 0.8)'
+    // 						}, {
+    // 							offset: 1,
+    // 							color: 'rgba(255,133,133, 0)'
+    // 						}], false),
+    // 						shadowColor: 'rgba(0, 0, 0, 0.1)',
+    // 						shadowBlur: 10
+    // 					}
+    // 				},
+    // 				itemStyle: {
+    // 					normal: {
+    // 						color: 'rgb(255,133,133)',
+    // 						borderColor: 'rgba(255,133,133,0.2)',
+    // 						borderWidth: 12
+    //
+    // 					}
+    // 				},
+    // 				data: [2.5, 3.3,4.13]
+    // 			} ,{
+    // 				name: '工业开票销售',
+    // 				type: 'line',
+    // 				smooth: false,
+    // 				symbol: 'circle',
+    // 				symbolSize: 5,
+    // 				showSymbol: false,
+    // 				lineStyle: {
+    // 					normal: {
+    // 						width: 1
+    // 					}
+    // 				},
+    // 				areaStyle: {
+    // 					normal: {
+    // 						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+    // 							offset: 0,
+    // 							color: 'rgba(53,178,247, 0.8)'
+    // 						}, {
+    // 							offset: 1,
+    // 							color: 'rgba(53,178,247, 0)'
+    // 						}], false),
+    // 						shadowColor: 'rgba(0, 0, 0, 0.1)',
+    // 						shadowBlur: 10
+    // 					}
+    // 				},
+    // 				itemStyle: {
+    // 					normal: {
+    // 						color: 'rgb(53,178,247)',
+    // 						borderColor: 'rgba(53,178,247,0.2)',
+    // 						borderWidth: 12
+    //
+    // 					}
+    // 				},
+    // 				data: [52, 65.6, 70]
+    // 			} ]
+    // 		};
+    xzsp_xnjc2.setOption(option_xnjc2);
+
+    //--------------------------------------------------------------------------
+    //收取材料TOP10
+    var xzsp_sqcl = echarts.init(document.getElementById('xzsp_sqcl'));
+
+    //app.title = '坐标轴刻度与标签对齐';
+    option_sqcl = {
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%',
+            top: '5%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ['个人独资企业', '有限公司', '股份制公司', '合伙企业', '非公司制企业', '合作社', '个体户'],
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#FFFFFF'
+                    }
+                },
+                axisLabel:{
+                    color: '#fff',
+                    fontSize: 24
+                },
+            }
+        ],
+        yAxis : [
+            {
+                name: '数量/件',
+                nameTextStyle:{
+                    color: "#6CABD7",
+                    fontSize: 24
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show:false,
+                    lineStyle: {
+                        color: '#FFFFFF'
+                    }
+                },
+                axisLabel:{
+                    color: '#fff',
+                    fontSize: 24
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                }
+            }
+        ],
+        series : [
+            {
+                name:'数量',
+                type:'bar',
+                barWidth: '20%',
+                data:[663, 798, 500, 680, 720, 820, 620],
+                itemStyle: {//图形样式
+                    normal: {
+                        barBorderRadius: [50, 50, 0, 0],
+                        label: {
+                            show: true,
+                            position: 'top',
+                            textStyle: {
+                                color: 'white',
+                                fontSize: 24
+                            }
+                        },
+                        color:new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#4043E3'
+                        }, {
+                            offset: 0.8,
+                            color: '#7052f4'
+                        }], false)
+                    },
+                },
+            },
+
+        ],
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                formatter: '{c}'
+            }
+        },
+        itemStyle: {
+            normal: {
+
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(17, 168,171, 1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(17, 168,171, 0.1)'
+                }]),
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10
+            }
+        }
+    };
+    xzsp_sqcl.setOption(option_sqcl);
+
+    //--------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------
+    //轮播
+    $(function () {
+         slider1();
+         slider2();
+         slider3();
+         slider4();
+        setInterval("NowTime()",1000);
+    });
+    //汽车产业园区轮播
+    function  slider1() {
+        var left = 0;
+        var slider = setInterval(function () {
+            left -= 506;
+            if(left == -6578){
+                $(".slider1").css("transition",'none');
+                $(".slider1").css("left","0px");
+                left = 0;
+            }else{
+                $(".slider1").css("transition",'all 2s linear');
+                $(".slider1").css("left",left+'px');
+            }
+        },6000);
+    }
+    //道口片区轮播
+    function  slider2() {
+        var left = 0;
+        var slider = setInterval(function () {
+            left -= 336;
+            if(left == -2352){
+                $(".slider2").css("transition",'none');
+                $(".slider2").css("left","0px");
+                left = 0;
+            }else{
+                $(".slider2").css("transition",'all 2s linear');
+                $(".slider2").css("left",left+'px');
+            }
+        },6000);
+    }
+    //沿湖景区轮播
+    function slider3() {
+        var left = 0;
+        var slider = setInterval(function () {
+            left -= 313;
+            if(left == -2191){
+                $(".slider3").css("transition",'none');
+                $(".slider3").css("left","0px");
+                left = 0;
+            }else{
+                $(".slider3").css("transition",'all 2s linear');
+                $(".slider3").css("left",left+'px');
+            }
+        },6000);
+    }
+    //美丽乡村轮播
+    function slider4() {
+        var i = 1;
+        setInterval(function () {
+            $('.box9 .sliderBox4 .scroll_img4').eq(i).show().siblings().hide();
+            var length = $('.box9 .sliderBox4 .scroll_img4').length;
+            if(i == length -1){
+                i = 0;
+            }else{
+                i++;
+            }
+        },5000);
+    }
+    function NowTime(){
+        //获取年月日
+        var time=new Date();
+        var year=time.getFullYear();
+        var month=time.getMonth();
+        var day=time.getDate();
+
+        //获取时分秒
+        var h=time.getHours();
+        var m=time.getMinutes();
+        var s=time.getSeconds();
+
+        //检查是否小于10
+        h=check(h);
+        m=check(m);
+        s=check(s);
+        y=year;
+        month=check(month+1);
+        d=check(day)
+
+
+        document.getElementById("nowTime").innerHTML="当前时间："+y+"年"+month+"月"+d+"日  "+h+":"+m+":"+s;
+    }
+    //时间数字小于10，则在之前加个“0”补位。
+    function check(i){
+        //方法一，用三元运算符
+        var num;
+        i<10?num="0"+i:num=i;
+        return num;
+
+        //方法二，if语句判断
+        //if(i<10){
+        //    i="0"+i;
+        //}
+        //return i;
+    }
+</script>
+
+</body>
+
+</html>

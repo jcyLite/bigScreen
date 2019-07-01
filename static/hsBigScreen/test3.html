@@ -1,0 +1,3068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/killercarousel.js"></script>
+    <!--<script type="text/jscript" src="js/echarts.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/chartsroom.js" ></script>-->
+    <!--<script type="text/javascript" src="js/ucdc.js"></script>-->
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="test" style="width: 900px;height: 642px;"></div>
+<video class="video" width="1920px" height="1080px"  poster="images/vediobg.jpg" controls>
+    <source src="xcp.mp4" type="video/mp4"></source>
+    <source src="xcp.ogv" type="video/ogg"></source>
+    <source src="xcp.webm" type="video/webm"></source>
+    <object width="" height="" type="application/x-shockwave-flash" data="xcp.swf">
+        <param name="movie" value="xcp.swf" />
+        <param name="flashvars" value="autostart=true&amp;file=xcp.swf" />
+    </object>
+</video>
+
+<script>
+
+
+    test6();
+    //3个仪表
+    function test() {
+        // 基于准备好的dom，初始化echarts实例
+
+        var myChart = echarts.init(document.getElementById('test'));
+        var option = {
+            title: [
+                {
+                    x: "2%",
+                    bottom: 100,
+                    text: '网格内处置',
+                    textStyle: {
+                        fontWeight: 'normal',
+                        fontSize: 30,
+                        color: "#4cd4db"
+                    }
+                },
+                {
+                    x: "42%",
+                    bottom: 100,
+                    text: '职能处置',
+                    textStyle: {
+                        fontWeight: 'normal',
+                        fontSize: 30,
+                        color: "#0271ff"
+                    }
+                },
+                {
+                    x: "70%",
+                    bottom: 100,
+                    text: '综合执法处置',
+                    textStyle: {
+                        fontWeight: 'normal',
+                        fontSize: 30,
+                        color: "#f2ba4d"
+                    }
+                }
+            ],
+            tooltip: {
+                show: true
+            },
+            series: [
+                {
+                    type: 'gauge',//中间
+                    center: ['50%', '50%'], // 默认全局居中
+                    radius: '50%',
+                    splitNumber: 10, //刻度数量
+                    min: 0,
+                    max: 1000,
+                    startAngle: 200,
+                    endAngle: -20,
+                    clockwise: true,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            width: 2,
+                            shadowBlur: 0,
+                            color: [
+                                [1, '#0271ff']
+                            ]
+                        }
+                    },
+                    axisTick: {
+                        show: true,
+                        lineStyle: {
+                            color: '#0271ff',
+                            width: 1
+                        },
+                        length: -15,
+                        splitNumber: 10
+                    },
+                    splitLine: {
+                        show: true,
+                        length: -20,
+                        lineStyle: {
+                            color: '#0271ff',
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        textStyle: {
+                            color: "#0271ff",
+                            fontSize: "15",
+                            fontWeight: "bold"
+                        }
+                    },
+                    pointer: { //仪表盘指针
+                        show: 0
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data: [{
+                        name: "",
+                        value: 1000
+                    }]
+                },
+                {
+                    startAngle: 200,//中间白线
+                    endAngle: -20,
+                    type: 'gauge',
+                    center: ['50%', '50%'], // 默认全局居中
+                    radius: '45%',
+                    min: 0,
+                    max: 1000,
+                    splitNumber: 0,
+                    axisLine: { // 坐标轴线
+                        lineStyle: {
+                            color: [
+                                [0.66, '#dddddd'],
+                                [1, '#dddddd']
+                            ], // 属性lineStyle控制线条样式
+                            width: 4
+                        }
+                    },
+                    axisLabel: { // 坐标轴小标记
+                        textStyle: { // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            fontSize: 16,
+                            color: 'rgba(30,144,255,0)',
+                        }
+                    },
+                    splitLine: { // 分隔线
+                        length: 10, // 属性length控制线长
+                        lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                            width: 0,
+                            color: '#444'
+                        }
+                    },
+                    pointer: { // 分隔线 指针
+                        color: '#666666',
+                        width: 0,
+                        length: 230
+                    },
+                    detail: {
+                        show: false
+                    },
+
+                },
+                {
+                    name: '职能处置',//中间指针
+                    type: 'gauge',
+                    startAngle: 200,
+                    endAngle: -20,
+                    radius: '40%',
+                    center: ['50%', '50%'], // 默认全局居中
+                    min: 0,
+                    max: 1000,
+                    axisLine: {
+                        show: false,
+                        lineStyle: {
+                            width: 25,
+                            shadowBlur: 0,
+                            color: [
+                                [1, '#0271ff']
+                            ]
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false,
+                        length: 20
+
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: {
+                        show: true
+                    },
+                    detail: {
+                        show: true,
+                        offsetCenter: [0, '40%'],
+                        textStyle: {
+                            fontSize: 30,
+                            color: "#0271ff"
+                        },
+                        formatter: function (value) {
+                            return value + '件';
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "#0271ff",
+                        }
+                    },
+                    data: [{
+                        value: 300
+                    }]
+                },
+                {
+                    type: 'gauge',//左边网格内处置
+                    center: ['20%', '50%'], // 默认全局居中
+                    radius: '35%',
+                    splitNumber: 10, //刻度数量
+                    min: 0,
+                    max: 1000,
+                    endAngle: 45,
+                    clockwise: true,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            width: 2,
+                            shadowBlur: 0,
+                            color: [
+                                [1, '#4cd4db']
+                            ]
+                        }
+                    },
+                    axisTick: {
+                        show: true,
+                        lineStyle: {
+                            color: '#4cd4db',
+                            width: 1
+                        },
+                        length: -15,
+                        splitNumber: 10
+                    },
+                    splitLine: {
+                        show: true,
+                        length: -20,
+                        lineStyle: {
+                            color: '#4cd4db',
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        textStyle: {
+                            color: "#4cd4db",
+                            fontSize: "15",
+                            fontWeight: "bold"
+                        }
+                    },
+                    pointer: { //仪表盘指针
+                        show: 0
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data: [{
+                        name: "",
+                        value: 0
+                    }]
+                },
+                {
+                    type: 'gauge',//左边白色
+                    center: ['20%', '50%'], // 默认全局居中
+                    radius: '30%',
+                    min: 0,
+                    max: 0,
+                    endAngle: 45,
+                    splitNumber: 0,
+                    axisLine: { // 坐标轴线
+                        lineStyle: {
+                            color: [
+                                [0.66, '#dddddd'],
+                                [1, '#dddddd']
+                            ], // 属性lineStyle控制线条样式
+                            width: 4
+                        }
+                    },
+
+
+                    axisLabel: { // 坐标轴小标记
+                        textStyle: { // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            fontSize: 16,
+                            color: 'rgba(30,144,255,0)',
+                        }
+                    },
+                    splitLine: { // 分隔线
+                        length: 10, // 属性length控制线长
+                        lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                            width: 0,
+                            color: '#444'
+                        }
+                    },
+                    pointer: { // 分隔线 指针
+                        color: '#666666',
+                        width: 0,
+                        length: 230
+                    },
+                    detail: {
+                        show: false
+                    },
+
+                },
+                {
+                    name: '网格内处置',//左边
+                    type: 'gauge',
+                    endAngle: 45,
+                    radius: '25%',
+                    center: ['20%', '50%'], // 默认全局居中
+                    min: 0,
+                    max: 1000,
+                    axisLine: {
+                        show: false,
+                        lineStyle: {
+                            width: 25,
+                            shadowBlur: 0,
+                            color: [
+                                [1, '#4cd4db']
+                            ]
+                        }
+                    },
+                    axisTick: {
+                        show: false,
+
+                    },
+                    splitLine: {
+                        show: false,
+                        length: 20,
+
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: {
+                        show: true,
+                    },
+                    detail: {
+                        show: true,
+                        offsetCenter: [0, '40%'],
+                        textStyle: {
+                            fontSize: 30,
+                            color: '#4cd4db'
+                        },
+                        formatter: function (value) {
+                            return value + '件';
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "#4cd4db"
+                        }
+                    },
+                    data: [{
+                        value: 400
+                    }]
+                },
+                {
+                    type: 'gauge',//右边
+                    center: ['80%', '50%'], // 默认全局居中
+                    radius: '35%',
+                    splitNumber: 10, //刻度数量
+                    min: 0,
+                    max: 1000,
+                    startAngle: 140,
+                    endAngle: -45,
+                    clockwise: true,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            width: 2,
+                            shadowBlur: 0,
+                            color: [
+                                [1, '#f2ba4d']
+                            ]
+                        }
+                    },
+                    axisTick: {
+                        show: true,
+                        lineStyle: {
+                            color: '#f2ba4d',
+                            width: 1
+                        },
+                        length: -15,
+                        splitNumber: 10
+                    },
+                    splitLine: {
+                        show: true,
+                        length: -20,
+                        lineStyle: {
+                            color: '#f2ba4d',
+                        }
+                    },
+                    axisLabel: {
+                        distance: -20,
+                        textStyle: {
+                            color: "#f2ba4d",
+                            fontSize: "15",
+                            fontWeight: "bold"
+                        }
+                    },
+                    pointer: { //仪表盘指针
+                        show: 0
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data: [{
+                        name: "",
+                        value: 200
+                    }]
+                },
+                {
+                    type: 'gauge',//右边白线
+                    center: ['80%', '50%'], // 默认全局居中
+                    radius: '30%',
+                    min: 0,
+                    max: 1000,
+                    startAngle: 140,
+                    endAngle: -45,
+                    splitNumber: 0,
+                    axisLine: { // 坐标轴线
+                        lineStyle: {
+                            color: [
+                                [0.66, '#dddddd'],
+                                [1, '#dddddd']
+                            ], // 属性lineStyle控制线条样式
+                            width: 4
+                        }
+                    },
+
+
+                    axisLabel: { // 坐标轴小标记
+                        textStyle: { // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            fontSize: 16,
+                            color: 'rgba(30,144,255,0)',
+                        }
+                    },
+                    splitLine: { // 分隔线
+                        length: 10, // 属性length控制线长
+                        lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                            width: 0,
+                            color: '#f2ba4d'
+                        }
+                    },
+                    pointer: { // 分隔线 指针
+                        color: '#f2ba4d',
+                        width: 0,
+                        length: 230
+                    },
+                    detail: {
+                        show: false
+                    },
+
+                },
+                {
+                    name: '综合执法处置',
+                    type: 'gauge',
+                    startAngle: 140,
+                    endAngle: -45,
+                    radius: '25%',
+                    center: ['80%', '50%'], // 默认全局居中
+                    min: 0,
+                    max: 1000,
+                    axisLine: {
+                        show: false,
+                        lineStyle: {
+                            width: 25,
+                            shadowBlur: 0,
+                            color: [
+                                [1, '#f2ba4d']
+                            ]
+                        }
+                    },
+                    axisTick: {
+                        show: false,
+
+                    },
+                    splitLine: {
+                        show: false,
+                        length: 20,
+
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: {
+                        show: true,
+                    },
+                    detail: {
+                        show: true,
+                        offsetCenter: [0, '40%'],
+                        textStyle: {
+                            fontSize: 30,
+                            color: "#f2ba4d"
+                        },
+                        formatter: function (value) {
+                            return value + '件';
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "#f2ba4d"
+                        }
+                    },
+                    data: [{
+                        value: 355
+                    }]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //
+    function test2(){
+        var myChart = echarts.init(document.getElementById('test'));
+        let data = {
+            "chart": [{
+                month: "1月",
+                value: 138,
+                ratio: 14.89
+            },
+
+                {
+                    month: "2月",
+                    value: 114,
+                    ratio: 79.49
+                },
+
+                {
+                    month: "3月",
+                    value: 714,
+                    ratio: 75.8
+                },
+
+                {
+                    month: "4月",
+                    value: 442,
+                    ratio: 19.8
+                },
+
+                {
+                    month: "5月",
+                    value: 622,
+                    ratio: 44.5
+                },
+
+
+                {
+                    month: "6月",
+                    value: 528,
+                    ratio: 87.3
+                }
+
+            ]
+        }
+
+
+        let xAxisMonth = [],
+            barData = [],
+            lineData = [];
+        for (let i = 0; i < data.chart.length; i++) {
+            xAxisMonth.push(data.chart[i].month);
+            barData.push({
+                "name": xAxisMonth[i],
+                "value": data.chart[i].value
+            });
+            lineData.push({
+                "name": xAxisMonth[i],
+                "value": data.chart[i].ratio
+            });
+        }
+
+        option = {
+            backgroundColor: "#020d22",
+            title: '',
+            grid: {
+                top: '24%',
+                left: '7%',
+                bottom: '6%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'none'
+                },
+                formatter: function(params) {
+                    return params[0]["data"].name + "<br/>" + '训练人次: ' + params[1]["data"].value + "<br/>" + '合格率: ' + params[0]["data"].value;
+                }
+            },
+            xAxis: [{
+                type: 'category',
+                show: false,
+                data: ['3月', '4月', '5月', '6月', '7月', '8月'],
+                axisLabel: {
+                    textStyle: {
+                        color: '#b6b5ab'
+                    }
+                }
+            },
+                {
+                    type: 'category',
+                    position: "bottom",
+                    data: xAxisMonth,
+                    boundaryGap: true,
+                    // offset: 40,
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: '#b6b5ab'
+                        }
+                    }
+                }
+
+            ],
+            yAxis: [{
+                show: true,
+                offset: 52,
+                splitLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "rgba(255,255,255,0.2)"
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true
+                },
+                axisLabel: {
+                    show: true,
+                    color: '#b6b5ab'
+                }
+            }, {
+                show: false,
+                type: "value",
+                name: "合格率(%)",
+                nameTextStyle: {
+                    color: '#ccc'
+                },
+                axisLabel: {
+                    color: '#ccc'
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                }
+            }],
+            color: ['#e54035'],
+            series: [{
+                name: '训练人次',
+                type: 'pictorialBar',
+                xAxisIndex: 1,
+                barCategoryGap: '-80%',
+                // barCategoryGap: '-5%',
+                symbol: 'path://d="M150 50 L130 130 L170 130  Z"',
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            let colorList = [
+                                'rgba(13,177,205,0.8)', 'rgba(29,103,182,0.6)',
+                                'rgba(13,177,205,0.8)', 'rgba(29,103,182,0.6)',
+                                'rgba(13,177,205,0.8)', 'rgba(29,103,182,0.6)'
+                            ];
+                            return colorList[params.dataIndex];
+                        }
+                    },
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                data: barData,
+            },
+                {
+                    symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAvCAYAAABzJ5OsAAAGDUlEQVRogbWaPWxcRRDHf/fO92Ffgk2MrXygBEJACCiQkCgQcoPSIAVXoYCKFBRIKegpQJHSBokehIgoiBBFrEiAQuEKgoQiPiIQEIRANnFI7ODYvvP5fBQ74zdvb/e9y9keafV27+3Hf2ZnZmf2XYlulx2kClAFVqS9V57LO7mIUmmb4H2wO90/l7YLfru0LWYGAd8A1oF2dM4wFS1UB8oFc3sLbV/yMbD9kF1cd6EDNPtbuBh8BUiAVmacP09+21+kqN0XDSL5UuQZ+w2y4LqRp18fwalPVIWGckBWvIE+yJJXz2PKAg3VtV0y9TbOBgYCnwSA+4ATD7zPSAj8pgFui+1XokDqrlOx2oQkbIEnpsQYUICb5rkZ+C2kUnWp9xixL/kKbqu0Ywh44pWy97SMPQ78A9w2ADsGfEf6bRqwm/KbqlHTMJAhX/INUleVB7xsypCpPwncBO6QlbyCfQyYkz6dQMnbhULw2Xdx4EOmPCiLLRtGtK8u3hVwG15pm7plwNqFZaAsfYC4wYY8iwVeMeUO7nBpSFsZ0HEKXMG3cafoOnAMuAEsBDBYVQqS9SiNAAMxqU8CR3G6OIzzyS8DM8B9wMPAi8DzwCjwEHAROCnrjMi4FeB+w7Rv+BYLGKn74Ne9jpYBX+qTOCkq8HEB+ouA7QA/AX8BYzJmBjgF7DEMNHH6XyVVw5DnslSX+YI6H5K4gq4CNbISfwd4Hxe7q4dQr6WeZEOE0wLWgNPA18Cn0j6M80i/Sz+1Aav/yFM1ZCXvkFJGfJVRJurA2x7IESMZH3wLJ+khATkNXJL3i2S9loJWDFbC69KHEt2uH1P7qlI2gI+JhEZw278fp7Mdaasuqxoo+LYAX5N17uK807LU7wKr8r5Ferpa9+mHEwzJQr6+W10Lucgq8BZwXvo0BHxjCg6/Ac895YyWFqx/AVffhW9uOAkjoNoilBeAT2TeI8BvZFXXlzy43W0mIomiAEwZmDcMPC3jEplseAqOnIOTChygBtUT8Ox5eIV0Z4bdKxrAa6QqM0q+sWYoyXvpTXKY7A58Rurra0DtLJyouV3poQMwftoxXMP1qeJs4XtS9bxJ2FVaPCDhS0Ka4cc6an0f2Z24gjlpp+DgWHwuAI7DE2ZMWcCfM4CXcoD3UEzyscGx8Lc0FgmeLHXDYfQlD/CeAgxK5YTwnUroSP6B1OI/Bm6Zdnepj7yzFI7nIeBJIhgypMYWIj/LOYQzqC7wAc7oEiSwmoW5ecdQlL6Ea/QGYl8FGOorN02QozaHAS0jwIQsOIPb1iGcx2kBrTPweSt1uxm6DnPvwVXpq4FZGzhLNqL8L4cB+1snoTfV8iWuWz0vE6vkTgHP4NSlCazNwp9vwoUf4Q+dYAmWL8KVl5yq6UG0Jq+Pk4bFe4ED5BxKhurgJGd1VWMTO1CP6n9xJ+EIqdSmgcuYUGAWrs/C3+SfsGsyZp+Zaz9O7fpRoQrQ1MCsTjb102KzJQ3KxmWBhpRDpL69n9hmlTREWJGiO9I0zKhd6M6rcLeoKDCzybKfCWnGdAv4ELiAixSbEfDrMt/rAvYMaSyjgP10sAewJfXzvpvzt82CXyQb3t4GvsPlp9pnSfotSn0Jl3FtAI8C35JKegJ4hGwYHFIZrW8lTbEcNi+L0gjzKE5aa0h4gDO6j6RcJk1SpoFXSb1My5QJYXKBXumHdmDrMsyCt7e/NrrUE9Hqv2ZTkzjjrJLGOf3msJM4r+TreCgJj0g4BR+L64tuDypeu5/bg3Gc3i9wb7cHUfC973qZiN3bPAAcBH41fWxsMopTj2uGiXu9t6mRvakOgq+TJguD3piN4/z2z4QNfzNQt8At6B5dzwOvurtqgPsMWFvY7bvKKPV7P18KPEPhbSwDsmBit8Qh16ifeoLfrIoOKT15bdhgSS9KLWD/6YP36yEp+7cFQSqSfOh6OQ9k6LcYsCLQhTToBzUfXFG7KNGw7dA3sAiI/sHXSCPE7ByD00CSUyq6PbDUQm6qAgD6yYDyjLNC70VvIW3nO2zRx+Rdp536fB/9bhShHWF8t/574P/bY1d26X/PtooMr/p/9AAAAABJRU5ErkJggg==',
+                    symbolSize: 42,
+                    name: "完成率",
+                    type: "line",
+                    yAxisIndex: 1,
+                    data: lineData,
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 5,
+                            color: {
+                                colorStops: [{
+                                    offset: 0,
+                                    color: '#821eff'
+                                },
+
+                                    {
+                                        offset: 1,
+                                        color: '#204fff'
+                                    }
+                                ],
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        myChart.setOption(option);
+    }
+//彩虹坐标
+    function test3() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+            backgroundColor: '#00265f',
+            angleAxis: {
+                interval: 1,
+                type: 'category',
+                data: ['喀什市',
+                    '疏附县',
+                    '疏勒县',
+                    '英吉沙县',
+                    '泽普县',
+                    '岳普湖县',
+                    '巴楚县',
+                    '伽师县',
+                    '叶城县',
+                    '莎车县 ',
+                ],
+                z: 10,
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: "#00c7ff",
+                        width: 1,
+                        type: "solid"
+                    },
+                },
+                axisLabel: {
+                    interval: 0,
+                    show: true,
+                    color: "#00c7ff",
+                    margin: 8,
+                    fontSize: 16
+                },
+            },
+            radiusAxis: {
+                min: 0,
+                max: 100,
+                interval: 20,
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: "#00c7ff",
+                        width: 1,
+                        type: "solid"
+                    },
+                },
+                axisLabel: {
+                    formatter: '{value} %',
+                    show: true,
+                    padding: [0, 0, 20, 0],
+                    color: "#00c7ff",
+                    fontSize: 16
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: "#00c7ff",
+                        width: 1,
+                        type: "solid"
+                    }
+                }
+            },
+            polar: {},
+            series: [{
+                type: 'bar',
+                data: [{
+                    value: 87,
+                    itemStyle: {
+                        normal: {
+                            color: "#f54d4d"
+                        }
+                    }
+                },
+                    {
+                        value: 80,
+                        itemStyle: {
+                            normal: {
+                                color: "#f87544"
+                            }
+                        }
+                    },
+                    {
+                        value: 75,
+                        itemStyle: {
+                            normal: {
+                                color: "#ffae00"
+                            }
+                        }
+                    },
+                    {
+                        value: 69,
+                        itemStyle: {
+                            normal: {
+                                color: "#dcff00"
+                            }
+                        }
+                    },
+                    {
+                        value: 63,
+                        itemStyle: {
+                            normal: {
+                                color: "#25d053"
+                            }
+                        }
+                    },
+                    {
+                        value: 54,
+                        itemStyle: {
+                            normal: {
+                                color: "#01fff5"
+                            }
+                        }
+                    },
+                    {
+                        value: 47,
+                        itemStyle: {
+                            normal: {
+                                color: "#007cff"
+                            }
+                        }
+                    },
+                    {
+                        value: 40,
+                        itemStyle: {
+                            normal: {
+                                color: "#4245ff"
+                            }
+                        }
+                    },
+                    {
+                        value: 35,
+                        itemStyle: {
+                            normal: {
+                                color: "#c32eff"
+                            }
+                        }
+                    },
+                    {
+                        value: 33,
+                        itemStyle: {
+                            normal: {
+                                color: "#ff62e8"
+                            }
+                        }
+                    }
+                ],
+                coordinateSystem: 'polar',
+            }],
+        };
+        myChart.setOption(option);
+    }
+    //柱状图
+    function test4() {
+        var myChart = echarts.init(document.getElementById('test'));
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+                formatter: "{b} : {c}",
+                textStyle: {
+                    fontSize: 22
+                }
+            },
+            grid: {
+                top: '1%',
+                left: '3%',
+                right: '4%',
+                bottom: '1%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01],
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'category',
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisLabel: {
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 26
+                    }
+                },
+                data: ['上栗镇', '桐木镇', '金山镇', '福田镇', '彭高镇', '赤山镇', '鸡冠山乡', '长平乡', '东源乡', '杨岐乡']
+            },
+            series: [
+                {
+                    name: '上栗县',
+                    type: 'bar',
+                    data: [10, 20, 30, 30, 30, 30, 30, 30, 30, 30],
+                    itemStyle: {
+                        normal: {
+                            color: '#0c91b4'
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'insideRight',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 32
+                            },
+                            formatter: function (e){
+                                var str = '';
+                                if (e.value != 0){
+                                    str = e.value + ' 吨';
+                                }
+                                return str;
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //横向渐变
+    function test5() {
+        var myChart = echarts.init(document.getElementById('test'));
+
+        //初始化数据
+        var category = ['小王', '小李', '小赵', '小马', '小刘', '小张', '小齐'];
+        var barData = [3100, 2142, 1218, 581, 431, 383, 163];
+
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+
+            xAxis: {
+                type: 'value',
+                show: false,
+                axisLine:{
+                    lineStyle:{
+                        color:'#fff',
+
+                }
+                },
+                axisTick: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'category',
+                data: category,
+                splitLine: {show: false},
+                axisLine: {
+                    show: false,
+                    lineStyle:{
+                        color:'#fff',
+
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                offset: 10,
+                nameTextStyle: {
+                    fontSize: 15
+                }
+            },
+            series: [
+                {
+                    name: '数量',
+                    type: 'bar',
+                    data: barData,
+                    barWidth: 14,
+                    barGap: 10,
+                    smooth: true,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'right',
+                            offset: [5, -2],
+                            textStyle: {
+                                color: '#F68300',
+                                fontSize: 13
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        emphasis: {
+                            barBorderRadius: 7
+                        },
+                        normal: {
+                            barBorderRadius: 7,
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 1, 0,
+                                [
+                                    {offset: 0, color: '#111E58'},
+                                    {offset: 0.5, color: '#4B96C8'},
+                                    {offset: 1, color: '#7EF9FE'}
+
+                                ]
+                            )
+                        }
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+
+    }
+    //横向堆叠图
+    function test6() {
+        var myChart = echarts.init(document.getElementById('test'));
+        var data={
+            "permanent": {
+                "datas": [
+                    {
+                        "name": "聚福社区",
+                        "count": "8681"
+                    },
+                    {
+                        "name": "酒甸社区",
+                        "count": "4210"
+                    },
+                    {
+                        "name": "林桥村",
+                        "count": "3347"
+                    },
+                    {
+                        "name": "运河村",
+                        "count": "3323"
+                    },
+                    {
+                        "name": "包家村",
+                        "count": "3212"
+                    },
+                    {
+                        "name": "陈院村",
+                        "count": "3149"
+                    },
+                    {
+                        "name": "酒甸村",
+                        "count": "2894"
+                    },
+                    {
+                        "name": "凤来村",
+                        "count": "2665"
+                    },
+                    {
+                        "name": "沈营村",
+                        "count": "2649"
+                    },
+                    {
+                        "name": "龙尾村",
+                        "count": "2474"
+                    },
+                    {
+                        "name": "杭庄村",
+                        "count": "2405"
+                    },
+                    {
+                        "name": "陈沟村",
+                        "count": "2130"
+                    },
+                    {
+                        "name": "团结村",
+                        "count": "1789"
+                    },
+                    {
+                        "name": "许巷村",
+                        "count": "1690"
+                    },
+                    {
+                        "name": "肖胡村",
+                        "count": "1550"
+                    }
+                ],
+                "total": "46168"
+            },
+            "temporary": {
+                "datas": [
+                    {
+                        "name": "聚福社区",
+                        "count": "350"
+                    },
+                    {
+                        "name": "酒甸社区",
+                        "count": "328"
+                    },
+                    {
+                        "name": "凤来村",
+                        "count": "200"
+                    },
+                    {
+                        "name": "酒甸村",
+                        "count": "122"
+                    },
+                    {
+                        "name": "沈营村",
+                        "count": "120"
+                    },
+                    {
+                        "name": "杭庄村",
+                        "count": "99"
+                    },
+                    {
+                        "name": "包家村",
+                        "count": "94"
+                    },
+                    {
+                        "name": "林桥村",
+                        "count": "62"
+                    },
+                    {
+                        "name": "许巷村",
+                        "count": "56"
+                    },
+                    {
+                        "name": "陈院村",
+                        "count": "43"
+                    },
+                    {
+                        "name": "团结村",
+                        "count": "26"
+                    },
+                    {
+                        "name": "肖胡村",
+                        "count": "26"
+                    },
+                    {
+                        "name": "龙尾村",
+                        "count": "26"
+                    },
+                    {
+                        "name": "陈沟村",
+                        "count": "21"
+                    },
+                    {
+                        "name": "运河村",
+                        "count": "8"
+                    }
+                ],
+                "total": "1851"
+            }
+        }
+        var permanents=data.permanent.datas;
+        var temporarys=data.temporary.datas;
+        var namearr=[];
+        var valarr1=[];
+        var valarr2=[];
+
+            for(var i=0;i<permanents.length;i++){
+                namearr.unshift(permanents[i].name);
+                valarr1.unshift(permanents[i].count);
+            }
+
+            for(var i=0;i<temporarys.length;i++){
+                // namearr.unshift(temporarys[i].name);
+                valarr2.unshift(temporarys[i].count);
+            }
+
+        option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            color:['#9675CE', '#4DD0E4', '#81C683', '#DBE876', '#60B1F2'],
+            legend: {
+                data: ['常住人口数量', '暂住人口数量'],
+                y: 'bottom',
+                textStyle:{
+                    color: '#fff'
+                }
+
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '5%',
+                top: '1%',
+                containLabel: true
+            },
+            xAxis:  {
+                type: 'value',
+                axisLabel:{
+                    color: '#fff',
+                    fontSize: 16
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle:{
+                        color:'#fff',
+
+                    }
+                },
+            },
+            yAxis: {
+                type: 'category',
+                axisLabel:{
+                    color: '#fff',
+                    fontSize: 16
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle:{
+                        color:'#fff',
+
+                    }
+                },
+                data: namearr
+            },
+            series: [
+                {
+                    name: '常住人口数量',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'insideRight',
+                            fontSize:16
+                        },
+                        fontSize:16
+
+                    },
+                    data: valarr1
+                },
+                {
+                    name: '暂住人口数量',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'right',
+                            fontSize:16
+                        },
+
+                    },
+                    data: valarr2
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //柱状堆叠图
+    function test7() {
+        var myChart = echarts.init(document.getElementById('test'));
+// Generate data
+        var category = ['酒甸村', '团结村', '运河村', '包家村', '酒甸社区', '陈院村', '聚福社区', '凤来村', '陈沟村', '杭庄村', '运河村', '林桥村', '沈营村',  '龙尾村', '肖胡村'];
+        var dottedBase = +new Date();
+        var lineData = [];
+        var barData = [];
+
+        for (var i = 0; i < 15; i++) {
+            var date = new Date(dottedBase += 1000 * 3600 * 24);
+
+            var b = Math.random() * 200;
+            var d = Math.random() * 200;
+            barData.push(b)
+            lineData.push(d + b);
+        }
+
+
+// option
+        option = {
+            title:{
+                left:'center',
+                text: "系统活跃度统计",
+                textStyle: {
+                    color: "#02B5C5",
+                    fontWeight: "bold",
+
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow',
+                    label: {
+                        show: true,
+                        backgroundColor: '#333'
+                    }
+                }
+            },
+            legend: {
+                data: ['投资效益', '扶贫企业'],
+                x: "right",
+                right: "0",
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+            xAxis: {
+                data: category,
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                }
+            },
+            yAxis: {
+                splitLine: {show: false},
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                }
+            },
+            series: [{
+                name: '投资效益',
+                type: 'line',
+                smooth: true,
+                showAllSymbol: true,
+                symbol: 'emptyCircle',
+                symbolSize: 15,
+                data: lineData
+            }, {
+                name: '扶贫企业',
+                type: 'bar',
+                barWidth: 10,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 5,
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#14c8d4'},
+                                {offset: 1, color: '#43eec6'}
+                            ]
+                        )
+                    }
+                },
+                data: barData
+            }, {
+                name: '投资效益',
+                type: 'bar',
+                barGap: '-100%',
+                barWidth: 10,
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(20,200,212,0.5)'},
+                                {offset: 0.2, color: 'rgba(20,200,212,0.2)'},
+                                {offset: 1, color: 'rgba(20,200,212,0)'}
+                            ]
+                        )
+                    }
+                },
+                z: -12,
+                data: lineData
+            }, {
+                name: 'dotted',
+                type: 'pictorialBar',
+                symbol: 'rect',
+                itemStyle: {
+                    normal: {
+                        color: '#0f375f'
+                    }
+                },
+                symbolRepeat: true,
+                symbolSize: [12, 4],
+                symbolMargin: 1,
+                z: -10,
+                data: lineData
+            }]
+        };
+        myChart.setOption(option);
+    }
+    //普通柱状图
+    function test8() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['申请人', '积极分子', '发展对象', '预备党员', '正式党员'],
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'直接访问',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:[10, 52, 200, 334, 390]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //普通横向柱状图
+    function test9() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            color:['#60B1F2'],
+            legend: {
+                data: ['安全隐患'],
+                y: 'bottom'
+
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '5%',
+                top: '1%',
+                containLabel: true
+            },
+            xAxis:  {
+                type: 'value',
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                splitLine: { //坐标轴在 grid 区域中的分隔线。
+                    show: false,
+                }
+
+            },
+            yAxis: {
+                type: 'category',
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                splitLine: { //坐标轴在 grid 区域中的分隔线。
+                    show: false,
+                },
+                data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月']
+            },
+            series: [
+                {
+                    name: '安全隐患',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'insideRight'
+                        }
+                    },
+
+                    smooth: true,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'right',
+                            offset: [5, -2],
+                            textStyle: {
+                                color: '#D0D2DB',
+                                fontSize: 14
+                            }
+                        }
+                    },
+
+                    data: [320, 302, 301, 334, 390, 330, 320, 301, 334, 390, 330, 320]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //网格线柱状图
+    function test10(){
+        var myChart = echarts.init(document.getElementById('test'));
+        let _boyActual = [30, 50, 60, 12, 13];
+        let yesterdayList = [100, 100, 100, 100, 100];
+        let _bgshow = [];
+        let _college = [
+
+            "城乡治理",
+            "环境保护",
+            "社会稳定",
+            "企业事项",
+            "安全隐患"
+        ];
+        let maxPlanCourseCnt = Math.max.apply(null, yesterdayList);
+        let maxRealCourseCnt = Math.max.apply(null, _boyActual);
+        let maxCourseCnt = Math.max(maxPlanCourseCnt, maxRealCourseCnt);
+
+        $.each(yesterdayList, function(i, d) {
+            _bgshow.push(maxCourseCnt);
+        });
+
+
+        var option = {
+            backgroundColor: '#0B154A',
+
+            grid: {
+                left: "10%",
+                right: "13%",
+                bottom: "5%",
+                top: 10
+            },
+            xAxis: {
+                type: "value",
+                show: true,
+                max: maxCourseCnt,
+                splitLine: {
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+
+                axisLine:{
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisLabel:{
+                    color: '#ccc'
+                }
+
+            },
+            yAxis: [{
+                type: "category",
+                axisLine: {
+
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine:{
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    color: "#6df8f0",
+                    fontSize: 14
+                },
+
+                data: _college
+            },
+
+
+                {
+                    type: "category",
+                    data: []
+                }
+            ],
+            series: [
+                {
+                    name: "",
+                    type: "bar",
+                    barWidth: 6,
+                    barGap: "-100%",
+                    barCategoryGap: "60%",
+
+                    itemStyle: {
+                        normal: {
+                            color: "transparent"
+                            // barBorderRadius: 20
+                        }
+                    },
+                    data: _bgshow
+                },
+                {
+                    name: "昨天",
+                    type: "bar",
+                    barWidth: 16,
+                    // barGap: '50%',
+                    barCategoryGap: "60%",
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: {
+                            color: "#003372",
+                            barBorderRadius: 20
+                        }
+                    },
+                    data: yesterdayList
+                },
+                {
+                    name: "今日",
+                    type: "bar",
+                    barWidth: 16,
+                    barCategoryGap: "60%",
+                    label: {
+                        normal: {
+                            show: false,
+                            color: "#fff",
+                            position: [320, -8],
+                            fontSize: "24",
+                            fontFamily: "myFirstFont"
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            show: false,
+                            color: "#6df8f0",
+                            barBorderRadius: 20
+                        }
+                    },
+                    data: _boyActual,
+                    zLevel: "2"
+                }
+            ]
+        };
+        myChart.setOption(option);
+        
+    }
+    //环形图
+    function test11() {
+        var myChart = echarts.init(document.getElementById('test'));
+        var scale = 1;
+        var echartData = [{
+            value: 589,
+            name: '未下单'
+        }, {
+            value: 860,
+            name: '未生产'
+        }, {
+            value: 1000,
+            name: '生产中'
+        }, {
+            value: 2000,
+            name: '厂内仓储'
+        }, {
+            value: 1800,
+            name: '现场仓储'
+        }, {
+            value: 900,
+            name: '已安装'
+        }]
+        var rich = {
+            yellow: {
+                color: "#ffc72b",
+                fontSize: 30 * scale,
+                padding: [5, 4],
+                align: 'center',
+            },
+            total: {
+                color: "#ffc72b",
+                fontSize: 50 * scale,
+                align: 'center'
+            },
+            white: {
+                color: "#fff",
+                align: 'center',
+                fontSize: 16 * scale,
+                padding: [15, 0]
+            },
+            blue: {
+                color: '#49dff0',
+                fontSize: 18 * scale,
+                align: 'center'
+            },
+            hr: {
+                borderColor: '#0b5263',
+                width: '110%',
+                borderWidth: 1,
+                height: 0,
+            }
+        }
+
+        option = {
+            backgroundColor: '#030d22',
+            title: {
+                text:'构件总数',
+                subtext:'',
+                left:'center',
+                top:'53%',
+                padding:[20,0],
+                textStyle:{
+                    color:'#fff',
+                    fontSize:25*scale,
+                    align:'center'
+                }
+            },
+            subtext: '总数',
+            legend: {
+                selectedMode:true,
+                formatter: function(name) {
+                    var total = 0; //各科正确率总和
+                    var averagePercent; //综合正确率
+                    echartData.forEach(function(value, index, array) {
+                        total += value.value;
+                    });
+                    return '{total|' + total + '}';
+                },
+                data: [echartData[0].name],
+                right: 'center',
+                top: 'center',
+                icon: 'none',
+                align:'center',
+                textStyle: {
+                    color: "#fff",
+                    fontSize: 18 * scale,
+                    rich: rich
+                },
+            },
+            series: [{
+                type: 'pie',
+                radius: ['35%', '50%'],
+                hoverAnimation: false,
+                color: ['#FBFC01', '#0135F7', '#2CFE4F', '#FF6B00', '#12C7FF', '#FF3097'],
+                label: {
+                    normal: {
+                        formatter: function(params, ticket, callback) {
+                            var total = 0; //考生总数量
+                            var percent = 0; //考生占比
+                            echartData.forEach(function(value, index, array) {
+                                total += value.value;
+                            });
+                            percent = ((params.value / total) * 100).toFixed(1);
+                            return '{white|' + params.name + '}\n{hr|}\n{yellow|' + params.value + '}\n{blue|' + percent + '%}';
+                        },
+                        rich: rich
+                    },
+                },
+                labelLine: {
+                    normal: {
+
+                    }
+                },
+                data: echartData
+            }]
+        };
+        myChart.setOption(option);
+    }
+    ////环形图2
+    function test12() {
+        var myChart = echarts.init(document.getElementById('test'));
+        var scale = 1;
+        var echartData = [{
+            value: 101,
+            name: '接单数'
+        }, {
+            value: 22,
+            name: '处置数'
+        }, {
+            value: 47,
+            name: '按时办结数'
+        }, {
+            value: 60,
+            name: '超期处置数'
+        }, {
+            value: 120,
+            name: '超期未处置数'
+        }]
+        var rich = {
+            yellow: {
+                color: "#ffc72b",
+                fontSize: 30 * scale,
+                padding: [5, 4],
+                align: 'center',
+            },
+            total: {
+                color: "#ffc72b",
+                fontSize: 50 * scale,
+                align: 'center'
+            },
+            white: {
+                color: "#fff",
+                align: 'center',
+                fontSize: 16 * scale,
+                padding: [15, 0]
+            },
+            blue: {
+                color: '#49dff0',
+                fontSize: 18 * scale,
+                align: 'center'
+            },
+            hr: {
+                borderColor: '#0b5263',
+                width: '110%',
+                borderWidth: 1,
+                height: 0,
+            }
+        }
+
+        option = {
+
+            title: {
+                text:'',
+                subtext:'',
+                left:'center',
+                top:'53%',
+                padding:[20,0],
+                textStyle:{
+                    color:'#fff',
+                    fontSize:25*scale,
+                    align:'center'
+                }
+            },
+            subtext: '总数',
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                top: 'center',
+                align: 'left',
+                textStyle:{
+                    color:'#7badf6',
+                    fontSize:16,
+                    align:'center'
+                },
+                formatter:  function(name){
+
+                    var val="";
+                    for(var i=0;i<echartData.length;i++){
+                        if(echartData[i].name==name){
+                            val=echartData[i].value;
+                        }
+                    }
+                    return name + "  " +val+' 个' ;
+                },
+                data:['接单数','处置数','按时办结数','超期处置数','超期未处置数']
+            },
+            series: [{
+                type: 'pie',
+                radius: ['35%', '50%'],
+                hoverAnimation: false,
+                color: ['#0e7ce2', '#ff8352', '#e271de', '#f8456b', '#00fff', '#FF3097'],
+                label: {
+                    normal: {
+                        formatter: function(params, ticket, callback) {
+                            var total = 0; //考生总数量
+                            var percent = 0; //考生占比
+                            echartData.forEach(function(value, index, array) {
+                                total += value.value;
+                            });
+                            percent = ((params.value / total) * 100).toFixed(1);
+                            return '{blue|' + percent + '%}';
+                        },
+                        rich: rich
+                    },
+                },
+                labelLine: {
+                    normal: {
+
+                    }
+                },
+                data: echartData
+            }]
+        };
+        myChart.setOption(option);
+    }
+    //横向堆叠图
+    function test13() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            color:['#9675CE', '#4DD0E4', '#81C683', '#DBE876', '#60B1F2'],
+            legend: {
+                data: ['安全隐患', '环境保护','社会稳定','企业事项','城乡治理'],
+                y: 'bottom',
+                textStyle:{
+                    color: '#fff'
+                }
+
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '5%',
+                top: '1%',
+                containLabel: true
+            },
+            yAxis:  {
+                type: 'value',
+                axisLine: {
+                    show: true,
+                    lineStyle:{
+                        color:'#858aa4',
+
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#fff'
+                    }
+                }
+            },
+            xAxis: {
+                type: 'category',
+                axisLine: {
+                    show: false,
+                    lineStyle:{
+                        color:'#858aa4',
+
+                    }
+                },
+                data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月']
+            },
+            series: [
+                {
+                    name: '安全隐患',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+
+                        }
+                    },
+                    data: [320, 302, 301, 334, 390, 330, 320, 301, 334, 390, 330, 320]
+                },
+                {
+                    name: '环境保护',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+
+                        }
+                    },
+                    data: [120, 132, 101, 134, 90, 230, 210, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '社会稳定',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+
+                        }
+                    },
+                    data: [220, 182, 191, 234, 290, 330, 310, 191, 234, 290, 330, 310]
+                },
+                {
+                    name: '企业事项',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+
+                        }
+                    },
+                    data: [150, 212, 201, 154, 190, 330, 410, 201, 154, 190, 330, 410]
+                },
+                {
+                    name: '城乡治理',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+
+                        }
+                    },
+                    data: [820, 832, 901, 934, 1290, 1330, 1320, 901, 934, 1290, 1330, 1320]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //折线图
+    function test14() {
+        var myChart = echarts.init(document.getElementById('test'));
+        var lendData = ['环境', '住宿', '门票', '景点'];
+        var myYData = ['2018-01-30', '2018-01-31', '2018-02-01', '2018-02-03', '2018-02-04', '2018-02-05', '2018-02-06'];
+        var color= ['#1d7b16', '#0897d7', '#e5b513', '#c02e33'],
+        option = {
+            legend: {
+                data: lendData,
+                right: 10
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line'
+                }
+            },
+            grid: {
+                left: 10,
+                right: 40,
+                bottom: 10,
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: myYData
+            },
+            yAxis: {
+                type: 'value',
+//                                name:'m',
+                nameTextStyle:{color:'#fff'}
+            },
+            series: [{
+                name: lendData[0],
+                type: 'line',
+                /* stack: '总量', */
+                data:[23, 23, 15, 13, 12, 23, 6],
+                markPoint: {
+                    data: [{
+                        type: 'max',
+                        name: '最大值'
+                    }]
+                }
+            },{
+                name: lendData[1],
+                type: 'line',
+                /* stack: '总量', */
+                data:[13, 14, 15, 16, 17, 18, 19],
+                markPoint: {
+                    data: [{
+                        type: 'max',
+                        name: '最大值'
+                    }]
+                }
+            },{
+                name: lendData[2],
+                type: 'line',
+                /* stack: '总量', */
+                data:[22, 21, 25, 23, 22, 23, 20],
+                markPoint: {
+                    data: [{
+                        type: 'max',
+                        name: '最大值'
+                    }]
+                }
+            },{
+                name: lendData[3],
+                type: 'line',
+                /* stack: '总量', */
+                data:[22, 21, 25, 23, 22, 23, 20],
+                markPoint: {
+                    data: [{
+                        type: 'max',
+                        name: '最大值'
+                    }]
+                }
+            }
+            ],
+            color: ['#1d7b16', '#0897d7', '#e5b513', '#c02e33']
+        };
+        myChart.setOption(option);
+    }
+    function echartF2(){
+        var myChart = echarts.init(document.getElementById('echart_F2'));
+        let _boyActual = [30, 50, 60, 12, 13];
+        let yesterdayList = [100, 100, 100, 100, 100];
+        let _bgshow = [];
+        let _college = [
+
+            "城乡治理",
+            "环境保护",
+            "社会稳定",
+            "企业事项",
+            "安全隐患"
+        ];
+        let maxPlanCourseCnt = Math.max.apply(null, yesterdayList);
+        let maxRealCourseCnt = Math.max.apply(null, _boyActual);
+        let maxCourseCnt = Math.max(maxPlanCourseCnt, maxRealCourseCnt);
+
+        $.each(yesterdayList, function(i, d) {
+            _bgshow.push(maxCourseCnt);
+        });
+
+
+        var option = {
+            backgroundColor: '#0B154A',
+
+            grid: {
+                left: "12%",
+                right: "3%",
+                bottom: "5%",
+                top: 10
+            },
+            xAxis: {
+                type: "value",
+                show: true,
+                max: maxCourseCnt,
+                splitLine: {
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+
+                axisLine:{
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisLabel:{
+                    color: '#ccc'
+                }
+
+            },
+            yAxis: [{
+                type: "category",
+                axisLine: {
+
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine:{
+                    show: true,
+                    lineStyle:{
+                        color: ['#26205C'],
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    color: "#6df8f0",
+                    fontSize: 14
+                },
+
+                data: _college
+            },
+
+
+                {
+                    type: "category",
+                    data: []
+                }
+            ],
+            series: [
+                {
+                    name: "",
+                    type: "bar",
+                    barWidth: 6,
+                    barGap: "-100%",
+                    barCategoryGap: "60%",
+
+                    itemStyle: {
+                        normal: {
+                            color: "transparent"
+                            // barBorderRadius: 20
+                        }
+                    },
+                    data: _bgshow
+                },
+                {
+                    name: "昨天",
+                    type: "bar",
+                    barWidth: 16,
+                    // barGap: '50%',
+                    barCategoryGap: "60%",
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: {
+                            color: "#003372",
+                            barBorderRadius: 20
+                        }
+                    },
+                    data: yesterdayList
+                },
+                {
+                    name: "今日",
+                    type: "bar",
+                    barWidth: 16,
+                    barCategoryGap: "60%",
+                    label: {
+                        normal: {
+                            show: false,
+                            color: "#fff",
+                            position: [320, -8],
+                            fontSize: "24",
+                            fontFamily: "myFirstFont"
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            show: false,
+                            color: "#6df8f0",
+                            barBorderRadius: 20
+                        }
+                    },
+                    data: _boyActual,
+                    zLevel: "2"
+                }
+            ]
+        };
+        myChart.setOption(option);
+
+    }
+    function echartI1() {
+        var myChart = echarts.init(document.getElementById('echart_I1'));
+        var lendData = ['环境', '住宿', '门票', '景点'];
+        var myYData = ['2018-01-30', '2018-01-31', '2018-02-01', '2018-02-03', '2018-02-04', '2018-02-05', '2018-02-06'];
+        var color= ['#1d7b16', '#0897d7', '#e5b513', '#c02e33'],
+            option = {
+                legend: {
+                    data: lendData,
+                    right: 10,
+                    textStyle:{
+                        color:"#7badf6"
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line'
+                    }
+                },
+                grid: {
+                    left: 30,
+                    right: 40,
+                    bottom: 10,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: myYData,
+                    axisLine:{
+                        show: true,
+                        lineStyle:{
+                            color: ['#848aa5'],
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    axisLabel:{
+                        color: '#7badf6'
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+//                                name:'m',
+                    axisLine:{
+                        show: true,
+                        lineStyle:{
+                            color: ['#848aa5'],
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    axisLabel:{
+                        color: '#7badf6'
+                    }
+                },
+                series: [{
+                    name: lendData[0],
+                    type: 'line',
+                    /* stack: '总量', */
+                    data:[23, 23, 15, 13, 12, 23, 6],
+                    markPoint: {
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }]
+                    }
+                },{
+                    name: lendData[1],
+                    type: 'line',
+                    /* stack: '总量', */
+                    data:[13, 14, 15, 16, 17, 18, 19],
+                    markPoint: {
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }]
+                    }
+                },{
+                    name: lendData[2],
+                    type: 'line',
+                    /* stack: '总量', */
+                    data:[22, 21, 25, 23, 22, 23, 20],
+                    markPoint: {
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }]
+                    }
+                },{
+                    name: lendData[3],
+                    type: 'line',
+                    /* stack: '总量', */
+                    data:[22, 21, 25, 23, 22, 23, 20],
+                    markPoint: {
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }]
+                    }
+                }
+                ],
+                color: ['#1d7b16', '#0897d7', '#e5b513', '#c02e33']
+            };
+        myChart.setOption(option);
+    }
+
+    //环形图中间字
+    function test15() {
+        var myChart = echarts.init(document.getElementById('test'));
+        var scale = 1;
+        var echartData = [{
+            value: 500,
+            name: '未挂牌企业数'
+        }, {
+            value: 120,
+            name: '黄牌企业数'
+        }, {
+            value: 100,
+            name: '红牌企业数'
+        }]
+        var rich = {
+            yellow: {
+                color: "#ffc72b",
+                fontSize: 30 * scale,
+                padding: [5, 4],
+                align: 'center'
+            },
+            total: {
+                color: "#ffc72b",
+                fontSize: 40 * scale,
+                align: 'center'
+            },
+            white: {
+                color: "#fff",
+                align: 'center',
+                fontSize: 14 * scale,
+                padding: [21, 0]
+            },
+            blue: {
+                color: '#49dff0',
+                fontSize: 16 * scale,
+                align: 'center'
+            },
+            hr: {
+                borderColor: '#0b5263',
+                width: '100%',
+                borderWidth: 1,
+                height: 0,
+            }
+        }
+        option = {
+
+            title: {
+                text:'企业数',
+                left:'center',
+                top:'53%',
+                padding:[24,0],
+                textStyle:{
+                    color:'#fff',
+                    fontSize:18*scale,
+                    align:'center'
+                }
+            },
+            legend: {
+                selectedMode:false,
+                formatter: function(name) {
+                    var total = 0; //各科正确率总和
+                    var averagePercent; //综合正确率
+                    echartData.forEach(function(value, index, array) {
+                        total += value.value;
+                    });
+                    return '{total|' + total + '}'+'家';
+                },
+                data: [echartData[0].name],
+                // data: ['高等教育学'],
+                // itemGap: 50,
+                left: 'center',
+                top: 'center',
+                icon: 'none',
+                align:'center',
+                textStyle: {
+                    color: "#fff",
+                    fontSize: 16 * scale,
+                    rich: rich
+                },
+            },
+            series: [{
+                name: '总考生数量',
+                type: 'pie',
+                //roseType : 'area',
+                radius : [80, 110],
+                hoverAnimation: false,
+                color: ['#0d77df', '#d5c821', '#e172b1'],
+                label: {
+                    normal: {
+                        formatter: function(params, ticket, callback) {
+                            var total = 0; //考生总数量
+                            var percent = 0; //考生占比
+                            echartData.forEach(function(value, index, array) {
+                                total += value.value;
+                            });
+                            percent = ((params.value / total) * 100).toFixed(1);
+                            return '{white|' + params.name + '}\n{hr|}\n{yellow|' + params.value + '}\n{blue|' + percent + '%}';
+                        },
+                        rich: rich
+                    },
+                },
+                labelLine: {
+                    normal: {
+                        length: 55 * scale,
+                        length2: 0,
+                        lineStyle: {
+                            color: '#0b5263'
+                        }
+                    }
+                },
+                data: echartData
+            }]
+        };
+        myChart.setOption(option);
+    }
+      //普通折线图
+    function test16() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+            title: {
+                text: '堆叠区域图'
+            },
+            tooltip : {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                data:['黄牌趋势','红牌趋势'],
+                textStyle:{
+                    color: '#fff'
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    axisLine:{
+                        show: true,
+                        lineStyle:{
+                            color: ['#848aa5'],
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    axisLabel:{
+                        color: '#7badf6'
+                    },
+                    data : ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLine:{
+                        show: true,
+                        lineStyle:{
+                            color: ['#848aa5'],
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    axisLabel:{
+                        color: '#7badf6'
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'红牌趋势',
+                    type:'line',
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                            color: "#65487e"
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#dbce3d'
+                            }, {
+                                offset: 0.8,
+                                color: '#58691e'
+                            }], false),
+
+                        }
+                    },
+                    data:[220, 182, 191, 234, 290, 330, 310,110, 125, 145, 122, 165, 122]
+                },
+                {
+                    name:'黄牌趋势',
+                    type:'line',
+                    lineStyle: {
+                        normal: {
+                            width: 1,
+                            color: "#65487e"
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#d989db'
+                            }, {
+                                offset: 0.8,
+                                color: '#222060'
+                            }], false),
+
+                        }
+                    },
+                    data:[220, 182, 191, 134, 250, 120, 110, 125, 145, 122, 165, 122]
+                },
+
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //三角形图
+    function test17() {
+        var myChart = echarts.init(document.getElementById('test'));
+        let data = {
+            "chart": [{
+                month: "安监",
+                value: 138,
+                ratio: 14.89
+            },
+
+                {
+                    month: "城管",
+                    value: 114,
+                    ratio: 79.49
+                },
+
+                {
+                    month: "国土",
+                    value: 714,
+                    ratio: 75.8
+                },
+
+                {
+                    month: "水利",
+                    value: 442,
+                    ratio: 19.8
+                },
+
+                {
+                    month: "建筑",
+                    value: 622,
+                    ratio: 44.5
+                },
+
+
+                {
+                    month: "其他",
+                    value: 528,
+                    ratio: 87.3
+                }
+
+            ]
+        }
+
+//  x轴数据          象形柱图数据  折线图数据
+        let xAxisMonth = [],
+            barData = [],
+            lineData = [];
+        for (let i = 0; i < data.chart.length; i++) {
+            xAxisMonth.push(data.chart[i].month);
+            barData.push({
+                "name": xAxisMonth[i],
+                "value": data.chart[i].value
+            });
+            lineData.push({
+                "name": xAxisMonth[i],
+                "value": data.chart[i].ratio
+            });
+        }
+
+        option = {
+            backgroundColor: "#020d22",
+            title: '',
+            grid: {
+                top: '24%',
+                left: '7%',
+                bottom: '6%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'none'
+                },
+                formatter: function(params) {
+                    return params[0]["data"].name + "<br/>" + '参训人次: ' + params[1]["data"].value + "<br/>" + '合格率: ' + params[0]["data"].value;
+                }
+            },
+            xAxis: [{
+                type: 'category',
+                show: false,
+                data: ['安监', '城管', '国土', '水利', '建筑', '其他'],
+                axisLabel: {
+                    textStyle: {
+                        color: '#b6b5ab'
+                    }
+                }
+            },
+                {
+                    type: 'category',
+                    position: "bottom",
+                    data: xAxisMonth,
+                    boundaryGap: true,
+                    // offset: 40,
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: true
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: '#b6b5ab'
+                        }
+                    }
+                }
+
+            ],
+            yAxis: [{
+                show: true,
+
+                splitLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "rgba(255,255,255,0.2)"
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true
+                },
+                axisLabel: {
+                    show: true,
+                    color: '#b6b5ab'
+                }
+            }, {
+                show: false,
+                type: "value",
+                name: "合格率(%)",
+                nameTextStyle: {
+                    color: '#ccc'
+                },
+                axisLabel: {
+                    color: '#ccc'
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                }
+            }],
+            color: ['#e54035'],
+            series: [{
+                name: '参训人次',
+                type: 'pictorialBar',
+                xAxisIndex: 1,
+
+                // barCategoryGap: '-5%',
+                symbol: 'path://d="M150 50 L130 130 L170 130  Z"',
+                itemStyle: {
+                    normal: {
+                        color: 'rgba(13,177,205,0.8)'
+                    },
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                data: barData,
+            }
+            ]
+        }
+        myChart.setOption(option);
+    }
+    //单个线折线区域
+    function test18() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                }
+            },
+            legend: {
+                icon: 'rect',
+                itemWidth: 14,
+                itemHeight: 5,
+                itemGap: 13,
+                data: ['南宁-曼芭'],
+                right: '4%',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#F1F1F3'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+            }],
+            yAxis: [{
+                type: 'value',
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 14
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                }
+            }],
+            series: [{
+                name: '',
+                type: 'line',
+                smooth: true,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#2972a5'
+                        }, {
+                            offset: 0.8,
+                            color: '#081456'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#41add4'
+                    }
+                },
+                data: [96.3,96.4,97.5,95.6,98.1,94.8,89.6,94.1,80.1,52.4,75.8,94.7]
+            } ]
+        };
+        myChart.setOption(option);
+    }
+    //饼图
+    function test19() {
+        var myChart = echarts.init(document.getElementById('test'));
+        option = {
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            color:['#0c7ce2','#e172b1','#00ccff','#ffcc00'],
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data: ['个人','企业'],
+                formatter:function(name){
+                    var oa = option.series[0].data;
+                    var num = oa[0].value + oa[1].value ;
+                    for(var i = 0; i < option.series[0].data.length; i++){
+                        if(name==oa[i].name){
+                            return name + '     ' + oa[i].value + '     ' + (oa[i].value/num * 100).toFixed(2) + '%';
+                        }
+                    }
+                }
+            },
+            series : [
+                {
+                    name: '签到比例分析',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['40%', '50%'],
+                    data:[
+                        {value:335, name:'个人'},
+                        {value:310, name:'企业'}
+
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            label:{
+                                show: true,
+//	                            position:'inside',
+                                formatter: '{b} : {c} ({d}%)'
+                            }
+                        },
+                        labelLine :{show:true}
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    //圆头柱状图
+    function test20() {
+        var myChart = echarts.init(document.getElementById('test'));
+
+
+        option = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['朱俊', '汤庆荣', '李学根', '陆广飞', '魏在兵', '王营', '陆俊', '李在元'],
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle:{
+                            color:'#858aa4',
+
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    // type : 'category',
+                    // data : ['10','20','30','40'],
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle:{
+                            color:'#858aa4',
+
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'直接访问',
+                    type:'bar',
+                    barWidth: '20',
+                    data:[1, 3, 2, 3, 4, 2, 1,3],
+
+                    itemStyle: {
+                        normal: {
+                            barBorderRadius: [30, 30, 0, 0],
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#3a49f5'
+                            }, {
+                                offset: 1,
+                                color: '#5865fc'
+                            }]),
+                            shadowColor: '#7278ff',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+
+            ]
+        };
+        myChart.setOption(option);
+    }
+
+</script>
+
+</body>
+</html>

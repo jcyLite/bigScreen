@@ -1,0 +1,200 @@
+<template>
+        <div class="sjfx zhzf">
+                <theader :active="3">
+                    <div class="zhzftitle" style="top: 91px;right: -285px;">
+                        <router-link to="/zhzf">综合执法</router-link>
+                        <!-- <a class="active" href="zhzf.html">综合执法</a> -->
+                        <router-link to="/sjfx">数据统计</router-link>
+                        <!-- <a href="sjfx.html">数据统计</a> -->
+                    </div>
+                </theader>
+                <div id="hv-wrapper">
+                        <div class="box box9">
+                                <div class="container">
+                                        <i class="icon1"></i>
+                                        <i class="icon2"></i>
+                                        <i class="icon3"></i>
+                                        <i class="icon4"></i>
+                                        <div class="contentWrapper">
+                                                <div class="mainTitle">综合执法类别统计</div>
+                                                <div class="conditionBox">
+                                                        <div id="echart_B1" style="width: 100%;height: 240px;"></div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="box box10">
+                                        <div class="container">
+                                                <i class="icon1"></i>
+                                                <i class="icon2"></i>
+                                                <i class="icon3"></i>
+                                                <i class="icon4"></i>
+                                                <div class="mainTitle">立案处罚类别统计</div>
+                                                <div class="conditionBox">
+                                                        <div id="echart_H1" style="width: 100%;height: 230px;"></div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="box box11">
+                                        <div class="container">
+                                                <i class="icon1"></i>
+                                                <i class="icon2"></i>
+                                                <i class="icon3"></i>
+                                                <i class="icon4"></i>
+                                                <div class="contentWrapper">
+                                                        <div class="mainTitle">年度案件来源</div>
+                                                        <div class="conditionBox">
+                                                                <div id="echart_F1" style="width: 100%;height: 270px;"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="contentWrapper" style="position:absolute;top:2px;left:600px;">
+                                        <div class="mainTitle" onclick="openwin()">企业总数量：
+                                                <span class="title_color">2</span>
+                                                <span class="title_color">0</span>
+                                                <span class="title_color">0</span>家</div>
+                                        <div class="conditionBox">
+                                                <div id="echart_e1" style="width: 752px;height:880px;"></div>
+                                        </div>
+                                </div>
+
+                                <div class="box box13">
+                                        <div class="container">
+                                                <i class="icon1"></i>
+                                                <i class="icon2"></i>
+                                                <i class="icon3"></i>
+                                                <i class="icon4"></i>
+                                                <div class="contentWrapper">
+                                                        <div class="mainTitle">企业抽检次数排名top7</div>
+                                                        <div class="conditionBox">
+                                                                <div id="echart_I2" style="width: 100%;height:245px;"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="box box14">
+                                        <div class="container">
+                                                <i class="icon1"></i>
+                                                <i class="icon2"></i>
+                                                <i class="icon3"></i>
+                                                <i class="icon4"></i>
+                                                <div class="contentWrapper">
+                                                        <div class="mainTitle">年度执法处置结果统计</div>
+                                                        <div class="conditionBox">
+                                                                <div id="echart_H2" style="width: 100%;height:230px;"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="box box15">
+                                        <div class="container">
+                                                <i class="icon1"></i>
+                                                <i class="icon2"></i>
+                                                <i class="icon3"></i>
+                                                <i class="icon4"></i>
+                                                <div class="contentWrapper">
+                                                        <div class="mainTitle">检查结果统计</div>
+                                                        <div class="conditionBox">
+                                                                <div id="echart_A2" style="width: 100%;height: 230px;"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                        </div>
+                 </div>
+
+        </div>
+</template>
+
+<script>
+export default {
+        mounted(){
+                import('../js/echarts_zhzf_ku.js').then(d=>{
+                         setInterval(nowTime_sjfX, 1000);
+			//以下为时间刷新方法----------------------------------------------------------
+			function nowTime_sjfX() {
+				//获取年月日
+				var time = new Date();
+				var year = time.getFullYear();
+				var month = time.getMonth();
+				var day = time.getDate();
+				var xingqi = time.getDay();         //获取当前星期X(0-6,0代表星期天)
+
+				//获取时分秒
+				var h = time.getHours();
+				var m = time.getMinutes();
+				var s = time.getSeconds();
+
+				//检查是否小于10
+				h = check(h);
+				m = check(m);
+				s = check(s);
+				y = year;
+				month = check(month + 1);
+				d = check(day)
+				$("#nowTime_sjfX>span:first-child").text(y + "年" + month + "月" + d + "日");
+				$("#nowTime_sjfX>span:nth-child(3)").text(h + " : " + m + " : " + s);
+				if (xingqi == 0) { $("#nowTime_sjfX>span:nth-child(2)").text("星期日"); }
+				else if (xingqi == 1) { $("#nowTime_sjfX>span:nth-child(2)").text("星期一"); }
+				else if (xingqi == 2) { $("#nowTime_sjfX>span:nth-child(2)").text("星期二"); }
+				else if (xingqi == 3) { $("#nowTime_sjfX>span:nth-child(2)").text("星期三"); }
+				else if (xingqi == 4) { $("#nowTime_sjfX>span:nth-child(2)").text("星期四"); }
+				else if (xingqi == 5) { $("#nowTime_sjfX>span:nth-child(2)").text("星期五"); }
+				else if (xingqi == 6) { $("#nowTime_sjfX>span:nth-child(2)").text("星期六"); }
+			}
+			//时间数字小于10，则在之前加个“0”补位。
+			function check(i) {
+				//方法一，用三元运算符
+				var num;
+				i < 10 ? num = "0" + i : num = i;
+				return num;
+			}
+			$(function () {
+                getweater()
+				echartB1();
+				echartH2();
+				echartA2();
+				echartH1();
+				echartF1();
+				echartI2();
+				echartE1();
+			})
+            function getweater() {
+
+                $.ajax({
+                    url: "http://wthrcdn.etouch.cn/weather_mini?city=如东",
+                    dataType: "jsonp",
+                    type: "post",
+                    data: {
+
+                    },
+                    success: function (data) {
+                        console.log(data.data.forecast[0]);
+                        var forecast=data.data.forecast[0];
+                        var str = forecast.fengli,
+                            fengli = str.slice(9,13);
+                        console.log(fengli);
+                        $("#nowTime_sjfX>span:nth-child(4)").text("最"+forecast.high);
+                        $("#nowTime_sjfX>span:nth-child(5)").text("最"+forecast.low);
+                        $("#nowTime_sjfX>span:nth-child(6)").text(forecast.fengxiang);
+                        $("#nowTime_sjfX>span:nth-child(7)").text(fengli);
+                        $("#nowTime_sjfX>span:nth-child(8)").text(forecast.type);
+
+                    }
+                })
+            }
+                })
+               
+        }
+}
+</script>
+
+<style lang='less'>
+        
+</style>

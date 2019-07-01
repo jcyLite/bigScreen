@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>智慧送桥管理中心</title>
+    <script type="text/javascript" src="./static/bigScreen/js/jquery.js"></script>
+    <script type="text/javascript" src="./static/bigScreen/js/echarts.js"></script>
+    <script type="text/javascript" src="./static/bigScreen/js/echarts_wgzl_ku.js"></script>
+    <script src="./static/bigScreen/js/easyui-1.4.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="./static/bigScreen/js/killercarousel.js"></script>
+
+    <script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&tk=7a1d904db1ad0e570a1b0afc5eab78c4"></script>
+    <script type="text/javascript" src="http://t0.tianditu.gov.cn/img_c/wmts?tk=7a1d904db1ad0e570a1b0afc5eab78c4"></script>
+
+    <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js " charset="utf-8"></script>
+    <script src="http://lbs.tianditu.gov.cn/api/js4.0/opensource/openlibrary/D3SvgOverlay.js"></script>
+    <!--<script src="./static/bigScreen/js/tdt/tiantidiapi.js"></script>-->
+    <!--<script src="./static/bigScreen/js/tdt/d3.js"></script>-->
+    <!--<script src="./static/bigScreen/js/tdt/D3SvgOverlay.js"></script>-->
+    <script src="./static/bigScreen/js/CarTrack.js"></script>
+    <script src="./static/bigScreen/js/scroll.js"></script>
+    <script src="./static/bigScreen/js/video.min.js"></script>
+    <script src="./static/bigScreen/js/videojs-contrib-hls.js"></script>
+</head>
+
+<body>
+    <% if(process.env.VUE_ENV=='spa'){ %>
+        <div id="app"></div>
+        <% } %>
+            <!--vue-ssr-outlet-->
+</body>
+
+</html>

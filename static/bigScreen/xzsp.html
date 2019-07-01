@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/xzsp.css" />
+    <link rel="stylesheet" type="text/css" href="css/history.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/echarts_xzsp_ku.js"></script>
+    <script type="text/javascript" src="js/scroll.js"></script>
+    <style>
+        body {
+            background-color: #0b1956;
+        }
+    </style>
+
+    <script>
+        var items = new Array;
+        window.serverUrl = "http://58.220.24.15:8084/sqxzsp/";
+        //        window.serverUrl = "http://localhost:8080/ykxzsp/";
+        function onLoad() {
+            getweater();
+            //每1秒刷新时间
+            setInterval("NowTime()", 1000);
+            document.getElementById("operate").style.display = "none";
+            document.getElementById("ggzyggxq").style.display = "none";
+            document.getElementById("qxmlxq").style.display = "none";
+            // caseinfoList("SP");
+            transfer("SP");
+            // approvalAuth("SP");
+            transfer2("SP");
+            // caseNumStatics("SP");
+            transfer1("SP");
+            // caseTOP5("SP");
+            transfer3("SP");
+            endResult();
+            echartB1();
+        }
+        //以下为时间刷新方法----------------------------------------------------------
+        function NowTime() {
+            //获取年月日
+            var time = new Date();
+            var year = time.getFullYear();
+            var month = time.getMonth();
+            var day = time.getDate();
+            var xingqi = time.getDay(); //获取当前星期X(0-6,0代表星期天)
+
+            //获取时分秒
+            var h = time.getHours();
+            var m = time.getMinutes();
+            var s = time.getSeconds();
+
+            //检查是否小于10
+            h = check(h);
+            m = check(m);
+            s = check(s);
+            y = year;
+            month = check(month + 1);
+            d = check(day)
+            $("#nowTime>span:first-child").text(y + "年" + month + "月" + d + "日");
+            $("#nowTime>span:nth-child(3)").text(h + " : " + m + " : " + s);
+            if (xingqi == 0) {
+                $("#nowTime>span:nth-child(2)").text("星期日");
+            } else if (xingqi == 1) {
+                $("#nowTime>span:nth-child(2)").text("星期一");
+            } else if (xingqi == 2) {
+                $("#nowTime>span:nth-child(2)").text("星期二");
+            } else if (xingqi == 3) {
+                $("#nowTime>span:nth-child(2)").text("星期三");
+            } else if (xingqi == 4) {
+                $("#nowTime>span:nth-child(2)").text("星期四");
+            } else if (xingqi == 5) {
+                $("#nowTime>span:nth-child(2)").text("星期五");
+            } else if (xingqi == 6) {
+                $("#nowTime>span:nth-child(2)").text("星期六");
+            }
+        }
+        //时间数字小于10，则在之前加个“0”补位。
+        function check(i) {
+            //方法一，用三元运算符
+            var num;
+            i < 10 ? num = "0" + i : num = i;
+            return num;
+        }
+        //		以下为办理事项列表------------------------------------------------------------
+        var MyMarhq = '';
+        clearInterval(MyMarhq);
+        $('.tbl-body tbody').empty();
+        $('.tbl-header tbody').empty();
+
+        function caseinfoList(type) {
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_caseinfoList.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    pageNum: "1",
+                    pageSize: "500",
+                    "sxType": type
+                },
+                error: function() {
+                    console.log("办理事项列表获取数据出错");
+                },
+                success: function(data) {
+                    console.log(data.datas)
+                    items = data.datas;
+                    $('#a3_ul_2').empty()
+                    $.each(items, function(i, item) {
+                        str =
+                            '<li onclick=getHistory("' + item.caseno + '")>' +
+                            '<div class="a3_div_content" style="left:0;line-height:42px;word-break:break-all;word-wrap:break-word;width:40%">' + item.caseno + '</div>' +
+                            '<div class="a3_div_content" style="left:40%;line-height:42px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">' + item.caseapplicant + '</div>' +
+                            '<div class="a3_div_content" style="right:0;line-height:42px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">' + item.servname + '</div>' +
+                            '</li>';
+
+                        $('#a3_ul_2').append(str);
+
+
+                        // if(items.length > 10){
+                        //     $('.tbl-body tbody').html($('.tbl-body tbody').html()+$('.tbl-body tbody').html());
+                        //     $('.tbl-body').css('top', '0');
+                        //     var tblTop = 0;
+                        //     var speedhq = 100; // 数值越大越慢
+                        //     var outerHeight = $('.tbl-body tbody').find("li").outerHeight();
+                        //     function Marqueehq(){
+                        //         if(tblTop <= -outerHeight*items.length){
+                        //             tblTop = 0;
+                        //         } else {
+                        //             tblTop -= 1;
+                        //         }
+                        //         $('.tbl-body').css('top', tblTop+'px');
+                        //     }
+
+                        //     MyMarhq = setInterval(Marqueehq,speedhq);
+
+                        //     $(".tbl-header tbody").click(function (){
+                        //         console.log('444444444444444')
+                        //     },function (){
+                        //         clearInterval(MyMarhq);
+                        //         MyMarhq = setInterval(Marqueehq,speedhq);
+                        //     })
+
+                        //     // 鼠标移上去取消事件
+                        //    /* $(".tbl-header tbody").hover(function (){
+                        //         clearInterval(MyMarhq);
+                        //     },function (){
+                        //         clearInterval(MyMarhq);
+                        //         MyMarhq = setInterval(Marqueehq,speedhq);
+                        //     })*/
+
+
+                        // }
+                    });
+                    $("#a3_ul_2").css("margin-top", "0");
+
+                }
+            });
+
+        }
+
+        //管理权限目录------------------------------------------------------------------
+        var MyMarhq2 = '';
+        clearInterval(MyMarhq2);
+        $('.tbl-body2 tbody').empty();
+        $('.tbl-header2 tbody').empty();
+        var str2 = '';
+        var Items2 = new Array;
+
+        function approvalAuth(type) {
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_approvalAuth.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    pageNum: "1",
+                    pageSize: "500",
+                    "sxType": type
+                },
+                error: function() {
+                    console.log("行政审批权限获取数据出错");
+                },
+                success: function(data) {
+                    $('#a3_ul_3').empty();
+                    Items2 = data.datas;
+                    console.log(Items2);
+                    $.each(Items2, function(i2, item2) {
+                        str2 = '<li style="height:42px;position: relative;padding:10px 0;" onClick=getThingDetail("' + item2.id + '")>'
+                        if ($.trim(item2.serveCode)) {
+                            str2 += '<div class="a3_div_content" style="left:0;line-height:42px;width:40%">' + item2.serveCode + '</div>'
+                        } else {
+                            str2 += '<div class="a3_div_content" style="left:0;line-height:42px;width:40%">' + '- - - - -' + '</div>'
+                        }
+
+                        str2 += '<div class="a3_div_content" style="line-height:42px;left:40%;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">' + item2.serveName + '</div>' +
+                            '<div class="a3_div_content" style="right:0;line-height:42px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">' + item2.caseType + '</div>' +
+                            '</li>';
+                        $('#a3_ul_3').append(str2);
+                    });
+                    $("#a3_ul_3").css("margin-top", "0");
+                    // if (Items2.length > 10) {
+                    //     $('.tbl-body2 tbody').html($('.tbl-body2 tbody').html() + $('.tbl-body2 tbody').html());
+                    //     $('.tbl-body2').css('top', '0');
+                    //     var tblTop2 = 0;
+                    //     var speedhq2 = 100; // 数值越大越慢
+                    //     var outerHeight2 = $('.tbl-body2 tbody').find("tr").outerHeight();
+                    //     function Marqueehq2() {
+                    //         if (tblTop2 <= -outerHeight2 * Items2.length) {
+                    //             tblTop2 = 0;
+                    //         } else {
+                    //             tblTop2 -= 1;
+                    //         }
+                    //         $('.tbl-body2').css('top', tblTop2 + 'px');
+                    //     }
+
+                    //     MyMarhq2 = setInterval(Marqueehq2, speedhq2);
+
+                    //     // 鼠标移上去取消事件
+                    //     $(".tbl-header2 tbody").hover(function () {
+                    //         clearInterval(MyMarhq2);
+                    //     }, function () {
+                    //         clearInterval(MyMarhq2);
+                    //         MyMarhq2 = setInterval(Marqueehq2, speedhq2);
+                    //     })
+                    // }
+
+                }
+            });
+        }
+        //事件接收-----------------------------------------------------------
+        function caseNumStatics(type) {
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_caseNumStatics.action",
+                dataType: "json",
+                async: false,
+                type: "post",
+                data: {
+                    pageNum: "1",
+                    pageSize: "500",
+                    "sxType": type
+                },
+                error: function() {
+                    console.log("事件接收获取数据出错");
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data != null) {
+                        var obj = data;
+
+                        // scrollNum1(obj.dayNum, 'dayNum');
+                        // scrollNum1(obj.dayHandleNum, 'dayHandleNum');
+                        // scrollNum2(obj.monthNum, 'monthNum');
+                        // scrollNum2(obj.monthHandleNum, 'monthHandleNum');
+                        // scrollNum3(obj.yearNum, 'yearNum');
+                        // scrollNum3(obj.yearHandleNum, 'yearHandleNum');
+                        clearInterval(timer1)
+                        clearInterval(timer2)
+                        if (type == "SP") {
+                            scrollNum1(49, 'dayNum');
+                            scrollNum1(49, 'dayHandleNum');
+                            scrollNum2(1462, 'monthNum');
+                            scrollNum2(1462, 'monthHandleNum');
+                            scrollNum3(7268, 'yearNum');
+                            scrollNum3(7268, 'yearHandleNum');
+                            var timer1 = setInterval(function() {
+                                scrollNum1(49, 'dayNum');
+                                scrollNum1(49, 'dayHandleNum');
+                                scrollNum2(1462, 'monthNum');
+                                scrollNum2(1462, 'monthHandleNum');
+                                scrollNum3(7268, 'yearNum');
+                                scrollNum3(7268, 'yearHandleNum');
+                            }, 300000)
+                        } else {
+                            scrollNum1(31, 'dayNum');
+                            scrollNum1(31, 'dayHandleNum');
+                            scrollNum2(538, 'monthNum');
+                            scrollNum2(538, 'monthHandleNum');
+                            scrollNum3(2738, 'yearNum');
+                            scrollNum3(2738, 'yearHandleNum');
+                            var timer2 = setInterval(function() {
+                                scrollNum1(31, 'dayNum');
+                                scrollNum1(31, 'dayHandleNum');
+                                scrollNum2(538, 'monthNum');
+                                scrollNum2(538, 'monthHandleNum');
+                                scrollNum3(2738, 'yearNum');
+                                scrollNum3(2738, 'yearHandleNum');
+                            }, 300000)
+                        }
+
+                    }
+                }
+            });
+        }
+        //服务事项top5统计------------------------------------------------------------------------------------------
+        var xzsp_grfwsx;
+        var data_y = new Array;
+        var data_x = new Array;
+
+        function caseTOP5(type) {
+            xzsp_grfwsx = echarts.init(document.getElementById('xzsp_grfwsx'));
+            if (type == "GF") {
+                data_x = ["城乡居民养老保险及社保政策咨询服务", "非税收入发票代开服务", "发票代开服务", "对持独生子女父母光荣证企业退休一次性奖励", "城镇居民医疗保险办理"];
+                data_y = [780, 533, 436, 202, 190];
+                $('#fwSum').text(2141);
+            } else {
+                // $.ajax({
+                //     url: window.serverUrl + "outWeb/selectBigScreen_caseTOP5.action",
+                //     dataType: "json",
+                //     async: false,
+                //     type: "post",
+                //     data: {
+                //         pageNum: "1",
+                //         pageSize: "500",
+                //         "sxType": type
+                //     },
+                //     error: function () {
+                //         console.log("服务事项top5获取数据出错");
+                //     },
+                //     success: function (data) {
+                //         items = data.datas;
+                //         console.log(items)
+                //         $.each(items, function (i, item) {
+                //             data_x.push(item.serveName);
+                //             data_y.push(parseInt(item.caseCount));
+                //         });
+                //         console.log(data_x)
+                //         console.log(data_y)
+                //         var fwSum = 0;
+                //         for (var i = 0; i < data_y.length; i++) {
+                //             fwSum += parseInt(data_y[i]);
+                //         }
+                //         $('#fwSum').text(fwSum);
+                //     }
+                // });
+                data_x = ["80周岁以上老年人尊老金的发放", "重大危险源备案", "建设工程规划许可证核发", "规划条件和规划许可内容的核实", "建立乡镇公益性殡仪服务站、公益性公墓、公益性骨灰堂（塔）的审批"];
+                data_y = [7015, 35, 24, 21, 15];
+                $('#fwSum').text(7115);
+
+
+            }
+            echar_qyfwsx();
+        }
+
+        function echar_qyfwsx() {
+            option_grfwsx = {
+                backgroundColor: 'rgba(0,0,0,0)',
+                grid: {
+                    top: '1%',
+                    left: '2%'
+                },
+                legend: {
+                    orient: 'vertical',
+                    bottom: 50,
+                    right: 0,
+                    left: 250,
+                    data: [{
+                        name: data_x[0],
+                        icon: 'square',
+                        textStyle: {
+                            color: '#819EDA',
+                            fontSize: 14
+                        }
+                    }, {
+                        name: data_x[1],
+                        icon: 'square',
+                        textStyle: {
+                            color: '#819EDA',
+                            fontSize: 14
+                        }
+                    }, {
+                        name: data_x[2],
+                        icon: 'square',
+                        textStyle: {
+                            color: '#819EDA',
+                            fontSize: 14
+                        }
+                    }, {
+                        name: data_x[3],
+                        icon: 'square',
+                        textStyle: {
+                            color: '#819EDA',
+                            fontSize: 14
+                        }
+                    }, {
+                        name: data_x[4],
+                        icon: 'square',
+                        textStyle: {
+                            color: '#819EDA',
+                            fontSize: 14
+                        }
+                    }],
+                    textStyle: { //图例文字的样式
+                        color: '#fff',
+                        fontSize: 8,
+                    }
+                },
+                color: ['#3AA7F9', '#F56C7C', '#FD9A36', '#EBE028', '#31CE65', '#20DACD', '#D671F5', '#F430E8', '#8A31FB'],
+                series: [{
+                    name: '事项名',
+                    type: 'pie',
+                    radius: ['40%', '55%'],
+                    center: ['150px', '100px'],
+                    data: [{
+                            value: data_y[0],
+                            name: data_x[0]
+                        }, {
+                            value: data_y[1],
+                            name: data_x[1]
+                        }, {
+                            value: data_y[2],
+                            name: data_x[2]
+                        }, {
+                            value: data_y[3],
+                            name: data_x[3]
+                        }, {
+                            value: data_y[4],
+                            name: data_x[4]
+                        },
+
+                    ],
+                    label: {
+                        normal: {
+                            show: true,
+                            formatter: '{d}%',
+                            fontSize: 14
+                        },
+
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            };
+            xzsp_grfwsx.setOption(option_grfwsx, true);
+            data_y.length = 0;
+            data_x.length = 0;
+        }
+        //审批结果评估--------------------------------------------------------------------------
+        var endRate;
+        var myl;
+        var spendDays;
+
+        function endResult() {
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_closerate.action",
+                dataType: "json",
+                async: false,
+                type: "post",
+                data: {
+                    pageNum: "1",
+                    pageSize: "500",
+                },
+                error: function() {
+                    console.log("办结率获取数据出错");
+                },
+                success: function(data) {
+                    endRate = parseInt(data.rate);
+                    console.log('办结率' + endRate);
+                }
+            });
+
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_satisfactionRatio.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    pageNum: "1",
+                    pageSize: "500",
+                },
+                error: function() {
+                    console.log("满意率获取数据出错");
+                },
+                success: function(data) {
+                    myl = parseInt(data.ratio);
+                    console.log('满意率' + myl);
+                }
+            });
+
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_limitationOfApproval.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    pageNum: "1",
+                    pageSize: "500",
+                },
+                error: function() {
+                    console.log("平均审批时间获取数据出错");
+                },
+                success: function(data) {
+                    spendDays = parseInt(data.spendDays);
+                    console.log('平均审批时间' + spendDays);
+                }
+            });
+            echartA2();
+        }
+
+
+        function echartA2() {
+            var echart_A2 = echarts.init(document.getElementById('echart_A2'));
+            echart_A2.setOption({
+                title: [{
+                        x: "20%",
+                        bottom: 30,
+                        text: '按时办结率',
+                        textStyle: {
+                            fontWeight: 'normal',
+                            fontSize: 18,
+                            color: "#4cd4db"
+                        }
+                    },
+                    /*{
+                        x: "42%",
+                        bottom: 30,
+                        text: '时效率',
+                        textStyle: {
+                            fontWeight: 'normal',
+                            fontSize: 18,
+                            color: "#0271ff"
+                        }
+                    },*/
+                    {
+                        x: "70%",
+                        bottom: 30,
+                        text: '满意率',
+                        textStyle: {
+                            fontWeight: 'normal',
+                            fontSize: 18,
+                            color: "#f2ba4d"
+                        }
+                    }
+                ],
+                tooltip: {
+                    show: true
+                },
+                series: [
+                    /*{
+                                        type: 'gauge', //中间
+                                        center: ['50%', '50%'], // 默认全局居中
+                                        radius: '50%',
+                                        splitNumber: 6, //刻度数量
+                                        min: 0,
+                                        max: 30,
+                                        startAngle: 200,
+                                        endAngle: -20,
+                                        clockwise: true,
+                                        axisLine: {
+                                            show: true,
+                                            lineStyle: {
+                                                width: 2,
+                                                shadowBlur: 0,
+                                                color: [
+                                                    [1, '#0271ff']
+                                                ]
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: true,
+                                            lineStyle: {
+                                                color: '#0271ff',
+                                                width: 1
+                                            },
+                                            length: -15,
+                                            splitNumber: 10
+                                        },
+                                        splitLine: {
+                                            show: true,
+                                            length: -20,
+                                            lineStyle: {
+                                                color: '#0271ff',
+                                            }
+                                        },
+                                        axisLabel: {
+                                            distance: -20,
+                                            textStyle: {
+                                                color: "#0271ff",
+                                                fontSize: "16",
+                                                fontWeight: "bold"
+                                            }
+                                        },
+                                        pointer: { //仪表盘指针
+                                            show: 0
+                                        },
+                                        detail: {
+                                            show: false
+                                        },
+                                        data: [{
+                                            name: "",
+                                            value: 1000
+                                        }]
+                                    },*/
+                    /*{
+                        startAngle: 200, //中间白线
+                        endAngle: -20,
+                        type: 'gauge',
+                        center: ['50%', '50%'], // 默认全局居中
+                        radius: '45%',
+                        min: 0,
+                        max: 1000,
+                        splitNumber: 0,
+                        axisLine: { // 坐标轴线
+                            lineStyle: {
+                                color: [
+                                    [0.66, '#dddddd'],
+                                    [1, '#dddddd']
+                                ], // 属性lineStyle控制线条样式
+                                width: 4
+                            }
+                        },
+                        axisLabel: { // 坐标轴小标记
+                            textStyle: { // 属性lineStyle控制线条样式
+                                fontWeight: 'bolder',
+                                fontSize: 16,
+                                color: 'rgba(30,144,255,0)',
+                            }
+                        },
+                        splitLine: { // 分隔线
+                            length: 10, // 属性length控制线长
+                            lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 0,
+                                color: '#444'
+                            }
+                        },
+                        pointer: { // 分隔线 指针
+                            color: '#666666',
+                            width: 0,
+                            length: 230
+                        },
+                        detail: {
+                            show: false
+                        },
+
+                    },*/
+                    /*{
+                        name: '职能处置', //中间指针
+                        type: 'gauge',
+                        startAngle: 200,
+                        endAngle: -20,
+                        radius: '40%',
+                        center: ['50%', '50%'], // 默认全局居中
+                        min: 0,
+                        max: 30,
+                        axisLine: {
+                            show: false,
+                            lineStyle: {
+                                width: 10,
+                                shadowBlur: 0,
+                                color: [
+                                    [1, '#0271ff']
+                                ]
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false,
+                            length: 10
+
+                        },
+                        axisLabel: {
+                            show: false
+                        },
+                        pointer: {
+                            show: true
+                        },
+                        detail: {
+                            show: true,
+                            offsetCenter: [0, '40%'],
+                            textStyle: {
+                                fontSize: 15,
+                                color: "#0271ff"
+                            },
+                            formatter: function (value) {
+                                return 70 + "%";
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: "#0271ff",
+                            }
+                        },
+                        data: [{
+                            value: spendDays
+                        }]
+                    },*/
+                    {
+                        type: 'gauge', //左边网格内处置
+                        center: ['30%', '50%'], // 默认全局居中
+                        radius: '35%',
+                        splitNumber: 5, //刻度数量
+                        min: 0,
+                        max: 100,
+                        endAngle: 45,
+                        clockwise: true,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                width: 2,
+                                shadowBlur: 0,
+                                color: [
+                                    [1, '#4cd4db']
+                                ]
+                            }
+                        },
+                        axisTick: {
+                            show: true,
+                            lineStyle: {
+                                color: '#4cd4db',
+                                width: 1
+                            },
+                            length: -15,
+                            splitNumber: 10
+                        },
+                        splitLine: {
+                            show: true,
+                            length: -20,
+                            lineStyle: {
+                                color: '#4cd4db',
+                            }
+                        },
+                        axisLabel: {
+                            distance: -20,
+                            textStyle: {
+                                color: "#4cd4db",
+                                fontSize: "15",
+                                fontWeight: "bold"
+                            }
+                        },
+                        pointer: { //仪表盘指针
+                            show: 0
+                        },
+                        detail: {
+                            show: false
+                        },
+                        data: [{
+                            name: "",
+                            value: 70
+                        }]
+                    }, {
+                        type: 'gauge', //左边白色
+                        center: ['30%', '50%'], // 默认全局居中
+                        radius: '30%',
+                        min: 0,
+                        max: 0,
+                        endAngle: 45,
+                        splitNumber: 0,
+                        axisLine: { // 坐标轴线
+                            lineStyle: {
+                                color: [
+                                    [0.66, '#dddddd'],
+                                    [1, '#dddddd']
+                                ], // 属性lineStyle控制线条样式
+                                width: 4
+                            }
+                        },
+
+                        axisLabel: { // 坐标轴小标记
+                            textStyle: { // 属性lineStyle控制线条样式
+                                fontWeight: 'bolder',
+                                fontSize: 15,
+                                color: 'rgba(30,144,255,0)',
+                            }
+                        },
+                        splitLine: { // 分隔线
+                            length: 10, // 属性length控制线长
+                            lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 0,
+                                color: '#444'
+                            }
+                        },
+                        pointer: { // 分隔线 指针
+                            color: '#666666',
+                            width: 0,
+                            length: 230
+                        },
+                        detail: {
+                            show: false
+                        },
+
+                    }, {
+                        name: '网格内处置', //左边
+                        type: 'gauge',
+                        endAngle: 45,
+                        radius: '25%',
+                        center: ['30%', '50%'], // 默认全局居中
+                        min: 0,
+                        max: 100,
+                        axisLine: {
+                            show: false,
+                            lineStyle: {
+                                width: 12,
+                                shadowBlur: 0,
+                                color: [
+                                    [1, '#4cd4db']
+                                ]
+                            }
+                        },
+                        axisTick: {
+                            show: false,
+
+                        },
+                        splitLine: {
+                            show: false,
+                            length: 20,
+
+                        },
+                        axisLabel: {
+                            show: false
+                        },
+                        pointer: {
+                            show: true,
+                        },
+                        detail: {
+                            show: true,
+                            offsetCenter: ['20%', '60%'],
+                            textStyle: {
+                                fontSize: 15,
+                                color: '#4cd4db'
+                            },
+                            formatter: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: "#4cd4db"
+                            }
+                        },
+                        data: [{
+                            value: endRate
+                        }]
+                    }, {
+                        type: 'gauge', //右边
+                        center: ['70%', '50%'], // 默认全局居中
+                        radius: '35%',
+                        splitNumber: 5, //刻度数量
+                        min: 50,
+                        max: 100,
+                        startAngle: 140,
+                        endAngle: -45,
+                        clockwise: true,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                width: 2,
+                                shadowBlur: 0,
+                                color: [
+                                    [1, '#f2ba4d']
+                                ]
+                            }
+                        },
+                        axisTick: {
+                            show: true,
+                            lineStyle: {
+                                color: '#f2ba4d',
+                                width: 1
+                            },
+                            length: -15,
+                            splitNumber: 10
+                        },
+                        splitLine: {
+                            show: true,
+                            length: -20,
+                            lineStyle: {
+                                color: '#f2ba4d',
+                            }
+                        },
+                        axisLabel: {
+                            distance: -20,
+                            textStyle: {
+                                color: "#f2ba4d",
+                                fontSize: "15",
+                                fontWeight: "bold"
+                            }
+                        },
+                        pointer: { //仪表盘指针
+                            show: 0
+                        },
+                        detail: {
+                            show: false
+                        },
+                        data: [{
+                            name: "",
+                            value: 200
+                        }]
+                    }, {
+                        type: 'gauge', //右边白线
+                        center: ['70%', '50%'], // 默认全局居中
+                        radius: '30%',
+                        min: 0,
+                        max: 1000,
+                        startAngle: 140,
+                        endAngle: -45,
+                        splitNumber: 0,
+                        axisLine: { // 坐标轴线
+                            lineStyle: {
+                                color: [
+                                    [0.66, '#dddddd'],
+                                    [1, '#dddddd']
+                                ], // 属性lineStyle控制线条样式
+                                width: 4
+                            }
+                        },
+
+                        axisLabel: { // 坐标轴小标记
+                            textStyle: { // 属性lineStyle控制线条样式
+                                fontWeight: 'bolder',
+                                fontSize: 16,
+                                color: 'rgba(30,144,255,0)',
+                            }
+                        },
+                        splitLine: { // 分隔线
+                            length: 10, // 属性length控制线长
+                            lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                                width: 0,
+                                color: '#f2ba4d'
+                            }
+                        },
+                        pointer: { // 分隔线 指针
+                            color: '#f2ba4d',
+                            width: 0,
+                            length: 230
+                        },
+                        detail: {
+                            show: false
+                        },
+
+                    }, {
+                        name: '满意率',
+                        type: 'gauge',
+                        startAngle: 140,
+                        endAngle: -45,
+                        radius: '25%',
+                        center: ['70%', '50%'], // 默认全局居中
+                        min: 0,
+                        max: 100,
+                        axisLine: {
+                            show: false,
+                            lineStyle: {
+                                width: 12,
+                                shadowBlur: 0,
+                                color: [
+                                    [1, '#f2ba4d']
+                                ]
+                            }
+                        },
+                        axisTick: {
+                            show: false,
+
+                        },
+                        splitLine: {
+                            show: false,
+                            length: 20,
+
+                        },
+                        axisLabel: {
+                            show: false
+                        },
+                        pointer: {
+                            show: true,
+                        },
+                        detail: {
+                            show: true,
+                            offsetCenter: ['-20%', '60%'],
+                            textStyle: {
+                                fontSize: 15,
+                                color: "#f2ba4d"
+                            },
+                            formatter: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: "#f2ba4d"
+                            }
+                        },
+                        data: [{
+                            value: myl
+                        }]
+                    }
+                ]
+            });
+        }
+        // 详情
+        function getThingDetail(caseno) {
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_getCaseDetail.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    "itemId": caseno
+                },
+                error: function() {
+                    console.log("事项详情获取数据出错");
+                },
+                success: function(data) {
+                    $("#Things111").empty()
+                    console.log(data)
+                    var arr = data.obj;
+                    var html = '';
+                    if (arr.caseName) {
+                        html += '<p><span>事项名称：</span>' + arr.caseName + '</p>'
+                    }
+                    if (arr.caseCode) {
+                        html += '<p><span>事项编码：</span>' + arr.caseCode + '</p>'
+                    }
+                    if (arr.handleDept) {
+                        html += '<p><span>实施单位：</span>' + arr.handleDept + '</p>'
+                    }
+                    if (arr.dealType) {
+                        html += '<p><span>办结类型：</span>' + arr.dealType + '</p>'
+                    }
+                    if (arr.promiseDays) {
+                        html += '<p><span>承诺办结时限：</span>' + arr.promiseDays + '天</p>'
+                    }
+                    if (arr.telephone) {
+                        html += '<p><span>咨询电话：</span>' + arr.telephone + '</p>'
+                    }
+                    if (arr.comPhone) {
+                        html += '<p><span>监督电话：</span>' + arr.comPhone + '</p>'
+                    }
+                    if (arr.handleTime) {
+                        html += '<p><span>办理时间：</span>' + arr.handleTime + '</p>'
+                    }
+                    if (arr.handleAddress) {
+                        html += '<p><span>办理地点：</span>' + arr.handleAddress + '</p>'
+                    }
+                    if (arr.handleMaterial) {
+                        html += '<p><span>办理材料：</span>' + arr.handleMaterial + '</p>'
+                    }
+
+                    $("#Things111").append(html)
+                    $("#qxmlxq").css("display", "block")
+                }
+            })
+        }
+        // 数字滚动效果
+        function scrollNum1(num, id) {
+            var a = 0;
+            var timer = setInterval(function() {
+                if (a < num) {
+                    a++;
+                    var text = '';
+                    var b = 4 - a.toString().length;
+                    for (var i = 0; i < b; i++) {
+                        text += '0';
+                    }
+                    text += a;
+                    $("#" + id).text(text);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10)
+        }
+
+        function scrollNum2(num, id) {
+            var a = 0;
+            var timer = setInterval(function() {
+                if (a < num) {
+                    a += 10;
+                    var text = '';
+                    if (a < num) {
+                        var b = 5 - a.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += a;
+                    } else {
+                        var b = 5 - num.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += num;
+                    }
+                    $("#" + id).text(text);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10)
+        }
+
+        function scrollNum3(num, id) {
+            var a = 0;
+            var timer = setInterval(function() {
+                if (a < num) {
+                    a += 100;
+                    var text = '';
+                    if (a < num) {
+                        var b = 6 - a.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += a;
+                    } else {
+                        var b = 6 - num.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += num;
+                    }
+                    $("#" + id).text(text);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10)
+        }
+
+        // guidong
+        setInterval(function() {
+            scrollNum1(1, "dangtian111")
+            scrollNum2(20, "dangtian112")
+            scrollNum3(93, "dangtian113")
+            scrollNum1(1, "dangtian114")
+            scrollNum2(20, "dangtian115")
+            scrollNum3(93, "dangtian116")
+        }, 300000)
+
+        //历史流程------------------------------------------
+        function getHistory(caseno) {
+            getHistoricalSteps(caseno);
+            document.getElementById("operate").style.display = "block"; //显
+        }
+
+        function getHistoricalSteps(caseno) {
+            var strContent1 = "";
+            $.ajax({
+                url: window.serverUrl + "outWeb/selectBigScreen_getHistoricalSteps.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    "caseno": caseno
+                },
+                error: function() {
+                    console.log("历史步骤获取数据出错");
+                },
+                success: function(data) {
+                    $('#history-ul').empty();
+                    Items2 = data.processlist;
+                    $.each(Items2, function(i2, item2) {
+                        strContent1 += '<li >' +
+                            '<h3>' + item2.TACHEENDDATETIME + '</h3>' +
+                            '<dl>' +
+                            '<p>【南通市->送桥镇->' + item2.DEPTNAME + '】<a class="active" href="#">' + item2.USERNAME + '</a>' + item2.TACHENAME + '</p>' +
+                            '<p>' + item2.TACHENOTE + '</p>' +
+                            '</dl>' +
+                            '</li>';
+                    });
+                    console.log(strContent1);
+                    $('#history-ul').append(strContent1);
+                }
+            });
+        }
+
+        function closeWin() {
+            document.getElementById("operate").style.display = "none";
+        }
+
+        function transfer(type) {
+            if (type == "SP") {
+                document.getElementById("S_P").style.color = "#00f5fe";
+                $("#S_P").css("border-bottom", "1px solid #00f5fe")
+                $("#G_F").css("border-bottom", "none")
+                document.getElementById("G_F").style.color = "#ffffffb3";
+            } else {
+                document.getElementById("S_P").style.color = "#ffffffb3";
+                document.getElementById("G_F").style.color = "#00f5fe";
+                $("#S_P").css("border-bottom", "none")
+                $("#G_F").css("border-bottom", "1px solid #00f5fe")
+            }
+            caseinfoList(type);
+        }
+
+        function transfer1(type) {
+            if (type == "SP") {
+                document.getElementById("_SP_").style.color = "#00f5fe";
+                document.getElementById("_GF_").style.color = "#ffffffb3";
+                $("#_GF_").css("border-bottom", "none")
+                $("#_SP_").css("border-bottom", "1px solid #00f5fe")
+            } else {
+                document.getElementById("_SP_").style.color = "#ffffffb3";
+                document.getElementById("_GF_").style.color = "#00f5fe";
+                $("#_SP_").css("border-bottom", "none")
+                $("#_GF_").css("border-bottom", "1px solid #00f5fe")
+            }
+            caseNumStatics(type);
+        }
+
+        function transfer2(type) {
+            if (type == "SP") {
+                document.getElementById("S_P_").style.color = "#00f5fe";
+                document.getElementById("G_F_").style.color = "#ffffffb3";
+                $("#G_F_").css("border-bottom", "none")
+                $("#S_P_").css("border-bottom", "1px solid #00f5fe")
+            } else {
+                document.getElementById("S_P_").style.color = "#ffffffb3";
+                document.getElementById("G_F_").style.color = "#00f5fe";
+                $("#S_P_").css("border-bottom", "none")
+                $("#G_F_").css("border-bottom", "1px solid #00f5fe")
+            }
+            approvalAuth(type);
+        }
+
+        function transfer3(type) {
+            if (type == "SP") {
+                document.getElementById("_sp0").style.color = "#00f5fe";
+                document.getElementById("_gf0").style.color = "#ffffffb3";
+                $("#_gf0").css("border-bottom", "none")
+                $("#_sp0").css("border-bottom", "1px solid #00f5fe")
+            } else {
+                document.getElementById("_sp0").style.color = "#ffffffb3";
+                document.getElementById("_gf0").style.color = "#00f5fe";
+                $("#_sp0").css("border-bottom", "none")
+                $("#_gf0").css("border-bottom", "1px solid #00f5fe")
+            }
+            caseTOP5(type);
+        }
+    </script>
+</head>
+
+<body onload="onLoad()">
+    <!--head-->
+    <div class="head">
+        <div class="nav">
+            <ul>
+                <!-- <li><a href="ykgk.html">送桥概况</a></li> -->
+                <li><a href="djyl.html">党建引领</a></li>
+                <li class="active01"><a href="xzsp.html">政务服务</a></li>
+            </ul>
+            <div>
+                <a href="ykgk.html">
+                    <div class="logo"></div>
+                </a>
+            </div>
+            <ul>
+                <li><a href="zhzf.html">综合执法</a></li>
+                <li><a href="wgzl.html">网格治理</a></li>
+                <!-- <li><a href="zhzx.html">指挥中心</a></li> -->
+            </ul>
+        </div>
+        <div class="time" id="nowTime">
+            <span>2019年05月28日</span>
+            <span>17:20:10</span>
+            <span>周一</span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!--/head end-->
+    <div id="hv-wrapper">
+        <div class="box box1">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a id="S_P" onclick="transfer('SP')">行政许可类办理事项列表</a>
+                        <a id="G_F" onclick="transfer('GF')">公共服务类办理事项列表</a>
+                    </div>
+                    <div class="conditionBox">
+                        <ul id="a3_ul">
+                            <li>
+                                <div class="a3_div_head" style="width:40%">工单编号</div>
+                                <div class="a3_div_head" style="width:28%">申请人/机构</div>
+                                <div class="a3_div_head" style="width:28%">事项名称</div>
+                            </li>
+                        </ul>
+                        <div id="gd_div" class="content_div">
+                            <ul id="a3_ul_2">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box2">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a id="_SP_" onclick="transfer1('SP')">行政许可类事项接收量</a>
+                        <a id="_GF_" onclick="transfer1('GF')">公共服务类事项接收量</a>
+                    </div>
+                    <div class="conditionBox">
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天受理<span> / 件</span></p>
+                                <p id='dayNum'>0015</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月受理<span> / 件</span></p>
+                                <p id='monthNum'>01045</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年受理<span> / 件</span></p>
+                                <p id='yearNum'>010402</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天办结<span> / 件</span></p>
+                                <p id='dayHandleNum'>0015</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月办结<span> / 件</span></p>
+                                <p id='monthHandleNum'>01045</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年办结<span> / 件</span></p>
+                                <p id='yearHandleNum'>010402</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box3">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a id="_sp0" onclick="transfer3('SP')" style="margin-right:20px;">行政许可类办件top5</a>
+                        <a id="_gf0" onclick="transfer3('GF')">公共服务类办件top5</a>
+                    </div>
+                    <div class="conditionBox">
+                        <div id="xzsp_grfwsx" style="width: 100%;height:232px;"></div>
+                        <div id="xzsp_grfwsx_t">
+                            <p>
+                                <span id='fwSum'>0</span>
+                                <span>件</span>
+                            </p>
+                            <p>总数</p>
+                        </div>
+                        <!--<div id="xzsp_grfwsx_num">
+							   <ul>
+								   <li>120件</li>
+								  <li>101件</li>
+								   <li>60件</li>
+								   <li>47件</li>
+								  <li>22件</li>
+		   
+							   </ul>
+			 			   </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box4">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">政务服务绩效评估</div>
+                    <div class="conditionBox">
+                        <div id="echart_A2" style="width:100%;height: 252px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box5">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">公共资源交易量</div>
+                    <div class="conditionBox">
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天受理<span> / 件</span></p>
+                                <p id="dangtian111">0001</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月受理<span> / 件</span></p>
+                                <p id="dangtian112">00020</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年受理<span> / 件</span></p>
+                                <p d="dangtian113">000093</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天交易<span> / 件</span></p>
+                                <p d="dangtian114">0001</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月交易<span> / 件</span></p>
+                                <p d="dangtian115">00020</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年交易<span> / 件</span></p>
+                                <p d="dangtian116">00093</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box6">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">公共资源交易类别(当年)</div>
+                    <div class="conditionBox">
+                        <div id="echart_B1" style="width: 100%;height: 270px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box7">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper" style="height:100%">
+                    <div class="mainTitle">公共资源交易公告</div>
+                    <div class="conditionBox" style="height:82%">
+                        <div id="gd_div_public" class="content_div">
+                            <!--class="a33_ul_2"  -->
+                            <ul class="a33_ul_2" id="ggjygg">
+                                <li><span>如东县送桥镇闸西村道路拓宽工程中标结果公示</span><span>2019.5.13</span></li>
+                                <li><span>如东县送桥镇新林小学省科技特色课程基地项...</span><span>2019.4.24</span></li>
+                                <li><span>如东县送桥镇灭鼠药采购项目询价公告（重新招标）</span><span>2019.4.24</span></li>
+                                <li><span>如东县送桥镇闸西村垃圾池新建工程项目询价采购公告（二次公告）</span><span>2019.4.24</span></li>
+                                <li><span>如东县送桥镇古坳村公益性公墓扩建工程询价采购公告</span><span>2019.4.24</span></li>
+                                <li><span>如东县送桥镇闸西村垃圾池新建工程项目中标结果公示</span><span>2019.4.24</span></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box8">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a id="S_P_" onclick="transfer2('SP')">行政许可类管理权限目录</a>
+                        <a id="G_F_" onclick="transfer2('GF')">公共服务类管理权限目录</a>
+                    </div>
+                    <div class="conditionBox">
+                        <ul id="a3_ul3">
+                            <li style="line-height: 54px;">
+                                <div class="a3_div_head" style="width:40%">事项编码</div>
+                                <div class="a3_div_head" style="width:28%">事项名称</div>
+                                <div class="a3_div_head" style="width:28%">权限类型</div>
+                            </li>
+                        </ul>
+                        <div id="gd_div_right" class="content_div">
+                            <ul id="a3_ul_3" style="padding:0 20px">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="operate" style="display: none">
+        <!-- 代码 开始 -->
+        <div class="main">
+            <div class="close"><a onclick="closeWin() ">×</a></div>
+            <div class="timez ">
+                <p>时间轴</p>处理内容
+            </div>
+            <div class="history">
+                <div class="history-date">
+                    <ul id='history-ul'>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 代码 结束 -->
+    </div>
+
+    <!-- 公共��源交易公告详情信息 -->
+    <div id="ggzyggxq" style="display: none">
+        <div class="main" id="ggThings">
+            <div class="title">村信息详情</div>
+            <div class="close"><a onclick="closeggxx() ">×</a></div>
+            <div class="approval">
+                <p><span>联系方式：</span>201812181708</p>
+                <p><span>网格数量：</span>送桥镇行政审批局</p>
+                <p><span>兼职网格员数量：</span>送桥镇行政审批局</p>
+                <p><span>网格长数量：</span>送桥镇行政审批局</p>
+                <p><span>网格总户数：</span>送桥镇行政审批局</p>
+                <p><span>网格总人数：</span>送桥镇行政审批局</p>
+                <p><span>重点人员数量：</span>送桥镇行政审批局</p>
+                <p><span>出租房数量：</span>送桥镇行政审批局</p>
+                <p><span>关怀对象数量：</span>送桥镇行政审批局</p>
+                <p><span>村面积大小（公顷）：</span>送桥镇行政审批局</p>
+            </div>
+        </div>
+    </div>
+    <!-- xiangqing  -->
+    <div id="qxmlxq" style="display: none">
+        <div class="main">
+            <div class="title">详情</div>
+            <div class="close"><a onclick="close11() ">×</a></div>
+            <div class="approval" id="Things111">
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    // 公共资源交易公告详情信息
+    var html1 = '<div class="title">如东县送桥镇闸西村道路拓宽工程中标结果详情</div><div class="close"><a onclick="closeggxx() ">×</a></div>'
+    html1 += '<div class="approval">'
+    html1 += '<p><span>招标人：</span>如东县送桥镇闸西村村民委员会</p>'
+    html1 += '<p><span>固定发包价：</span>186853.30元</p>'
+    html1 += '<p><span>中标单位：</span>南通中地建设工程有限公司</p>'
+    html1 += '<p><span>中标价：</span>186853.30元</p>'
+    html1 += '<p><span>项目负责人姓名：</span>康伟</p>'
+    html1 += '<p><span>项目负责人注册证书：</span>苏232101003525</p>'
+    html1 += '<p><span>工期要求：</span>50日历天</p>'
+    html1 += '<p><span>中标质量标准：</span>合格</p>'
+    html1 += '<p><span>公示时间：</span>2019年5月13日- 2019年5月15日</p>'
+    html1 += '<p><span>公示单位：</span>如东县送桥镇闸西村村民委员会</p>'
+    html1 += '<p><span>说明：</span>自中标结果公示之日三天内，对中标结果没有异议的，招标人将签发中标通知书</p>'
+    html1 += '</div>'
+
+    var html2 = '<div class="title">如东县送桥镇新林小学省科技特色课程基地项目竞争性磋商成交公告详情</div><div class="close"><a onclick="closeggxx() ">×</a></div>'
+    html2 += '<div class="approval">'
+    html2 += '<p><span>项目名称：</span>如东县送桥镇新林小学省科技特色课程基地项目</p>'
+    html2 += '<p><span>采购人：</span>如东县送桥镇人民政府</p>'
+    html2 += '<p><span>联系人：</span>杨小网</p>'
+    html2 += '<p><span>联系电话：</span>13862783959</p>'
+    html2 += '<p><span>采购公告媒体及日期：</span>2019年4月24日在“南通市公共资源交易平台”网站发布了本次竞争性磋商的采购信息。</p>'
+    html2 += '<p><span>成交供应商：</span>江苏梦宁教育科技有限公司</p>'
+    html2 += '<p><span>成交供应商地址：</span>南通市崇川区汇金国际广场C座1823室</p>'
+    html2 += '<p><span>成交金额：</span>贰佰壹拾捌万陆仟捌佰玖拾元整</p>'
+    html2 += '<p><span>磋商小组成员名单：</span>金新忠、黄华、余新星、杨小网、蔡炳忠、缪鑫梅</p>'
+    html2 += '<p><span>采购代理机构：</span>江苏衡源项目管理有限公司</p>'
+    html2 += '<p><span>联系人：</span>许静</p>'
+    html2 += '<p><span>联系电话：</span>15162818355</p>'
+    html2 += '</div>'
+
+    var html3 = '<div class="title">如东县送桥镇灭鼠药采购项目询价公告（重新招标）</div><div class="close"><a onclick="closeggxx() ">×</a></div>'
+    html3 += '<div class="approval">'
+    html3 += '<p><span>采购人：</span>如东县送桥镇人民政府</p>'
+    html3 += '<p><span>采购项目名称：</span>如东县送桥镇灭鼠药采购项目</p>'
+    html3 += '<p><span>供货地点：</span>如东县送桥镇（采购人指定地点）</p>'
+    html3 += '<p><span>供货时间要求：</span>7日历天</p>'
+    html3 += '<p><span>质量要求：</span>合格</p>'
+    html3 += '<p><span>本项目招标控制价：</span> 42000.00元</p>'
+    html3 += '<p><span>采购产品名称、品牌及规格要求：</span>1、品牌：溴敌隆或溴鼠灵（大隆）2、规格：20克 3、数量：60000.00包/包</p>'
+    html3 += '<p><span>投标供应商资格要求：</span>⑴供应商具有独立承担民事等法律责任的能力；⑵经营范围须包括本采购项目产品的生产销售或经销；⑶具有安全生产监督部门颁发的危险化学品经营许可证；⑷投标供应商连续3年本采购项目产品销售额达到10万元及以上的业绩证明【证明材料为合同或中标通知书】；⑸参加本次政府采购活动前三年内，在经营活动中没有重大违法记录；⑹符合《中华人民共和国政府采购法》第22条规定；⑺本项目不接受联合体投标。</p>'
+    html3 += '<p><span>供应商投标截止时间：</span>2019年5月30日上午9:30。请申请人于2019年5月30日上午9时00分-9时30分到如东沿海经济开发区3号楼（公共资源交易中心）3133室报名询价投标。本项目资料费100元/套，开标时由代理单位收取，无论中标与否，均不予退还。</p>'
+    html3 += '<p><span>询价投标时应提供以下资料：</span>（1）加盖单位公章的营业执照复印件；（原件必须带至报名现场核查）（2）投标经办人员必须提供加盖单位公章的本人身份证复印件一份和加盖单位公章的单位授权委托书（原件）；（身份证原件必须带至报名现场核查）（3）加盖单位公章的安全生产监督部门颁发的危险化学品经营许可证复印件；（原件必须带至报名现场核查）（4）加盖单位公章的投标供应商连续3年本采购项目产品销售额达到10万元及以上业绩证明材料；（① 证明材料：合同或中标通知书；② 原件必须带至报名现场核查）（5）厂家或公司授权书须加盖厂家或公司公章；（6）农药登记证复印件须加盖厂家或公司公章；（7）报价单。</p>'
+    html3 += '<p><span>注意：</span>参加询价投标的单位在投标时还需提交询价投标保证金壹仟元，投标保证金一律采用现金的方式缴纳。中标后，投标保证金自动转为履约保证金，履约保证金在货物验收合格后退还，无息。</p>'
+    html3 += '<p><span>报价要求：</span>（1）投标供应商法定代表人或法定代表授权委托人必须按时到采购人指定地点提交投标保证金和投标文件等。投标供应商法定代表授权委托人在询价过程中签署的文件、资料均作为投标文件的组成部分，具有法律效力。（2）投标文件和投标供应商法定代表人或法定代表授权委托人签署的文件、资料的有效期为40个日历日。（3）投标报价包括报价单的全部内容，且为最终报价。（4）本项目为一个完整标的，询价小组不接受有选择性、不完整或不正确的报价。（5）报价应包括完成本项目的人工费、材料费、包装费、运输费、税等一切费用。（6）报价应书写端正、字迹清楚、不得涂改（涂改无效）。询价小组有权将未按规定填写的报价单视为无效报价单。（7）投标报价在招标控制价以下（含招标控制价）的为有效报价，高于招标控制价的为无效报价。</p>'
+    html3 += '<p><span>定标原则：</span>询价小组根据《政府采购法》规定的符合采购需求、质量和服务相等且报价最低的原则，从合格投标供应商中确定成交供应商。</p>'
+    html3 += '<p><span>本项目付款方式：</span>供货到业主指定地点后并经验收合格后付合同价的95%，余款在2019年年底前一次性付清。（以上付款均不计息）</p>'
+    html3 += '<p><span>联系人：</span>陈政</p>'
+    html3 += '<p><span>联系电话：</span>13485175473</p>'
+    html3 += '<p><span>代理单位联系人：</span>陈工</p>'
+    html3 += '<p><span>陈工联系电话：</span>18362121606</p>'
+    html3 += '</div>'
+
+    var html4 = '<div class="title">如东县送桥镇闸西村垃圾池新建工程项目询价采购公告（二次公告）</div><div class="close"><a onclick="closeggxx() ">×</a></div>'
+    html4 += '<div class="approval">'
+    html4 += '<p><span>采购人：</span>如东县送桥镇闸西村村民委员会</p>'
+    html4 += '<p><span>采购项目名称：</span>如东县送桥镇闸西村垃圾池新建工程项目</p>'
+    html4 += '<p><span>采购方式：</span>询价</p>'
+    html4 += '<p><span>投标供应商资格要求：</span>（1）投标供应商资质要求: 必须具有独立法人资格和建筑工程施工总承包叁级以上（含叁级）施工资质（并在有效期内）。（2）项目负责人资格：建筑工程专业一、二级注册建造师（含临时）。（3）项目负责人无在建工程。（4）投标供应商具有安全生产许可证。（5）本项目不接受联合体投标。（6）企业信誉要求: 企业未处于被责令停业、投标资格被取消或者财产被接管、冻结和破产状态、没有因骗取中标或者严重违约以及发生重大工程质量、安全生产事故等问题，被有关部门暂停投标资格并在暂停期内的。</p>'
+    html4 += '<p><span>供应商投标截止时间：</span>2019年5月23日上午9时30分。</p>'
+    html4 += '<p><span>递交投标文件、递交投标保证金的地点：</span>如东沿海经济开发区3号楼（公共资源交易中心）3133室。</p>'
+    html4 += '<p><span>注意：</span>本项目采用资格后审，取消报名环节，询价采购文件等请在南通市公共资源交易平台—“交易信息”—“其他交易”—“镇区交易”—“公告信息”内该工程的采购公告的附件中下载。本工程资料费100元/套，开标时由代理单位收取，无论中标与否，均不予退还。</p>'
+    html4 += '<p><span>采购单位联系人：</span>林  云</p>'
+    html4 += '<p><span>电话：</span>13222137685</p>'
+    html4 += '<p><span>代理单位联系人：</span>陈  工</p>'
+    html4 += '<p><span>电话：</span>18362121606</p>'
+    html4 += '</div>'
+
+    var html5 = '<div class="title">如东县送桥镇古坳村公益性公墓扩建工程询价采购公告</div><div class="close"><a onclick="closeggxx() ">×</a></div>'
+    html5 += '<div class="approval">'
+    html5 += '<p><span>采购人：</span>如东县送桥镇古坳村村民委员会</p>'
+    html5 += '<p><span>采购项目名称：</span>如东县送桥镇古坳村公益性公墓扩建工程</p>'
+    html5 += '<p><span>项目地址：</span>本项目位于如东县送桥镇古坳村</p>'
+    html5 += '<p><span>造价约：</span>38万元。具体详见附件五“工程量清单报价表”。</p>'
+    html5 += '<p><span>工期：</span>30日历天</p>'
+    html5 += '<p><span>供应商资质要求：</span>1、投标人资质要求: 必须具有独立法人资格，同时具备建筑工程施工总承包叁级以上（含叁级）施工资质（并在有效期内）；2、拟选派项目经理资质等级：建筑工程一、二级注册建造师（含临时）（须在有效期内）；3、项目负责人无在建工程。4、投标供应商具有安全生产许可证。5、本项目不接受联合体投标。6、企业信誉要求: 企业未处于被责令停业、投标资格被取消或者财产被接管、冻结和破产状态、没有因骗取中标或者严重违约以及发生重大工程质量、安全生产事故等问题，被有关部门暂停投标资格并在暂停期内的。</p>'
+    html5 += '<p><span>投标报名须知及要求：</span>1、供应商投标截止时间： 2019年5月23日上午9时30分止，报名费：200元/套。开标时由代理单位收取，无论中标与否，均不予退还。         2、投标文件递交及开标地点： 如东沿海经济开发区3号楼公共资源交易中心3133室。       3、本项目采用资格后审，取消报名环节，询价采购文件等请在南通市公共资源交易平台—“交易信息”—“其他交易”—“镇区交易”—“公告信息”内该工程的招标公告的附件中。 </p>'
+    html5 += '<p><span>采购单位联系人：</span>顾爱民</p>'
+    html5 += '<p><span>电话：</span>13912413134</p>'
+    html5 += '<p><span>代理单位联系人：</span>许  静</p>'
+    html5 += '<p><span>电话：</span>15162818355</p>'
+    html5 += '<p><span>成交原则：</span>询价小组根据《政府采购法》规定的符合采购需求、质量和服务相等且投标报价最低的原则，从合格投标人中确定成交供应商【若最低价相同时，由询价小组确定成交供应商】。</p>'
+    html5 += '</div>'
+
+    var html6 = '<div class="title">如东县送桥镇闸西村垃圾池新建工程项目中标结果公示</div><div class="close"><a onclick="closeggxx() ">×</a></div>'
+    html6 += '<div class="approval">'
+    html6 += '<p><span>采购人：</span>如东县送桥镇闸西村村民委员会</p>'
+    html6 += '<p><span>招标控制价：</span>2.784783万元</p>'
+    html6 += '<p><span>中标单位：</span>南通顺嘉市政工程有限公司</p>'
+    html6 += '<p><span>中标价：</span>2.73万元</p>'
+    html6 += '<p><span>中标工期：</span>30日历天</p>'
+    html6 += '<p><span>中标质量标准：</span>合格</p>'
+    html6 += '<p><span>中标项目负责人：</span>孙红霞</p>'
+    html6 += '<p><span>项目负责人证书编号：</span>苏232141515647</p>'
+    html6 += '<p><span>公示时间：</span>2019年5月23日—2019年5月27日</p>'
+    html6 += '<p><span>注意：</span>自中标结果公示之日三天内，对中标结果没有异议的，采购人将签发中标通知书。</p>'
+    html6 += '</div>'
+
+    var ulo = document.getElementById("ggjygg");
+    var lio = ulo.getElementsByTagName("li");
+    for (var i = 0; i < lio.length; i++) {
+        (function(i) {
+            lio[i].addEventListener("click", function() {
+                if (i == 0) {
+                    $("#ggThings").html(html1)
+                    $("#ggzyggxq").css("display", "block")
+                } else if (i == 1) {
+                    $("#ggThings").html(html2)
+                    $("#ggzyggxq").css("display", "block")
+                } else if (i == 2) {
+                    $("#ggThings").html(html3)
+                    $("#ggzyggxq").css("display", "block")
+                } else if (i == 3) {
+                    $("#ggThings").html(html4)
+                    $("#ggzyggxq").css("display", "block")
+                } else if (i == 4) {
+                    $("#ggThings").html(html5)
+                    $("#ggzyggxq").css("display", "block")
+                } else if (i == 5) {
+                    $("#ggThings").html(html6)
+                    $("#ggzyggxq").css("display", "block")
+                }
+
+            })
+        })(i)
+    }
+
+
+    $('#gd_div').myScroll({
+        speed: 40, //数值越大，速度越慢
+        rowHeight: 62 //li的高度
+    });
+
+
+    $('#gd_div_right').myScroll({
+        speed: 40, //数值越大，速度越慢
+        rowHeight: 62 //li的高度
+    });
+
+    $('#gd_div_public').myScroll({
+        speed: 40, //数值越大，速度越慢
+        rowHeight: 41 //li的高度
+    });
+
+    function closeggxx() {
+        $("#ggzyggxq").css("display", "none")
+    }
+
+    function close11() {
+        $("#qxmlxq").css("display", "none")
+    }
+
+    function getweater() {
+
+        $.ajax({
+            url: "http://wthrcdn.etouch.cn/weather_mini?city=如东",
+            dataType: "jsonp",
+            type: "post",
+            data: {
+
+            },
+            success: function(data) {
+                console.log(data.data.forecast[0]);
+                var forecast = data.data.forecast[0];
+                var str = forecast.fengli,
+                    fengli = str.slice(9, 13);
+                console.log(fengli);
+                $("#nowTime>span:nth-child(4)").text("最" + forecast.high);
+                $("#nowTime>span:nth-child(5)").text("最" + forecast.low);
+                $("#nowTime>span:nth-child(6)").text(forecast.fengxiang);
+                $("#nowTime>span:nth-child(7)").text(fengli);
+                $("#nowTime>span:nth-child(8)").text(forecast.type);
+
+            }
+        })
+    }
+</script>
+
+</html>

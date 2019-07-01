@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/history.css" />
+    <link rel="stylesheet" type="text/css" href="css/xzsp.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/echarts_xzsp_ku.js"></script>
+    <script type="text/javascript" src="js/ipc.js"></script>
+</head>
+
+<body>
+    <!--head-->
+    <div class="head">
+        <div class="nav">
+            <ul>
+                <li><a href="ykgk.html">送桥概况</a></li>
+                <li><a href="djyl.html">党建引领</a></li>
+                <li class="active01"><a href="xzsp.html">行政审批</a></li>
+            </ul>
+            <div class="logo"></div>
+            <ul>
+                <li><a href="zhzf.html">综合执法</a></li>
+                <li><a href="wgzl.html">网格治理</a></li>
+                <li><a href="zhzx.html">指挥中心</a></li>
+            </ul>
+        </div>
+        <div class="time">2019/05/28<span>17:20:10</span>周一</div>
+    </div>
+    <!--/head end-->
+    <div id="hv-wrapper">
+        <div class="box box1">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a class="active" href="#">行政审批办理事项列表</a>
+                        <a href="#">公共服务办理事项列表</a>
+                    </div>
+                    <div class="conditionBox">
+                        <ul id="a3_ul">
+                            <li>
+                                <div class="a3_div_head">工单编号</div>
+                                <div class="a3_div_head">所属网格</div>
+                                <div class="a3_div_head">职能事项</div>
+                            </li>
+                        </ul>
+                        <div id="gd_div" class="content_div">
+                            <ul id="a3_ul_2">
+                                <a href="content.html">
+                                    <li>
+                                        <div class="a3_div_content">2019011020836</div>
+                                        <div class="a3_div_content">酒甸社区</div>
+                                        <div class="a3_div_content">社会稳定</div>
+                                    </li>
+                                </a>
+                                <a href="#">
+                                    <li>
+                                        <div class="a3_div_content">2019011020837</div>
+                                        <div class="a3_div_content">运河村</div>
+                                        <div class="a3_div_content">安全隐患</div>
+                                    </li>
+                                </a>
+                                <a href="#">
+                                    <li>
+                                        <div class="a3_div_content">2019011020838</div>
+                                        <div class="a3_div_content">沈营村</div>
+                                        <div class="a3_div_content">环境保护</div>
+                                    </li>
+                                </a>
+                                <a href="#">
+                                    <li>
+                                        <div class="a3_div_content">2019011020839</div>
+                                        <div class="a3_div_content">聚福社区</div>
+                                        <div class="a3_div_content">城乡治理</div>
+                                    </li>
+                                </a>
+                                <a href="#">
+                                    <li>
+                                        <div class="a3_div_content">2019011020840</div>
+                                        <div class="a3_div_content">凤来村</div>
+                                        <div class="a3_div_content">企业事项</div>
+                                    </li>
+                                    <a href="#">
+                                        <li>
+                                            <div class="a3_div_content">2019011020841</div>
+                                            <div class="a3_div_content">团结村</div>
+                                            <div class="a3_div_content">综合行政执法</div>
+                                        </li>
+                                    </a>
+                                    <a href="#">
+                                        <li>
+                                            <div class="a3_div_content">2019011020842</div>
+                                            <div class="a3_div_content">龙尾村</div>
+                                            <div class="a3_div_content">企业事项</div>
+                                        </li>
+                                        <a href="#">
+                                            <li>
+                                                <div class="a3_div_content">2019011020843</div>
+                                                <div class="a3_div_content">包家村</div>
+                                                <div class="a3_div_content">企业事项</div>
+                                            </li>
+                                        </a>
+                                        <a href="#">
+                                            <li>
+                                                <div class="a3_div_content">2019011020844</div>
+                                                <div class="a3_div_content">林桥村</div>
+                                                <div class="a3_div_content">社会稳定</div>
+                                            </li>
+                                            <a href="#">
+                                                <li>
+                                                    <div class="a3_div_content">2019011020845</div>
+                                                    <div class="a3_div_content">许巷村</div>
+                                                    <div class="a3_div_content">城乡治理</div>
+                                                </li>
+                                            </a>
+                                            <a href="#">
+                                                <li>
+                                                    <div class="a3_div_content">2019011020846</div>
+                                                    <div class="a3_div_content">肖胡村</div>
+                                                    <div class="a3_div_content">社会稳定</div>
+                                                </li>
+                                                <a href="#">
+                                                    <li>
+                                                        <div class="a3_div_content">2019011020847</div>
+                                                        <div class="a3_div_content">酒甸村</div>
+                                                        <div class="a3_div_content">城乡治理</div>
+                                                    </li>
+                                                </a>
+                                                <a href="#">
+                                                    <li>
+                                                        <div class="a3_div_content">2019011020848</div>
+                                                        <div class="a3_div_content">杭庄村</div>
+                                                        <div class="a3_div_content">社会稳定</div>
+                                                    </li>
+                                                    <a href="#">
+                                                        <li>
+                                                            <div class="a3_div_content">2019011020849</div>
+                                                            <div class="a3_div_content">沈营村</div>
+                                                            <div class="a3_div_content">城乡治理</div>
+                                                        </li>
+                                                    </a>
+                                                    <a href="#">
+                                                        <li>
+                                                            <div class="a3_div_content">2019011020850</div>
+                                                            <div class="a3_div_content">运河村</div>
+                                                            <div class="a3_div_content">城乡治理</div>
+                                                        </li>
+                                                        <a href="#">
+                                                            <li>
+                                                                <div class="a3_div_content">2019011020851</div>
+                                                                <div class="a3_div_content">沈营村</div>
+                                                                <div class="a3_div_content">城乡治理</div>
+                                                            </li>
+                                                        </a>
+                                                        <a href="#">
+                                                            <li>
+                                                                <div class="a3_div_content">2019011020852</div>
+                                                                <div class="a3_div_content">团结村</div>
+                                                                <div class="a3_div_content">城乡治理</div>
+                                                            </li>
+                                                            <a href="#">
+                                                                <li>
+                                                                    <div class="a3_div_content">2019011020853</div>
+                                                                    <div class="a3_div_content">林桥村</div>
+                                                                    <div class="a3_div_content">安全隐患</div>
+                                                                </li>
+                                                            </a>
+                                                            <a href="#">
+                                                                <li>
+                                                                    <div class="a3_div_content">2019011020854</div>
+                                                                    <div class="a3_div_content">龙尾村</div>
+                                                                    <div class="a3_div_content">城乡治理</div>
+                                                                </li>
+                                                                <a href="#">
+                                                                    <li>
+                                                                        <div class="a3_div_content">2019011020855</div>
+                                                                        <div class="a3_div_content">肖胡村</div>
+                                                                        <div class="a3_div_content">安全隐患</div>
+                                                                    </li>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <li>
+                                                                        <div class="a3_div_content">2019011020856</div>
+                                                                        <div class="a3_div_content">聚福社区</div>
+                                                                        <div class="a3_div_content">城乡治理</div>
+                                                                    </li>
+                                                                    <a href="#">
+                                                                        <li>
+                                                                            <div class="a3_div_content">2019011020857</div>
+                                                                            <div class="a3_div_content">陈沟村</div>
+                                                                            <div class="a3_div_content">安全隐患</div>
+                                                                        </li>
+                                                                    </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box2">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a class="active" href="#">行政审批事项接收量</a>
+                        <a href="#">公共服务事项接收量</a>
+                    </div>
+                    <div class="conditionBox">
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天接收<span> / 件</span></p>
+                                <p>0132</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月接收<span> / 件</span></p>
+                                <p>03223</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年接收<span> / 件</span></p>
+                                <p>030312</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天处置<span> / 件</span></p>
+                                <p>0132</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月处置<span> / 件</span></p>
+                                <p>03223</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年处置<span> / 件</span></p>
+                                <p>030312</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box3">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a class="active" href="#" style="margin-right:20px;">行政审批服务事项top5统计</a>
+                        <a href="#">公共服务事项top5统计</a>
+                    </div>
+                    <div class="conditionBox">
+                        <div id="xzsp_grfwsx" style="width: 100%;height:232px;"></div>
+                        <div id="xzsp_grfwsx_t">
+                            <p>435<span>件</span></p>
+                            <p>总数</p>
+                        </div>
+                        <!--<div id="xzsp_grfwsx_num">
+							   <ul>
+								   <li>120件</li>
+								  <li>101件</li>
+								   <li>60件</li>
+								   <li>47件</li>
+								  <li>22件</li>
+		   
+							   </ul>
+			 			   </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box4">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">审批结果评估</div>
+                    <div class="conditionBox">
+                        <div id="echart_A2" style="width:100%;height: 252px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box5">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">公共资源交易接收量</div>
+                    <div class="conditionBox">
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天接收<span> / 件</span></p>
+                                <p>0132</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月接收<span> / 件</span></p>
+                                <p>03223</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年接收<span> / 件</span></p>
+                                <p>030312</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                        <div class="box_sjjs">
+                            <div>
+                                <p>当天处置<span> / 件</span></p>
+                                <p>0132</p>
+                                <img src="img/4.png">
+                            </div>
+                            <div>
+                                <p>当月处置<span> / 件</span></p>
+                                <p>03223</p>
+                                <img src="img/5.png">
+                            </div>
+                            <div>
+                                <p>当年处置<span> / 件</span></p>
+                                <p>030312</p>
+                                <img src="img/6.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box6">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">公共资源交易接收类别</div>
+                    <div class="conditionBox">
+                        <div id="echart_B1" style="width: 100%;height: 270px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box7">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">公共资源交易公告</div>
+                    <div class="conditionBox">
+                        <div id="gd_div" class="content_div">
+
+                            <ul class="a33_ul_2">
+                                <li><a href="#">关于调整优化节能产品政府采购执行机制的通知</a><span>2019.5.1</span></li>
+                                <li><a href="#">关于调整优化节能产品政府采购执行机制的通知</a><span>2019.5.1</span></li>
+                                <li><a class="active" href="#">关于调整优化节能产品政府采购执行机制的通知</a><span>2019.5.1</span></li>
+                                <li><a href="#">关于调整优化节能产品政府采购执行机制的通知</a><span>2019.5.1</span></li>
+                                <li><a href="#">关于调整优化节能产品政府采购执行机制的通知</a><span>2019.5.1</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box8">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle">
+                        <a class="active" href="#">行政审批管理权限目录</a>
+                        <a href="#">公共服务管理权限目录</a>
+                    </div>
+                    <div class="conditionBox">
+                        <ul id="a3_ul">
+                            <li>
+                                <div class="a3_div_head">工单编号</div>
+                                <div class="a3_div_head">所属网格</div>
+                                <div class="a3_div_head">职能事项</div>
+                            </li>
+                        </ul>
+                        <div id="gd_div" class="content_div">
+                            <ul id="a3_ul_2">
+                                <li>
+                                    <div class="a3_div_content">2019011020836</div>
+                                    <div class="a3_div_content">酒甸社区</div>
+                                    <div class="a3_div_content">社会稳定</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020837</div>
+                                    <div class="a3_div_content">运河村</div>
+                                    <div class="a3_div_content">安全隐患</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020838</div>
+                                    <div class="a3_div_content">沈营村</div>
+                                    <div class="a3_div_content">环境保护</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020839</div>
+                                    <div class="a3_div_content">聚福社区</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020840</div>
+                                    <div class="a3_div_content">凤来村</div>
+                                    <div class="a3_div_content">企业事项</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020841</div>
+                                    <div class="a3_div_content">团结村</div>
+                                    <div class="a3_div_content">综合行政执法</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020842</div>
+                                    <div class="a3_div_content">龙尾村</div>
+                                    <div class="a3_div_content">企业事项</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020843</div>
+                                    <div class="a3_div_content">包家村</div>
+                                    <div class="a3_div_content">企业事项</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020844</div>
+                                    <div class="a3_div_content">林桥村</div>
+                                    <div class="a3_div_content">社会稳定</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020845</div>
+                                    <div class="a3_div_content">许巷村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020846</div>
+                                    <div class="a3_div_content">肖胡村</div>
+                                    <div class="a3_div_content">社会稳定</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020847</div>
+                                    <div class="a3_div_content">酒甸村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020848</div>
+                                    <div class="a3_div_content">杭庄村</div>
+                                    <div class="a3_div_content">社会稳定</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020849</div>
+                                    <div class="a3_div_content">沈营村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020850</div>
+                                    <div class="a3_div_content">运河村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020851</div>
+                                    <div class="a3_div_content">沈营村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020852</div>
+                                    <div class="a3_div_content">团结村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020853</div>
+                                    <div class="a3_div_content">林桥村</div>
+                                    <div class="a3_div_content">安全隐患</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020854</div>
+                                    <div class="a3_div_content">龙尾村</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020855</div>
+                                    <div class="a3_div_content">肖胡村</div>
+                                    <div class="a3_div_content">安全隐患</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020856</div>
+                                    <div class="a3_div_content">聚福社区</div>
+                                    <div class="a3_div_content">城乡治理</div>
+                                </li>
+                                <li>
+                                    <div class="a3_div_content">2019011020857</div>
+                                    <div class="a3_div_content">陈沟村</div>
+                                    <div class="a3_div_content">安全隐患</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="operate">
+        <!-- 代码 开始 -->
+        <div class="main">
+            <div class="close"><a onclick="closeWin() ">×</a></div>
+            <div class="timez ">
+                <p>时间轴</p>处理内容</div>
+            <div class="history">
+                <div class="history-date">
+                    <ul id='history-ul'>
+                        <!--<li class="green">
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li>				             
+				             <li>
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了粪表示不再进行粪便表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li>
+				             
+				             <li>
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了粪便处理池，表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li>				             
+				             <li>
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了粪便处理池，养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li>				             
+				             <li>
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了粪便处理池，表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li>				             
+				             <li>
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了粪便处理池，养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li>				             
+				             <li>
+				                  <h3>2018.03.08<span>16:20</span></h3>
+				                  <dl>
+				                    <p>【江苏省->盐城市->盐都区】<a class="active" href="#">唐建军</a>把本事件结案</p>
+				                    <p>并留言：涉及到的两个养殖都建立了粪便处理池，表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示养殖户表示不表示不养殖户表示不表示不再进行粪便，周边群众对处理结果表示满意</p>
+				                  </dl>
+				             </li> -->
+                    </ul>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!-- 代码 结束 -->
+
+    </div>
+</body>
+<script>
+    var Items2 = new Array();
+    var str2 = '';
+    var caseno = getUrlParam("caseno");
+    window.serverUrl = "http://localhost:8080/ykxzsp/";
+    $(function() {
+            getHistoricalSteps(caseno);
+        })
+        //历史步骤----------------------------------------------------
+    function getHistoricalSteps(caseno) {
+        $.ajax({
+            url: window.serverUrl + "outWeb/selectBigScreen_getHistoricalSteps.action",
+            dataType: "json",
+            type: "post",
+            async: false,
+            data: {
+                "caseno": caseno
+            },
+            error: function() {
+                console.log("历史步骤获取数据出错");
+            },
+            success: function(data) {
+                Items2 = data.processlist;
+                $.each(Items2, function(i2, item2) {
+                    str2 += '<li class="green">' +
+                        '<h3>' + item2.TACHEENDDATETIME + '</h3>' +
+                        '<dl>' +
+                        '<p>【南通市->送桥镇->' + item2.DEPTNAME + '】<a class="active" href="#">' + item2.USERNAME + '</a>' + item2.TACHENAME + '</p>' +
+                        '<p>' + item2.TACHENOTE + '</p>' +
+                        '</dl>' +
+                        '</li>';
+                });
+                console.log(str2);
+                $('#history-ul').append(str2);
+            }
+        });
+    }
+
+    function closeWin() {
+        window.opener = null;
+        window.open("", "_self", "");
+        window.close();
+    }
+</script>
+
+</html>

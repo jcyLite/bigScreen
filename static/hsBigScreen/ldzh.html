@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="./css/ldzh.css">
+</head>
+
+<body>
+<!--head-->
+<div class="head">
+    <div id="nowTime" class="time"></div>
+    <div class="nav">
+        <ul>
+            <li><a href="hsgk.html">槐泗概况</a></li>
+            <li><a href="djyl.html">党建引领</a></li>
+            <li><a href="xzsp.html">行政审批</a></li>
+        </ul>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="zhzf.html">综合执法</a></li>
+            <li><a href="grid.html">网格治理</a></li>
+            <li class="active02"><a href="spjk.htmll">指挥中心</a></li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="listBox"></div>
+    <div class="mapBox">
+        <div class="map"></div>
+        <img src="./images/map-bottom.png" class="bottom-img"/>
+        <div class="map-menu">
+            <div class="btn-1 active">工单</div>
+            <div class="btn-2">部件</div>
+        </div>
+    </div>
+
+    <div class="listBox"></div>
+
+    <div class="videoBox">
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+        <video src=""></video>
+    </div>
+</div>
+<!--/head end-->
+<script type="text/javascript">
+    window.onload=function(){
+        //每1秒刷新时间
+        setInterval("NowTime()",1000);
+    }
+    function NowTime(){
+        //获取年月日
+        var time=new Date();
+        var year=time.getFullYear();
+        var month=time.getMonth();
+        var day=time.getDate();
+
+        //获取时分秒
+        var h=time.getHours();
+        var m=time.getMinutes();
+        var s=time.getSeconds();
+
+        //检查是否小于10
+        h=check(h);
+        m=check(m);
+        s=check(s);
+        y=year;
+        month=check(month+1);
+        d=check(day)
+        document.getElementById("nowTime").innerHTML="当前时间："+y+"年"+month+"月"+d+"日  "+h+":"+m+":"+s;
+    }
+    //时间数字小于10，则在之前加个“0”补位。
+    function check(i){
+        //方法一，用三元运算符
+        var num;
+        i<10?num="0"+i:num=i;
+        return num;
+
+        //方法二，if语句判断
+        //if(i<10){
+        //    i="0"+i;
+        //}
+        //return i;
+    }
+</script>
+</body>
+</html>

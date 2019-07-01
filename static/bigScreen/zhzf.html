@@ -1,0 +1,4016 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/zhzf.css" />
+    <link rel="stylesheet" type="text/css" href="css/history.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/echarts_zhzf_ku.js"></script>
+    <script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&tk=7a1d904db1ad0e570a1b0afc5eab78c4"></script>
+    <script src="http://lbs.tianditu.gov.cn/api/js4.0/opensource/openlibrary/D3SvgOverlay.js"></script>
+    <script type="text/javascript" src="js/scroll.js"></script>
+</head>
+<style>
+    body {
+        background-color: #0b1956;
+    }
+    
+    .tdt-control-copyright {
+        display: none
+    }
+</style>
+
+<body>
+    <!--head-->
+    <div class="head">
+        <div class="nav">
+            <ul>
+                <!-- <li>
+					<a href="ykgk.html">送桥概况</a>
+				</li> -->
+                <li>
+                    <a href="djyl.html">党建引领</a>
+                </li>
+                <li>
+                    <a href="xzsp.html">政务服务</a>
+                </li>
+            </ul>
+            <div>
+                <a href="ykgk.html">
+                    <div class="logo"></div>
+                </a>
+            </div>
+            <ul>
+                <li class="active02">
+                    <a href="zhzf.html">综合执法</a>
+                </li>
+                <li>
+                    <a href="wgzl.html">网格治理</a>
+                </li>
+                <!-- <li>
+					<a href="zhzx.html">指挥中心</a>
+				</li> -->
+            </ul>
+        </div>
+        <div class="time" id="nowTime_zhzF">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="zhzftitle" style="top: 91px;right: -285px;">
+            <a class="active" href="zhzf.html">综合执法</a>
+            <a href="sjfx.html">数据统计</a>
+        </div>
+    </div>
+    <!--/head end-->
+    <div id="hv-wrapper">
+        <div class="box box1">
+            <div class="container">
+                <i class="icon1"></i>
+                <i class="icon2"></i>
+                <i class="icon3"></i>
+                <i class="icon4"></i>
+                <div class="contentWrapper">
+                    <div class="mainTitle" onclick="openwin()">双随机</div>
+                    <div class="conditionBox">
+                        <div id="echart_A1" style="width: 230px;height: 200px;display: inline-block; margin-left: -13px;"></div>
+                        <div id="echart_A12" style="width: 297px;height: 200px;display: inline-block;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="box box2">
+                <div class="container">
+                    <i class="icon1"></i>
+                    <i class="icon2"></i>
+                    <i class="icon3"></i>
+                    <i class="icon4"></i>
+                    <div class="contentWrapper">
+                        <div class="mainTitle">执法事件数量统计</div>
+                        <div class="conditionBox">
+                            <div class="box_sjjs">
+                                <div>
+                                    <p>当天接收<span> / 件</span></p>
+                                    <p id="dangtian1">0000</p>
+                                    <img src="img/4.png">
+                                </div>
+                                <div>
+                                    <p>当月接收<span> / 件</span></p>
+                                    <p id="dangyue1">00006</p>
+                                    <img src="img/5.png">
+                                </div>
+                                <div>
+                                    <p>当年接收<span> / 件</span></p>
+                                    <p id="dangnian1">000167</p>
+                                    <img src="img/6.png">
+                                </div>
+                            </div>
+                            <div class="box_sjjs">
+                                <div>
+                                    <p>当天处置<span> / 件</span></p>
+                                    <p id="dangtian2">0000</p>
+                                    <img src="img/4.png">
+                                </div>
+                                <div>
+                                    <p>当月处置<span> / 件</span></p>
+                                    <p id="dangyue2">00005</p>
+                                    <img src="img/5.png">
+                                </div>
+                                <div>
+                                    <p>当年处置<span> / 件</span></p>
+                                    <p id="dangnian2">000164</p>
+                                    <img src="img/6.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box3">
+                <div class="container">
+                    <i class="icon1"></i>
+                    <i class="icon2"></i>
+                    <i class="icon3"></i>
+                    <i class="icon4"></i>
+                    <div class="contentWrapper">
+                        <div class="mainTitle">年度处罚对象类型统计</div>
+                        <div class="conditionBox">
+                            <div id="echart_G2" style="width: 100%;height: 240px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box4">
+                <div class="container">
+                    <i class="icon1"></i>
+                    <i class="icon2"></i>
+                    <i class="icon3"></i>
+                    <i class="icon4"></i>
+                    <div class="contentWrapper">
+                        <div class="mainTitle">年度案件详情列表</div>
+                        <div class="conditionBox">
+                            <ul id="aj_ul">
+                                <li>
+                                    <div class="a3_div_head2first">企业名称</div>
+                                    <div class="a3_div_head2">受理日期</div>
+                                    <div class="a3_div_head2">案由</div>
+                                    <div class="a3_div_head2">处罚结果</div>
+                                </li>
+                            </ul>
+                            <div id="ndaj_div" class="content_div">
+                                <ul id="aj_ul_2" style="padding:0 10px">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box5">
+                <div class="container">
+                    <i class="icon1"></i>
+                    <i class="icon2"></i>
+                    <i class="icon3"></i>
+                    <i class="icon4"></i>
+                    <div class="contentWrapper">
+                        <div class="mainTitle">执法事项权限</div>
+                        <div class="conditionBox">
+                            <ul id="a33_ul">
+                                <li>
+                                    <div class="a33_div_head_one">基本编码</div>
+                                    <div class="a33_div_head_two">权限类型</div>
+                                    <div class="a33_div_head">涉及部门</div>
+                                </li>
+                            </ul>
+                            <div id="gd_div" class="content_div" style="padding:0 10px">
+                                <ul id="a33_ul_2">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box7">
+                <!-- <div class="container">
+					<div class="contentWrapper">
+						<div class="mainTitle" id="mapdiv_gk_zhzf">
+
+						</div>
+					</div>
+				</div> -->
+                <div id="mapdiv_gk_zhzf" style="width:100%;height:100%">
+
+                </div>
+                <!-- <input type="text" id="lnglatStr" style="color: #000;" value=""/> -->
+            </div>
+
+            <div class="box box8">
+                <div class="container">
+                    <i class="icon1"></i>
+                    <i class="icon2"></i>
+                    <i class="icon3"></i>
+                    <i class="icon4"></i>
+                    <div class="contentWrapper">
+                        <div class="mainTitle">年度检查及处罚案件数量统计</div>
+                        <div class="conditionBox">
+                            <div id="echart_G1" style="width: 100%;height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- 展示详情 -->
+    <div id="yearDetail" style="display: none">
+        <div class="main">
+            <div class="title">详情</div>
+            <div class="close"><a onclick="closeYear()">×</a></div>
+            <div class="approval" id="yearDThing">
+
+            </div>
+        </div>
+    </div>
+    <!-- xiangqing -->
+    <div id="zhifashixiangDetail" style="display: none">
+        <div class="main">
+            <div class="title">详情</div>
+            <div class="close"><a onclick="closeZhiFa()">×</a></div>
+            <div class="approval" id="zhifaDhing">
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        setInterval("nowTime_zhzF()", 1000);
+        // window.serverUrlZHZF = "http://192.168.1.252:8086";
+        //		window.serverUrlZHZF = "http://222.93.106.183:8082";
+        //         window.serverUrlZHZF = "http://localhost:8080/";
+        window.serverUrlZHZF = "http://58.220.24.15:8081/";
+        document.getElementById("yearDetail").style.display = "none";
+        document.getElementById("zhifashixiangDetail").style.display = "none";
+        //以下为时间刷新方法----------------------------------------------------------
+        function nowTime_zhzF() {
+            //获取年月日
+            var time = new Date();
+            var year = time.getFullYear();
+            var month = time.getMonth();
+            var day = time.getDate();
+            var xingqi = time.getDay(); //获取当前星期X(0-6,0代表星期天)
+
+            //获取时分秒
+            var h = time.getHours();
+            var m = time.getMinutes();
+            var s = time.getSeconds();
+
+            //检查是否小于10
+            h = check(h);
+            m = check(m);
+            s = check(s);
+            y = year;
+            month = check(month + 1);
+            var d = check(day)
+            $("#nowTime_zhzF>span:first-child").text(y + "年" + month + "月" + d + "日");
+            $("#nowTime_zhzF>span:nth-child(3)").text(h + " : " + m + " : " + s);
+            if (xingqi == 0) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期日");
+            } else if (xingqi == 1) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期一");
+            } else if (xingqi == 2) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期二");
+            } else if (xingqi == 3) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期三");
+            } else if (xingqi == 4) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期四");
+            } else if (xingqi == 5) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期五");
+            } else if (xingqi == 6) {
+                $("#nowTime_zhzF>span:nth-child(2)").text("星期六");
+            }
+        }
+        //时间数字小于10，则在之前加个“0”补位。
+        function check(i) {
+            //方法一，用三元运算符
+            var num;
+            i < 10 ? num = "0" + i : num = i;
+            return num;
+        }
+
+        // 数字滚动效果
+        function scrollNum11(num, id) {
+            var a = 0;
+            var timer = setInterval(function() {
+                if (a < num) {
+                    a++;
+                    var text = '';
+                    var b = 4 - a.toString().length;
+                    for (var i = 0; i < b; i++) {
+                        text += '0';
+                    }
+                    text += a;
+                    $("#" + id).text(text);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10)
+        }
+
+        function scrollNum21(num, id) {
+            var a = 0;
+            var timer = setInterval(function() {
+                if (a < num) {
+                    a += 10;
+                    var text = '';
+                    if (a < num) {
+                        var b = 5 - a.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += a;
+                    } else {
+                        var b = 5 - num.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += num;
+                    }
+                    $("#" + id).text(text);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10)
+        }
+
+        function scrollNum31(num, id) {
+            var a = 0;
+            var timer = setInterval(function() {
+                if (a < num) {
+                    a += 100;
+                    var text = '';
+                    if (a < num) {
+                        var b = 6 - a.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += a;
+                    } else {
+                        var b = 6 - num.toString().length;
+                        for (var i = 0; i < b; i++) {
+                            text += '0';
+                        }
+                        text += num;
+                    }
+                    $("#" + id).text(text);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10)
+        }
+        //每隔5秒数字自动跳跳
+        setInterval(function() {
+                scrollNum11(0, "dangtian1")
+                scrollNum11(0, "dangtian2")
+                scrollNum21(6, "dangyue1")
+                scrollNum21(5, "dangyue2")
+                scrollNum31(167, "dangnian1")
+                scrollNum31(164, "dangnian2")
+            }, 300000)
+            //地图加载企业信息--------------------------------------------------------------------
+        function addEnterPrise(index) {
+            map.clearOverLays();
+            if (_CarTrack) {
+                _CarTrack.stop();
+                _CarTrack.clear();
+            }
+            map.centerAndZoom(new T.LngLat(120.97333757316215, 32.52218043222892), 12);
+            ykArea();
+            var icon = new T.Icon({
+                iconUrl: "img/enterprise.jpg",
+                iconSize: new T.Point(44, 44),
+                iconAnchor: new T.Point(22, 22)
+            });
+            //                var json_data = [[121.078959, 32.549203], [121.097166, 32.544266], [121.054712, 32.542748], [121.058001, 32.549473]];
+            var json_data = findEnterPriseList();
+            //                alert(json_data);
+            var iparr = [
+                ["http://192.168.11.97", "http://192.168.11.98"],
+                ["http://192.168.12.202", "http://192.168.12.204"],
+                ["http://192.168.40.2", "http://192.168.40.3"],
+                ["http://192.168.40.9", "http://192.168.40.207"]
+            ]
+            for (var i = 0; i < json_data.length; i++) {
+
+                var userJson = json_data[i];
+                if (userJson.length > 0) {
+                    console.log(userJson.length);
+
+                    (function(i) {
+                        var mark = new T.Marker(new T.LngLat(userJson[0], userJson[1]), {
+                            icon: icon
+                        });
+                        map.addOverLay(mark);
+                        /* mark.addEventListener("click", function () {
+                                console.log(iparr[i])
+                                var iWidth = 750;                         //弹出窗口的宽度;
+                                var iHeight = 250;                        //弹出窗口的高度;
+                                //window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+                                var iTop = (window.screen.height - 30 - iHeight) / 2;       //获得窗口的垂直位置;
+                                var iLeft = (window.screen.width - 10 - iWidth) / 2;        //获得窗口的水平位置;
+//                                findSPDWList(carTitle,carType,locationDeptId);
+                                window.open("view.html", "视频监控", 'height=' + iHeight + ',,innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ', toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')
+                                window.localStorage.vidio1 = iparr[i][0];
+                                window.localStorage.vidio2 = iparr[i][1];
+                            }, this);*/
+
+                    })(i);
+
+                }
+            }
+        }
+        $(function() {
+            addEnterPrise();
+        })
+        var Items2 = new Array;
+
+        function findEnterPriseList() {
+            var locationArr = new Array;
+            $.ajax({
+                url: window.serverUrlZHZF + "/zhrd/fore/index/index_findEnterPriseList.action",
+                dataType: 'json',
+                type: 'post',
+                async: false,
+                data: {},
+                error: function() {
+                    console.log("企业经纬度信息获取数据出错");
+                },
+                success: function(data) {
+                    console.log(data.datas)
+                    Items2 = data;
+                    $.each(Items2, function(i2, item2) {
+                        var location = new Array;
+                        location.push(item2.longitude);
+                        location.push(item2.latitude);
+                        locationArr.push(location);
+                    })
+                }
+            })
+            console.log(locationArr);
+            return locationArr;
+        }
+        // 年度案件详情列表
+        $.ajax({
+            url: window.serverUrlZHZF + "/zhrd/jsp/caseInfo/selectBigScreen_enforceList.action",
+            dataType: "json",
+            type: "post",
+            // async: false,
+            data: {},
+            error: function() {
+                console.log("年度案件详情列表获取数据出错");
+            },
+            success: function(data) {
+                var arr = data.datas;
+                console.log(data)
+                for (var i = 0; i < arr.length; i++) {
+                    var html = "";
+                    html += '<a target="_blank"><li onClick=getYearListDetail("' + arr[i].id + '")>'
+                    html += '<div class="a3_div_content2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + arr[i].partyName + '</div>'
+                    html += '<div class="a3_div_content2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + arr[i].acceptdate + '</div>'
+                    html += '<div class="a3_div_content2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + arr[i].cause + '</div>'
+                    html += '<div class="a3_div_content2" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + arr[i].penalty + '</div>'
+                    html += '</li></a>'
+                    $("#aj_ul_2").append(html);
+                }
+                console.log(data)
+            }
+        })
+
+        // 年度案件详情列表详情
+        function getYearListDetail(id) {
+            $.ajax({
+                url: window.serverUrlZHZF + "/zhrd/jsp/caseInfo/selectBigScreen_getEnforceDetail.action",
+                dataType: "json",
+                type: "post",
+                async: false,
+                data: {
+                    enforceLawId: id
+                },
+                error: function() {
+                    console.log("年度案件详情获取数据出错");
+                },
+                success: function(data) {
+                    $("#yearDThing").empty()
+                    var arr = data.datas;
+                    var html = '';
+                    if (arr.caseno) {
+                        html += '<p><span>案件编号：</span>' + arr.caseno + '</p>'
+                    }
+                    if (arr.partyName) {
+                        html += '<p><span>企业名称：</span>' + arr.partyName + '</p>'
+                    }
+                    if (arr.acceptdate) {
+                        html += '<p><span>受理日期：</span>' + arr.acceptdate + '</p>'
+                    }
+                    if (arr.registerdate) {
+                        html += '<p><span>立案日期：</span>' + arr.registerdate + '</p>'
+                    }
+                    if (arr.closedate) {
+                        html += '<p><span>结案日期：</span>' + arr.closedate + '</p>'
+                    }
+                    if (arr.cause) {
+                        html += '<p><span>案由：</span>' + arr.cause + '</p>'
+                    }
+                    if (arr.penalty) {
+                        html += '<p><span>处罚结果：</span>' + arr.penalty + '</p>'
+                    }
+
+                    $("#yearDThing").append(html)
+                    $("#yearDetail").css("display", "block")
+                }
+            })
+        }
+
+        function closeYear() {
+            $("#yearDetail").css("display", "none")
+        }
+
+        // 执法事项权限列表
+        var arr1 = [{
+                no: "0203035000",
+                name: "对养殖者使用未取得新饲料、新饲料添加剂证书的新饲料、新饲料添加剂或者未取得饲料、饲料添加剂进口登记证的进口饲料、进口饲料添加剂的；使用无产品标签、无生产许可证、无产品质量标准、无产品质量检验合格证的饲料、饲料添加剂的；使用无产品批准文号的饲料添加剂、添加剂预混合饲料的；在饲料或者动物饮用水中添加饲料添加剂，不遵守国务院农业行政主管部门制定的饲料添加剂安全使用规范的；使用自行配制的饲料，不遵守国务院农业行政主管部门制定的自行配制饲料使用规范的；使用限制使用的物质养殖动物，不遵守国务院农业行政主管部门的限制性规定的；在反刍动物饲料中添加乳和乳制品以外的动物源性成分的处罚",
+                type: "行政处罚",
+                case: "《饲料和饲料添加剂管理条例》（国务院令第266号发布，第609号、第645号、第666号修订）",
+                department: "农业农村局"
+            }, {
+                no: "0203036000",
+                name: "对在饲料或者动物饮用水中添加国务院农业行政主管部门公布禁用的物质以及对人体具有直接或者潜在危害的其他物质，或者直接使用上述物质养殖动物的处罚",
+                type: "行政处罚",
+                case: "《饲料和饲料添加剂管理条例》（国务院令第266号发布，第609号、第645号、第666号修订）",
+                department: "农业农村局"
+            }, {
+                no: "0203037000",
+                name: "对养殖者对外提供自行配制的饲料的处罚",
+                type: "行政处罚",
+                case: "《饲料和饲料添加剂管理条例》（国务院令第266号发布，第609号、第645号、第666号修订）",
+                department: "农业农村局"
+            }, {
+                no: "0202989000",
+                name: "对农产品生产企业、农民专业合作经济组织未建立或者未按照规定保存农产品生产记录的，或者伪造农产品生产记录的处罚",
+                type: "行政处罚",
+                case: "《中华人民共和国农产品质量安全法》",
+                department: "农业农村局"
+            }, {
+                no: "0202990000",
+                name: "对农产品生产企业、农民专业合作经济组织以及从事农产品收购的单位或者个人销售的农产品未按照规定包装、标识的处罚",
+                type: "行政处罚",
+                case: "《中华人民共和国农产品质量安全法》",
+                department: "农业农村局"
+            }, {
+                no: "0203015000",
+                name: "对未领取许可证照或需要经过认证未认证而不按照法定条件、要求从事生产经营活动或者生产、销售不符合法定要求产品的处罚",
+                type: "行政处罚",
+                case: "《国务院关于加强食品等产品安全监督管理的特别规定》（国务院令第503号)",
+                department: "农业农村局"
+            }, {
+                no: "0202991000",
+                name: "对销售的农产品使用保鲜剂、防腐剂、添加剂等材料不符合国家有关强制性技术规范的处罚",
+                type: "行政处罚",
+                case: "《中华人民共和国农产品质量安全法》",
+                department: "农业农村局"
+            }, {
+                no: "0202994000",
+                name: "对冒用农产品质量标志的处罚",
+                type: "行政处罚",
+                case: "《中华人民共和国农产品质量安全法》",
+                department: "农业农村局"
+            }, {
+                no: "0203018000",
+                name: "对违法使用原料、辅料、添加剂、农业投入品的处罚",
+                type: "行政处罚",
+                case: "《国务院关于加强食品等产品安全监督管理的特别规定》（国务院令第503号)",
+                department: "农业农村局"
+            }, {
+                no: "0202993000",
+                name: "对农产品批发市场没有设立或者委托农产品质量安全检测机构，对进场销售的农产品质量安全状况进行抽查检测；发现不符合农产品质量安全标准的，没有要求销售者立即停止销售，并向农业行政主管部门报告的处罚",
+                type: "行政处罚",
+                case: "《中华人民共和国农产品质量安全法》",
+                department: "农业农村局"
+            }, {
+                no: "0202992000",
+                name: "对农产品生产企业、农民专业合作经济组织销售含有国家禁止使用的农药、兽药或者其他化学物质的农产品；销售农药、兽药等化学物质残留或者含有的重金属等有毒有害物质不符合农产品质量安全标准的农产品；销售含有的致病性寄生虫、微生物或者生物毒素不符合农产品质量安全标准的农产品；销售其他不符合农产品质量安全标准的农产品处罚",
+                type: "行政处罚",
+                case: "《中华人民共和国农产品质量安全法》",
+                department: "农业农村局"
+            },
+
+        ]
+        $("#a33_ul_2").empty();
+        for (var i = 0; i < arr1.length; i++) {
+            var html = "";
+            html += '<li onClick=getDetailFunction("' + i + '")>'
+            html += '<div class="a33_div_content_one">' + arr1[i].no + '</div>'
+            html += '<div class="a33_div_content_two">' + arr1[i].type + '</div>'
+            html += '<div class="a33_div_content">' + arr1[i].department + '</div>'
+            html += '</li>'
+            $("#a33_ul_2").append(html)
+        }
+
+        function getDetailFunction(id) {
+            $("#zhifaDhing").empty();
+            var html = "";
+            html += '<p><span>基本编码：</span>' + arr1[id].no + '</p>'
+            html += '<p><span>权限名称：</span>' + arr1[id].name + '</p>'
+            html += '<p><span>权限类型：</span>' + arr1[id].type + '</p>'
+            html += '<p><span>设定依据：</span>' + arr1[id].case+'</p>'
+            html += '<p><span>涉及部门：</span>' + arr1[id].department + '</p>'
+            $("#zhifaDhing").html(html);
+            $("#zhifashixiangDetail").css("display", "block");
+        }
+
+        function closeZhiFa() {
+            $("#zhifashixiangDetail").css("display", "none")
+        }
+
+
+        getweater();
+
+        echartA1();
+        echartA12();
+
+        /*echartA199()
+        echartA1299()*/
+
+        echartG1();
+        echartG2();
+        // echartH2();
+        /*echartHHOO();
+        echartHHqq()*/
+        $('#gd_div').myScroll({
+            speed: 50, //数值越大，速度越慢
+            rowHeight: 42 //li的高度
+        });
+        $('#ndaj_div').myScroll({
+            speed: 50, //数值越大，速度越慢
+            rowHeight: 62 //li的高度
+        });
+
+        function getLngLat(lnglat) {
+            document.getElementById("lnglatStr").value = lnglat.lng.toFixed(6) + "," + lnglat.lat.toFixed(6);
+        }
+        //送桥镇区域网格
+        function ykArea() {
+            var iconurl0 = 'img/pointOffline.jpg'; //正常节点
+            var iconurl1 = 'http://lbs.tianditu.gov.cn/images/bus/start.png'; //起点
+            var iconurl2 = 'http://lbs.tianditu.gov.cn/images/bus/end.png'; //终点
+            var icon = new T.Icon({
+                iconUrl: "img/view.png",
+                iconSize: new T.Point(20, 34),
+                iconAnchor: new T.Point(10, 25)
+            });
+
+            var icon0 = new T.Icon({
+                iconUrl: iconurl0,
+                iconSize: new T.Point(1, 1),
+                iconAnchor: new T.Point(1, 3)
+            });
+            var icon1 = new T.Icon({
+                iconUrl: iconurl1,
+                iconSize: new T.Point(44, 34),
+                iconAnchor: new T.Point(12, 31)
+            });
+            var icon2 = new T.Icon({
+                iconUrl: iconurl2,
+                iconSize: new T.Point(44, 34),
+                iconAnchor: new T.Point(12, 31)
+            });
+
+            var style = {
+                color: "#00fff3",
+                weight: 3,
+                opacity: 0.8,
+                lineStyle: "dashed"
+            };
+
+            //许璐村
+            var areaJson = [
+                [121.030540, 32.470960],
+                [121.044530, 32.467990],
+                [121.046500, 32.483630],
+                [121.048310, 32.497890],
+                [121.024020, 32.505270],
+                [121.014830, 32.489850],
+                [121.019850, 32.487790],
+                [121.026270, 32.485290],
+                [121.033520, 32.486610],
+                [121.036400, 32.485570],
+                [121.034420, 32.482800],
+                [121.031700, 32.478760],
+                [121.031400, 32.476770],
+                [121.030730, 32.472280],
+                [121.030540, 32.470900]
+            ];
+
+            var cy_areaJson = [
+                    [121.036380, 32.485580],
+                    [121.033540, 32.486600],
+                    [121.026250, 32.485290],
+                    [121.014960, 32.489780],
+                    [121.013890, 32.488080],
+                    [121.011010, 32.489530],
+                    [121.010160, 32.487610],
+                    [121.007880, 32.488880],
+                    [121.005520, 32.486420],
+                    [121.003330, 32.482580],
+                    [121.002770, 32.478050],
+                    [120.998910, 32.473740],
+                    [121.004920, 32.468930],
+                    [121.011060, 32.465020],
+                    [121.015860, 32.462740],
+                    [121.021100, 32.460280],
+                    [121.027110, 32.458650],
+                    [121.029980, 32.458250],
+                    [121.032600, 32.457230],
+                    [121.029850, 32.460420],
+                    [121.030150, 32.465670],
+                    [121.030540, 32.470700],
+                    [121.031610, 32.478230],
+                    [121.031700, 32.478780],
+                    [121.036380, 32.485580]
+                ]
+                //古坳村
+            var fl_areaJson = [
+                [120.998910, 32.473740],
+                [121.002770, 32.478050],
+                [121.003290, 32.482610],
+                [121.005500, 32.486380],
+                [121.007070, 32.488010],
+                [121.002900, 32.490520],
+                [121.003050, 32.490980],
+                [121.001830, 32.491280],
+                [121.003460, 32.493820],
+                [121.001270, 32.497200],
+                [121.003010, 32.497440],
+                [121.003030, 32.497930],
+                [121.003680, 32.498290],
+                [121.001810, 32.499070],
+                [121.002580, 32.500150],
+                [121.002320, 32.501560],
+                [121.003590, 32.502030],
+                [121.002190, 32.503140],
+                [120.999020, 32.500260],
+                [120.993030, 32.503320],
+                [120.991550, 32.504010],
+                [120.992020, 32.506360],
+                [120.989860, 32.506250],
+                [120.989790, 32.504820],
+                [120.984920, 32.507250],
+                [120.983400, 32.502780],
+                [120.982220, 32.499340],
+                [120.980630, 32.494510],
+                [120.978510, 32.488420],
+                [120.979170, 32.487660],
+                [120.982650, 32.485190],
+                [120.985840, 32.482920],
+                [120.992220, 32.478200],
+                [120.996850, 32.475950],
+                [120.998870, 32.473820]
+            ];
+            var zl_areaJson = [
+                [120.987630, 32.516090],
+                [120.984410, 32.514000],
+                [120.978400, 32.509270],
+                [120.971960, 32.505980],
+                [120.961550, 32.502160],
+                [120.953310, 32.499100],
+                [120.944950, 32.494960],
+                [120.938770, 32.490270],
+                [120.938620, 32.496860],
+                [120.938530, 32.502810],
+                [120.938490, 32.511060],
+                [120.948830, 32.509110],
+                [120.951080, 32.509270],
+                [120.954840, 32.511390],
+                [120.957090, 32.512710],
+                [120.959820, 32.513780],
+                [120.964210, 32.513360],
+                [120.982410, 32.514360],
+                [120.987650, 32.516090]
+            ]
+            var hz_areaJson = [
+                [121.024010, 32.505270],
+                [121.021730, 32.501440],
+                [121.021030, 32.500230],
+                [121.019850, 32.498260],
+                [121.016140, 32.492030],
+                [121.014830, 32.489860],
+                [121.014960, 32.489780],
+                [121.013890, 32.488080],
+                [121.011010, 32.489520],
+                [121.010140, 32.487610],
+                [121.007890, 32.488880],
+                [121.007060, 32.488000],
+                [121.002910, 32.490540],
+                [121.003040, 32.490980],
+                [121.001820, 32.491280],
+                [121.003470, 32.493820],
+                [121.001260, 32.497210],
+                [121.003010, 32.497450],
+                [121.003030, 32.497920],
+                [121.003680, 32.498290],
+                [121.001810, 32.499080],
+                [121.002580, 32.500160],
+                [121.002330, 32.501560],
+                [121.003600, 32.502030],
+                [121.002940, 32.502540],
+                [121.002210, 32.503150],
+                [120.999010, 32.500260],
+                [120.992690, 32.503500],
+                [120.991550, 32.504000],
+                [120.992020, 32.506370],
+                [120.989860, 32.506250],
+                [120.989780, 32.504840],
+                [120.984920, 32.507260],
+                [120.986420, 32.511600],
+                [120.987640, 32.516120],
+                [120.991220, 32.519260],
+                [120.994430, 32.517900],
+                [120.998270, 32.516310],
+                [120.999900, 32.515640],
+                [121.002440, 32.514570],
+                [121.007180, 32.512610],
+                [121.008700, 32.511980],
+                [121.013950, 32.510070],
+                [121.022520, 32.506020],
+                [121.024060, 32.505290]
+            ]
+
+            var jdc_areaJson = [
+                [120.917760, 32.542550],
+                [120.915380, 32.535820],
+                [120.910010, 32.520800],
+                [120.933340, 32.512080],
+                [120.938470, 32.511050],
+                [120.938980, 32.511680],
+                [120.940200, 32.515210],
+                [120.945610, 32.530860],
+                [120.936860, 32.534550],
+                [120.924880, 32.539650],
+                [120.918790, 32.542110],
+                [120.918360, 32.542290]
+            ];
+
+            var jdsq_areaJson = [
+                [120.995690, 32.523530],
+                [120.991230, 32.519230],
+                [120.989150, 32.520460],
+                [120.986870, 32.520310],
+                [120.945570, 32.530890],
+                [120.936860, 32.534510],
+                [120.940630, 32.550210],
+                [120.954540, 32.542250],
+                [120.969210, 32.536210],
+                [120.983010, 32.531020],
+                [120.982050, 32.536320],
+                [120.981680, 32.538040],
+                [120.985220, 32.536920],
+                [120.990240, 32.535240],
+                [120.989920, 32.531170],
+                [120.989750, 32.529450],
+                [120.991720, 32.527480],
+                [120.995690, 32.523530]
+            ]
+
+            var jfsq_areaJson = [
+                [120.94556640002997, 32.53053200087449],
+                [120.93895743701728, 32.51164924940964],
+                [120.94844172809394, 32.5092459901323],
+                [120.95483611438544, 32.510104297017065],
+                [120.95921347949775, 32.51353752455613],
+                [120.96011470172675, 32.513322947834936],
+                [120.96659491870673, 32.51293670973679],
+                [120.98436187122138, 32.51431000075242],
+                [120.99079917285712, 32.5196744187822],
+                [120.9892113051203, 32.52044689497849],
+                [120.98702262256415, 32.52018940291306],
+                [120.97689460132392, 32.521820185994116],
+                [120.9723884901789, 32.522335170124975],
+                [120.9659941038874, 32.524352191304175],
+                [120.9608442625788, 32.52525341353318],
+                [120.95234702441962, 32.528600810383764],
+                [120.94556640002997, 32.53053200087449]
+            ]
+            var lw_areaJson = [
+                [120.940620, 32.550200],
+                [120.939070, 32.551090],
+                [120.934110, 32.554030],
+                [120.930270, 32.556310],
+                [120.926160, 32.558750],
+                [120.924070, 32.559580],
+                [120.922970, 32.557480],
+                [120.921270, 32.552580],
+                [120.919110, 32.546490],
+                [120.917760, 32.542540],
+                [120.925030, 32.539690],
+                [120.930830, 32.537050],
+                [120.936870, 32.534510],
+                [120.937260, 32.536150],
+                [120.937940, 32.539040]
+            ]
+
+            var sy_areaJson = [
+                [120.973440, 32.472890],
+                [120.966510, 32.452270],
+                [120.962730, 32.440610],
+                [120.939650, 32.438730],
+                [120.939470, 32.454520],
+                [120.956730, 32.455080],
+                [120.956060, 32.472130]
+            ]
+
+            var tj_areaJson = [
+                [120.987650, 32.516090],
+                [120.984430, 32.514010],
+                [120.978400, 32.509260],
+                [120.971940, 32.505960],
+                [120.961280, 32.502070],
+                [120.958930, 32.501170],
+                [120.953300, 32.499100],
+                [120.944960, 32.494970],
+                [120.938770, 32.490290],
+                [120.939060, 32.481530],
+                [120.978510, 32.488420],
+                [120.979050, 32.490070],
+                [120.984910, 32.507260],
+                [120.986440, 32.511650],
+                [120.986690, 32.512640],
+                [120.987410, 32.515250]
+            ]
+
+            var xx_areaJson = [
+                [120.938590, 32.498610],
+                [120.918750, 32.494430],
+                [120.917670, 32.509200],
+                [120.895250, 32.505090],
+                [120.892760, 32.518750],
+                [120.893730, 32.521870],
+                [120.899330, 32.523840],
+                [120.903250, 32.523590],
+                [120.910010, 32.520800],
+                [120.927410, 32.514290],
+                [120.933380, 32.512060],
+                [120.938490, 32.511060],
+                [120.938510, 32.509180]
+            ]
+
+            var yh_areaJson = [
+                [120.939650, 32.438730],
+                [120.925270, 32.437420],
+                [120.925180, 32.438840],
+                [120.917370, 32.438910],
+                [120.912870, 32.437930],
+                [120.911920, 32.439130],
+                [120.912740, 32.444200],
+                [120.915780, 32.449090],
+                [120.917030, 32.450530],
+                [120.917370, 32.451770],
+                [120.915780, 32.453780],
+                [120.939470, 32.454540]
+            ]
+
+
+            var bj_areaJson = [
+                [120.917690, 32.509200],
+                [120.918750, 32.494380],
+                [120.919050, 32.489490],
+                [120.898960, 32.485260],
+                [120.895270, 32.505110],
+                [120.905530, 32.506940],
+                [120.915030, 32.508690],
+                [120.917030, 32.509070]
+            ]
+
+            var xh_areaJson = [
+                [120.991230, 32.519260],
+                [120.987630, 32.516090],
+                [120.982370, 32.514380],
+                [120.964170, 32.513380],
+                [120.959790, 32.513760],
+                [120.957030, 32.512660],
+                [120.951150, 32.509270],
+                [120.948850, 32.509110],
+                [120.938490, 32.511060],
+                [120.939000, 32.511680],
+                [120.945610, 32.530930],
+                [120.955520, 32.528360],
+                [120.986980, 32.520290],
+                [120.989150, 32.520460],
+                [120.991250, 32.519240]
+            ]
+
+            var lq_areaJson = [
+                [120.978510, 32.488420],
+                [120.973440, 32.472890],
+                [120.956100, 32.472130],
+                [120.955980, 32.476420],
+                [120.950700, 32.475520],
+                [120.947410, 32.475050],
+                [120.944620, 32.473440],
+                [120.942520, 32.471160],
+                [120.939580, 32.470990],
+                [120.938780, 32.481480]
+            ]
+
+            var zxz_areaJson = [
+                [120.939580, 32.470990],
+                [120.939320, 32.463820],
+                [120.929950, 32.470720],
+                [120.901730, 32.469870],
+                [120.898960, 32.485280],
+                [120.909910, 32.487570],
+                [120.919070, 32.489490],
+                [120.918720, 32.494430],
+                [120.938590, 32.498610],
+                [120.938680, 32.494000],
+                [120.938810, 32.490340],
+                [120.939170, 32.481600],
+                [120.938830, 32.481490],
+                [120.939170, 32.476750],
+                [120.939520, 32.472350]
+            ]
+
+            var yjy_areaJson = [
+                [120.901900, 32.469870],
+                [120.903690, 32.469880],
+                [120.905360, 32.465130],
+                [120.906020, 32.464370],
+                [120.906210, 32.463210],
+                [120.915780, 32.453780],
+                [120.956730, 32.455100],
+                [120.956110, 32.472130],
+                [120.955990, 32.476420],
+                [120.950990, 32.475560],
+                [120.947430, 32.475050],
+                [120.944580, 32.473420],
+                [120.942520, 32.471140],
+                [120.939580, 32.470980],
+                [120.939300, 32.463860],
+                [120.929970, 32.470720]
+            ]
+            var yk_areaJson = [
+                [121.084440, 32.518230],
+                [121.081010, 32.510850],
+                [121.079460, 32.509690],
+                [121.065900, 32.505930],
+                [121.060920, 32.504480],
+                [121.059120, 32.502380],
+                [121.055860, 32.495360],
+                [121.048050, 32.497890],
+                [121.023930, 32.505350],
+                [121.013980, 32.510050],
+                [121.008650, 32.512010],
+                [120.991230, 32.519240],
+                [120.995690, 32.523510],
+                [121.004190, 32.531980],
+                [121.010630, 32.538560],
+                [121.020500, 32.532920],
+                [121.026850, 32.529450],
+                [121.032340, 32.526190],
+                [121.037490, 32.523220],
+                [121.045820, 32.520470],
+                [121.057490, 32.517650],
+                [121.062130, 32.526050],
+                [121.082640, 32.519530],
+                [121.084360, 32.518300]
+            ]
+            var ny_areaJson = [
+                [120.981660, 32.538090],
+                [120.983010, 32.531020],
+                [120.969710, 32.536070],
+                [120.954620, 32.542270],
+                [120.939450, 32.550860],
+                [120.926170, 32.558750],
+                [120.924070, 32.559580],
+                [120.928530, 32.565440],
+                [120.934020, 32.572960],
+                [120.936290, 32.575320],
+                [120.938980, 32.574030],
+                [120.945610, 32.570860],
+                [120.949540, 32.569000],
+                [120.953540, 32.567080],
+                [120.978380, 32.555210],
+                [120.980540, 32.544240],
+                [120.981700, 32.538020]
+            ]
+
+            var sh_areaJson = [
+                [121.092850, 32.544930],
+                [121.087790, 32.530610],
+                [121.087360, 32.529370],
+                [121.083930, 32.523730],
+                [121.085130, 32.522140],
+                [121.084360, 32.518160],
+                [121.082640, 32.519530],
+                [121.062130, 32.525970],
+                [121.057580, 32.517720],
+                [121.046420, 32.520400],
+                [121.037580, 32.523300],
+                [121.010710, 32.538560],
+                [120.995690, 32.523510],
+                [120.989770, 32.529450],
+                [120.990290, 32.535240],
+                [120.981700, 32.538060],
+                [120.978360, 32.555210],
+                [120.936300, 32.575320],
+                [120.939390, 32.580810],
+                [120.933040, 32.585300],
+                [120.932520, 32.596290],
+                [120.933720, 32.596940],
+                [120.933810, 32.599180],
+                [120.934410, 32.597440],
+                [120.935270, 32.597230],
+                [120.935870, 32.598670],
+                [120.937160, 32.599540],
+                [120.937500, 32.602000],
+                [120.939300, 32.600770],
+                [120.942390, 32.603590],
+                [120.942050, 32.605540],
+                [120.943080, 32.604390],
+                [120.944450, 32.605470],
+                [120.945400, 32.604750],
+                [120.944110, 32.601640],
+                [120.946250, 32.603880],
+                [120.947970, 32.602140],
+                [120.946940, 32.600190],
+                [120.966340, 32.600480],
+                [120.989600, 32.587030],
+                [121.000160, 32.580960],
+                [121.004790, 32.577770],
+                [121.012430, 32.573940],
+                [121.018350, 32.570900],
+                [121.023760, 32.568300],
+                [121.028390, 32.565980],
+                [121.032770, 32.564250],
+                [121.039040, 32.563090],
+                [121.043070, 32.560700],
+                [121.044790, 32.557950],
+                [121.053630, 32.554550],
+                [121.092680, 32.545080],
+                [121.092850, 32.544930]
+            ]
+
+
+            var xl_1_areaJson = [
+                [121.02359349496217, 32.50469099258302],
+                [121.0163408017859, 32.491902220000014],
+                [121.0227351880774, 32.490915167082534],
+                [121.02531268618871, 32.496514485957825],
+                [121.02779362477548, 32.49600909711522],
+                [121.03074405469187, 32.50281117917699],
+                [121.0307333258558, 32.502864823357285],
+                [121.02370593823679, 32.50479601384801],
+                [121.02359349496217, 32.50469099258302]
+            ]
+            var xl_2_areaJson = [
+                [121.02532940795483, 32.49638181237588],
+                [121.03903528651692, 32.4936115055769],
+                [121.03768345317341, 32.48846166426831],
+                [121.02272745570637, 32.49086492354565],
+                [121.02270599803425, 32.49086492354565],
+                [121.02279182872273, 32.49092929656201],
+                [121.02532940795483, 32.49638181237588]
+            ]
+            var xl_3_areaJson = [
+                [121.0344591236815, 32.48333524440645],
+                [121.03351498610826, 32.48097490047334],
+                [121.03169108397813, 32.47848581050752],
+                [121.03156233794542, 32.47702668880342],
+                [121.04484463698716, 32.474880921591506],
+                [121.045896062921, 32.481146561850295],
+                [121.04516650206895, 32.48127530788301],
+                [121.0344591236815, 32.48333524440645]
+            ]
+            var xl_4_areaJson = [
+                [121.03073674132885, 32.50276278762231],
+                [121.02779704024853, 32.49596070556054],
+                [121.04736643722119, 32.491905205530024],
+                [121.0481603710896, 32.497870438379145],
+                [121.03073674132885, 32.50276278762231]
+            ]
+            var xl_5_areaJson = [
+                [121.03903528651692, 32.49345057303601],
+                [121.04731794795491, 32.49186270529919],
+                [121.04592319926716, 32.48115532691174],
+                [121.03444334468342, 32.48334400946789],
+                [121.03631016215779, 32.4855970650404],
+                [121.0366534849117, 32.48587601477795],
+                [121.03768345317341, 32.48836510474377],
+                [121.03766157649328, 32.48845713007709],
+                [121.03903528651692, 32.49345057303601]
+            ]
+            var xl_6_areaJson = [
+                [121.03165952598198, 32.47673308268058],
+                [121.04522077476128, 32.4748448075341],
+                [121.04436246787651, 32.46797835245597],
+                [121.03045789634331, 32.47098242655265],
+                [121.03061067750515, 32.471539192479945],
+                [121.03165952598198, 32.47673308268058]
+            ]
+            var xl_7_areaJson = [
+                [121.01633585637589, 32.49181824129374],
+                [121.0142115468361, 32.48782711427958],
+                [121.01704395955582, 32.4868400613621],
+                [121.0175804013588, 32.487548164542034],
+                [121.018696200309, 32.48716192644389],
+                [121.01916826909562, 32.48789148729594],
+                [121.02062739079972, 32.487247757132366],
+                [121.02088488286515, 32.48731213014872],
+                [121.02247275060196, 32.48666839998515],
+                [121.02097071355362, 32.48668985765727],
+                [121.02103508656998, 32.486046127493694],
+                [121.02069176381607, 32.48596029680522],
+                [121.02082050984879, 32.48568134706767],
+                [121.02455414479752, 32.48486595552714],
+                [121.02502621358414, 32.48523073595317],
+                [121.02534807866593, 32.48589592378886],
+                [121.0284594411232, 32.48439388674052],
+                [121.02903879827042, 32.48563843172343],
+                [121.02843798345108, 32.485981754477336],
+                [121.0291246289589, 32.48641090791972],
+                [121.03094853108902, 32.48613195818217],
+                [121.0311416501381, 32.48666839998515],
+                [121.0336092824318, 32.48660402696879],
+                [121.03633440679093, 32.48563843172343],
+                [121.03665627187272, 32.48587446611674],
+                [121.03760040944596, 32.48847084444316],
+                [121.0376433247902, 32.48847084444316],
+                [121.01633585637589, 32.49181824129374]
+            ]
+            var xl_8_areaJson = [
+                [121.02185862948956, 32.49202858714471],
+                [121.02316754748882, 32.49177109507928],
+                [121.0226954787022, 32.49084841517816],
+                [121.02149384906353, 32.491148822587824],
+                [121.0216869681126, 32.49157797603021],
+                [121.02185862948956, 32.49202858714471]
+            ]
+            var xl_9_areaJson = [
+                [121.032199173754, 32.45716935344695],
+                [121.02953842241122, 32.45819932170867],
+                [121.02765014726474, 32.45862847515105],
+                [121.02533271867587, 32.459057628593435],
+                [121.02224281389071, 32.46000176616668],
+                [121.01786544877841, 32.46189004131316],
+                [121.01486137468173, 32.463263332328786],
+                [121.0105698402579, 32.465323268852224],
+                [121.00670745927646, 32.46746903606414],
+                [121.00413253862216, 32.46961480327605],
+                [121.00147178727939, 32.472018062553396],
+                [120.9984677131827, 32.47442132183074],
+                [120.99906037662299, 32.47550380072495],
+                [121.00026200626166, 32.47520339331528],
+                [121.00081990573676, 32.47606170020005],
+                [120.99961827609809, 32.476662515019385],
+                [120.99991868350776, 32.477649567936865],
+                [121.00112031314643, 32.47730624518296],
+                [121.00193570468696, 32.47850787482163],
+                [121.00266526553901, 32.478164552067724],
+                [121.00300858829291, 32.48043906531235],
+                [121.00348065707954, 32.4802674039354],
+                [121.00309441898139, 32.482370255803076],
+                [121.00395272586616, 32.48348605475327],
+                [121.00547879804363, 32.48590963815493],
+                [121.0055646287321, 32.48640316461367],
+                [121.00792497266521, 32.48865622018618],
+                [121.01009219754924, 32.48771208261294],
+                [121.0109852683992, 32.4895241223592],
+                [121.0139035118074, 32.487861152769966],
+                [121.01720799331375, 32.48674535381977],
+                [121.01757266898777, 32.48755961181249],
+                [121.01882794280674, 32.4870929074439],
+                [121.01921139394386, 32.48773013964164],
+                [121.02067051564796, 32.48720442667472],
+                [121.02059541379555, 32.48702203646171],
+                [121.02086363469704, 32.48694693460929],
+                [121.02094946538551, 32.487354630379556],
+                [121.02247296010597, 32.4867323578881],
+                [121.02241931592567, 32.48653923883903],
+                [121.02126060163124, 32.48680745974052],
+                [121.02107821141823, 32.48604571238029],
+                [121.02072415982826, 32.486120814232706],
+                [121.02063832913979, 32.48578822031486],
+                [121.02067051564796, 32.485659474282144],
+                [121.02252660428627, 32.48531615152824],
+                [121.02394281064613, 32.48504793062675],
+                [121.02472601567848, 32.48483335390556],
+                [121.02523027097328, 32.485670203118204],
+                [121.02729020749672, 32.484886998085855],
+                [121.02865276967628, 32.484361285118936],
+                [121.02916775380714, 32.48554145708549],
+                [121.02864204084023, 32.48570238962638],
+                [121.02886734639748, 32.4862817467736],
+                [121.02963982259377, 32.48629247560966],
+                [121.0308521810685, 32.48624956026542],
+                [121.03104530011757, 32.486614340691446],
+                [121.03348074590309, 32.48652851000297],
+                [121.03349105573113, 32.4863523144348],
+                [121.03505746579583, 32.48595534750059],
+                [121.03641445405336, 32.48553465579866],
+                [121.03542740113588, 32.484622704733596],
+                [121.03468711144777, 32.48377512668489],
+                [121.03448326356263, 32.483421075094924],
+                [121.03426868684144, 32.48326014255403],
+                [121.03410775430055, 32.482884633291945],
+                [121.03401119477601, 32.48227308963655],
+                [121.03345329530092, 32.4809856293094],
+                [121.03320653207155, 32.48061012004732],
+                [121.03253061539979, 32.47984837268709],
+                [121.03223020799012, 32.479429948080764],
+                [121.03195125825258, 32.47876476024507],
+                [121.0317044950232, 32.47870038722871],
+                [121.03122169740053, 32.475867974508986],
+                [121.03051317521258, 32.47105692176308],
+                [121.03002480366786, 32.46423111493358],
+                [121.02988233233405, 32.46125582670167],
+                [121.03020677487285, 32.46077189553118],
+                [121.03032479206951, 32.460396386269096],
+                [121.03031406323345, 32.46008525002337],
+                [121.03033552090557, 32.45976338494158],
+                [121.03197145890064, 32.457905029207666],
+                [121.03215384911366, 32.4575509776177],
+                [121.03221822213001, 32.45727202788015],
+                [121.03220749329395, 32.457422231584985],
+                [121.032199173754, 32.45716935344695]
+            ]
+
+            var tx_1_areaJson = [
+                [121.01476930021609, 32.46334415000458],
+                [121.0120870912012, 32.46467452567597],
+                [121.00979112028445, 32.46585469764252],
+                [121.00803159117068, 32.46677737754364],
+                [121.00657246946658, 32.467742972789004],
+                [121.00831054090823, 32.47033935111542],
+                [121.01049107208533, 32.47314917261522],
+                [121.0111721436711, 32.47417687378133],
+                [121.01314624950606, 32.47326492271627],
+                [121.01578554317672, 32.47219203911031],
+                [121.01615032360274, 32.47279285392965],
+                [121.01684769794662, 32.4724602600118],
+                [121.01656874820907, 32.47179507217611],
+                [121.0201414506169, 32.47015356025899],
+                [121.02209409877975, 32.46929525337423],
+                [121.02379998371322, 32.468587150194296],
+                [121.0228236596318, 32.467385520555624],
+                [121.02251252338607, 32.46720313034261],
+                [121.02137526676376, 32.46578692398275],
+                [121.01971229717452, 32.4664628406545],
+                [121.01959427997787, 32.46639846763814],
+                [121.01917585537154, 32.46668814621175],
+                [121.01784547970016, 32.466355552293905],
+                [121.01703008815963, 32.466591586687215],
+                [121.01639708683211, 32.46574400863851],
+                [121.01490577861983, 32.46331929168905],
+                [121.01476930021609, 32.46334415000458]
+            ]
+            var tx_2_areaJson = [
+                [121.0065777291326, 32.467706970524006],
+                [121.00327324762625, 32.470453552555256],
+                [121.00838275104762, 32.47920714923206],
+                [121.01039977222682, 32.47875653811756],
+                [121.01100058704615, 32.4797006756908],
+                [121.01147265583278, 32.479614845002324],
+                [121.01276011615992, 32.48167478152576],
+                [121.01354248317624, 32.48154769594667],
+                [121.01427204402829, 32.484079701256725],
+                [121.01216919216061, 32.48498092348573],
+                [121.01191170009518, 32.48446593935487],
+                [121.01036932515962, 32.48532311269183],
+                [121.00996162938935, 32.48555914708514],
+                [121.01081993627412, 32.48680369206805],
+                [121.00974705266816, 32.48734013387103],
+                [121.01103451299531, 32.4895502740993],
+                [121.01401712941987, 32.48787657567401],
+                [121.01717140722138, 32.486717861379574],
+                [121.01753618764741, 32.48755471059222],
+                [121.01890947866303, 32.48710409947772],
+                [121.01850178289277, 32.48626725026507],
+                [121.01749327230317, 32.486696403707455],
+                [121.01654913472993, 32.484722297872494],
+                [121.01468231725556, 32.481203239644955],
+                [121.01365492645085, 32.479120711901594],
+                [121.01361201110662, 32.47869155845921],
+                [121.0134296208936, 32.4785091682462],
+                [121.01327941718877, 32.478080014803815],
+                [121.01291463676274, 32.476824740984846],
+                [121.01318285766423, 32.47652433357518],
+                [121.0123674661237, 32.475569467165876],
+                [121.01169154945195, 32.4744751258878],
+                [121.01148770156682, 32.474110345461774],
+                [121.01113364997686, 32.47417471847813],
+                [121.00833342376531, 32.47041962585728],
+                [121.00659535232366, 32.46770523033421],
+                [121.0065777291326, 32.467706970524006]
+            ]
+            var tx_3_areaJson = [
+                [121.02283470272387, 32.46905189078827],
+                [121.02307073711718, 32.469491773066714],
+                [121.02338187336291, 32.47006040137787],
+                [121.02369300960864, 32.47091870826264],
+                [121.02381102680529, 32.47113328498383],
+                [121.02388612865771, 32.47165899795075],
+                [121.02422945141161, 32.47217398208161],
+                [121.02357499241198, 32.47243147414704],
+                [121.02230898975695, 32.47302156013031],
+                [121.02111808895434, 32.47341852706452],
+                [121.0200130188402, 32.47377257865448],
+                [121.01853243946398, 32.474223189768985],
+                [121.01837150692309, 32.47426610511322],
+                [121.01904742359484, 32.47537117522736],
+                [121.01931564449633, 32.47584324401398],
+                [121.02039089605529, 32.47541068992818],
+                [121.02097561762054, 32.47641920051778],
+                [121.01992955610473, 32.4768912693044],
+                [121.02046063348968, 32.47772275409902],
+                [121.01926436826903, 32.47829138241018],
+                [121.01915171549041, 32.478334297754415],
+                [121.01951649591643, 32.47903703651632],
+                [121.01984908983428, 32.47947691879476],
+                [121.01917317316253, 32.479809512712606],
+                [121.01926973268706, 32.480093826868185],
+                [121.01958086893279, 32.47997580967153],
+                [121.01965060636718, 32.48017429313863],
+                [121.02007975980956, 32.48000799617971],
+                [121.02049529270286, 32.48078356969842],
+                [121.01988374904747, 32.481051790599906],
+                [121.01940631584282, 32.48118053663262],
+                [121.01927962350709, 32.48122067400355],
+                [121.01947810697419, 32.48197705694575],
+                [121.01802971410615, 32.482406210388135],
+                [121.01776685762269, 32.48247058340449],
+                [121.01832991201181, 32.483610937349226],
+                [121.01860886174936, 32.48343927597227],
+                [121.01882343847055, 32.48376114105406],
+                [121.01857667524118, 32.483889887086775],
+                [121.01943745483095, 32.485883183498245],
+                [121.02050497401888, 32.48575443746553],
+                [121.02080538142854, 32.48695070268617],
+                [121.02062835563356, 32.48702580453859],
+                [121.02064981330568, 32.48722428800569],
+                [121.01922824252779, 32.48771781446443],
+                [121.01849868167574, 32.48626942159639],
+                [121.01749017108614, 32.48668248178468],
+                [121.01458223750598, 32.48105067308022],
+                [121.01370247294909, 32.47920531327797],
+                [121.01365955760485, 32.47875470216347],
+                [121.01344498088366, 32.478432837081684],
+                [121.0129299967528, 32.47686642701699],
+                [121.01325186183459, 32.47645873124672],
+                [121.01267250468737, 32.4759866624601],
+                [121.01226480891711, 32.47545022065712],
+                [121.01149233272082, 32.4740769296415],
+                [121.01578097543162, 32.47220248065349],
+                [121.01615112027568, 32.47281402430889],
+                [121.01685385903758, 32.47245997271892],
+                [121.01659636697215, 32.47181624255535],
+                [121.02283470272387, 32.46905189078827]
+            ]
+            var tx_4_areaJson = [
+                [121.01426137860113, 32.483886406707185],
+                [121.0122014420777, 32.48500220565738],
+                [121.01181520397955, 32.48474471359195],
+                [121.00992692883307, 32.48556010513248],
+                [121.01087106640631, 32.486675904082674],
+                [121.00971235211188, 32.487362549590486],
+                [121.00992692883307, 32.487877533721345],
+                [121.00799573834234, 32.48869292526187],
+                [121.00550664837652, 32.48633258132877],
+                [121.00533498699957, 32.48568885116519],
+                [121.0041333573609, 32.48384349136295],
+                [121.00314630444342, 32.48247020034732],
+                [121.0035754578858, 32.48023860244693],
+                [121.00310338909918, 32.48023860244693],
+                [121.00254548962408, 32.47804991989078],
+                [121.00194467480475, 32.47847907333316],
+                [121.00128206442606, 32.477297767818804],
+                [120.99999460409892, 32.47759817522847],
+                [120.99962982367289, 32.47667549532735],
+                [121.00078853796732, 32.47607468050801],
+                [121.00035938452494, 32.47515200060689],
+                [120.99907192419779, 32.47543095034444],
+                [120.99849256705058, 32.4744868127712],
+                [121.00321325491679, 32.4704527704128],
+                [121.00832018088114, 32.47914312762105],
+                [121.01078781317484, 32.47912166994893],
+                [121.01093801687968, 32.47967956942403],
+                [121.01153883169901, 32.47965811175191],
+                [121.01267608832133, 32.48161075991475],
+                [121.01357731055033, 32.48161075991475],
+                [121.0142210407139, 32.4839067308315],
+                [121.01426137860113, 32.483886406707185]
+            ]
+            var tx_5_areaJson = [
+                [121.01846001982058, 32.474370711264804],
+                [121.01927541136111, 32.47578691762467],
+                [121.02030537962283, 32.475486510215],
+                [121.02103494047488, 32.47643064778824],
+                [121.01996205686892, 32.47690271657486],
+                [121.0203912103113, 32.47771810811539],
+                [121.02210782408083, 32.47720312398453],
+                [121.02343819975222, 32.47964929860611],
+                [121.02382443785037, 32.479348891196445],
+                [121.02468274473513, 32.47943472188492],
+                [121.02519772886599, 32.47913431447525],
+                [121.02562688230837, 32.47917722981949],
+                [121.02541230558718, 32.478318922934726],
+                [121.02661393522585, 32.477846854148105],
+                [121.02738641142214, 32.47793268483658],
+                [121.02725766538943, 32.476559393820956],
+                [121.02828763365115, 32.4760444096901],
+                [121.02983258604372, 32.47887682240982],
+                [121.0315921151575, 32.47801851552506],
+                [121.03050292879344, 32.47092448779407],
+                [121.02665127664805, 32.472619643891484],
+                [121.0263723269105, 32.472115388596684],
+                [121.02599681764842, 32.47127853938404],
+                [121.02616847902537, 32.4711819798595],
+                [121.02556766420604, 32.47015201159778],
+                [121.02845372110606, 32.46896111079517],
+                [121.02757395654918, 32.466826072419316],
+                [121.02689803987742, 32.465828290665776],
+                [121.02643669992686, 32.46581756182972],
+                [121.02505268007518, 32.467577090943486],
+                [121.02409781366588, 32.46593557902637],
+                [121.02364720255137, 32.46628963061634],
+                [121.02270306497813, 32.46726595469776],
+                [121.02381886392833, 32.46853195735279],
+                [121.02282108217479, 32.46901475497547],
+                [121.02341632307208, 32.470063913813696],
+                [121.02367381513751, 32.470825661173926],
+                [121.02375964582599, 32.47104023789512],
+                [121.02387766302265, 32.47165178155051],
+                [121.02423171461261, 32.47219895218955],
+                [121.02379183233417, 32.472370613566504],
+                [121.0229335254494, 32.47278903817283],
+                [121.02162460745014, 32.47328256463157],
+                [121.0203586047951, 32.47366880272971],
+                [121.01909260214008, 32.474076498499976],
+                [121.01847032964862, 32.47430180405723],
+                [121.01846001982058, 32.474370711264804]
+            ]
+            var tx_6_areaJson = [
+                [121.03630764810968, 32.48550414577222],
+                [121.03362543909479, 32.48627662196851],
+                [121.0335181507342, 32.48644828334546],
+                [121.03107197611261, 32.48666286006665],
+                [121.03090031473566, 32.48627662196851],
+                [121.02888329355646, 32.486298079640626],
+                [121.02856142847467, 32.48567580714917],
+                [121.02914078562189, 32.48550414577222],
+                [121.02866871683527, 32.484345431477784],
+                [121.02529986231256, 32.48567580714917],
+                [121.0247848781817, 32.484817500264406],
+                [121.02270348398615, 32.48526811137891],
+                [121.02077229349543, 32.485568518788575],
+                [121.02083666651178, 32.48597621455884],
+                [121.02102978556086, 32.48599767223096],
+                [121.02128727762629, 32.48666286006665],
+                [121.02255328028131, 32.486598487050294],
+                [121.0225318226092, 32.48674869075513],
+                [121.02102978556086, 32.48737096324658],
+                [121.02053625910212, 32.48576163783765],
+                [121.01952774851252, 32.485847468526124],
+                [121.01862652628351, 32.48389482036328],
+                [121.01886256067682, 32.48372315898633],
+                [121.01866944162775, 32.483551497609376],
+                [121.01841194956232, 32.483572955281495],
+                [121.01770384638239, 32.48243569865918],
+                [121.01952774851252, 32.48198508754468],
+                [121.0192917141192, 32.48123406902051],
+                [121.02045042841364, 32.48078345790601],
+                [121.02010710565973, 32.48013972774243],
+                [121.01967795221735, 32.48016118541455],
+                [121.01959212152887, 32.48003243938184],
+                [121.01931317179132, 32.480075354726075],
+                [121.01918442575861, 32.47990369334912],
+                [121.01978524057795, 32.47949599757886],
+                [121.01920020475669, 32.4784036200754],
+                [121.02046620741172, 32.47763114387911],
+                [121.02198970213217, 32.47711615974825],
+                [121.02338445081992, 32.47951941902559],
+                [121.0238136042623, 32.4793048423044],
+                [121.02465045347495, 32.479412130665],
+                [121.0249294032125, 32.479197553943806],
+                [121.02563750639243, 32.47915463859957],
+                [121.02535855665488, 32.47836070473116],
+                [121.02658164396567, 32.47788863594454],
+                [121.0273970355062, 32.47788863594454],
+                [121.02720391645713, 32.476429514240436],
+                [121.02737557783408, 32.47630076820772],
+                [121.02825534239096, 32.476000360798054],
+                [121.02980029478354, 32.4788542311899],
+                [121.03153836622519, 32.47810321266573],
+                [121.0319726745816, 32.4785300990125],
+                [121.03243659198917, 32.47978423928367],
+                [121.03312323749698, 32.480342138758765],
+                [121.03393862903751, 32.481801260462866],
+                [121.0341532057587, 32.48300289010154],
+                [121.03441069782413, 32.48326038216697],
+                [121.03578398883975, 32.484848249903784],
+                [121.03621314228214, 32.48527740334617],
+                [121.03630764810968, 32.48550414577222]
+            ]
+            var tx_7_areaJson = [
+                [121.01939795495976, 32.47821195392324],
+                [121.02040646554936, 32.477675512120264],
+                [121.0198914814185, 32.47682793407156],
+                [121.01960180284489, 32.47699959544851],
+                [121.01950524332035, 32.47682793407156],
+                [121.01923702241886, 32.47699959544851],
+                [121.01909754755009, 32.47675283221914],
+                [121.0186683941077, 32.476903035923975],
+                [121.01907608987797, 32.4777720716448],
+                [121.01850746156681, 32.47804029254629],
+                [121.01863620759953, 32.47857673434927],
+                [121.01925848009098, 32.47828705577566],
+                [121.01939795495976, 32.47821195392324]
+            ]
+            var tx_8_areaJson = [
+                [120.97860863763644, 32.48814350315093],
+                [120.98208478051974, 32.48569732852935],
+                [120.98347952920749, 32.486298143348684],
+                [120.98388722497775, 32.48593336292266],
+                [120.98457387048556, 32.4854183787918],
+                [120.98536780435397, 32.4853110904312],
+                [120.98684838373019, 32.48533254810332],
+                [120.98807147104098, 32.48509651371001],
+                [120.98850062448336, 32.48443132587432],
+                [120.98858645517184, 32.48370176502227],
+                [120.98759940225436, 32.48342281528472],
+                [120.98695567209079, 32.482993661842336],
+                [120.98656943399264, 32.48288637348174],
+                [120.98676255304171, 32.48219972797393],
+                [120.987535029238, 32.481749116859426],
+                [120.98792126733615, 32.48123413272857],
+                [120.98802855569674, 32.48061186023711],
+                [120.98845770913913, 32.480053960762014],
+                [120.98886540490939, 32.47889524646758],
+                [120.98940184671237, 32.4784660930252],
+                [120.99023869592502, 32.47814422794341],
+                [120.99090388376071, 32.47844463535308],
+                [120.9914617832358, 32.478745042762746],
+                [120.9917836483176, 32.47861629673003],
+                [120.99189093667819, 32.47762924381255],
+                [120.99186947900607, 32.47537618824004],
+                [120.99186947900607, 32.47481828876494],
+                [120.99238446313693, 32.474517881355276],
+                [120.99262049753024, 32.4738741511917],
+                [120.99292090493991, 32.47338062473296],
+                [120.99354317743136, 32.475526391944875],
+                [120.9954958255942, 32.47494703479766],
+                [120.99577477533175, 32.4749899501419],
+                [120.9965043361838, 32.476019918403615],
+                [120.99697640497043, 32.47586971469878],
+                [120.99753430444552, 32.4753332728958],
+                [120.9986286457236, 32.47423893161773],
+                [120.99914362985446, 32.47539764591216],
+                [121.00025942880465, 32.475032865486135],
+                [121.00081732827975, 32.47608429141997],
+                [120.99970152932956, 32.47657781787871],
+                [120.9999804790671, 32.477543413124074],
+                [121.00122502405002, 32.477264463386526],
+                [121.00163271982028, 32.478015481910695],
+                [121.00182541986133, 32.47838645698156],
+                [121.00270518441822, 32.478021676555535],
+                [121.00300559182789, 32.480489308849236],
+                [121.0032416262212, 32.48244195701208],
+                [121.00532507411374, 32.485798645829924],
+                [121.00558256617917, 32.48646383366562],
+                [121.00626921168698, 32.48715047917343],
+                [121.00618338099851, 32.487493801927336],
+                [121.00656961909665, 32.48747234425522],
+                [121.00710606089963, 32.48792295536972],
+                [121.00442385188474, 32.48910312733627],
+                [121.00227808467282, 32.49056224904037],
+                [121.00249266139402, 32.49120597920395],
+                [121.00174164286985, 32.49163513264633],
+                [121.00309347621335, 32.49382381520248],
+                [121.00277161113156, 32.49459629139877],
+                [121.00184893123044, 32.49667768559433],
+                [121.00131248942746, 32.49714975438095],
+                [121.00328659526242, 32.497729111528166],
+                [121.00290035716428, 32.498029518937834],
+                [121.00317930690183, 32.498523045396574],
+                [121.00165581218137, 32.499231148576506],
+                [121.00268578044309, 32.50038986287094],
+                [121.00221371165647, 32.501248169755705],
+                [121.00320076457395, 32.50195627293564],
+                [121.00300764552487, 32.502492714738615],
+                [121.00251411906613, 32.50287895283676],
+                [121.00167726985349, 32.50262146077133],
+                [121.00103353968991, 32.501999188279875],
+                [121.0004541825427, 32.50105505070663],
+                [121.0002396058215, 32.50069027028061],
+                [120.99959587565793, 32.50038986287094],
+                [120.99925255290403, 32.50019674382187],
+                [120.99320148936643, 32.50330810627914],
+                [120.99330877772702, 32.503715802049406],
+                [120.99307274333371, 32.503715802049406],
+                [120.99298691264524, 32.50335102162338],
+                [120.99144196025266, 32.504230786180266],
+                [120.99174236766233, 32.50457410893417],
+                [120.99206423274411, 32.505475331163176],
+                [120.9919354867114, 32.50609760365463],
+                [120.9914848755969, 32.50620489201523],
+                [120.99084114543332, 32.506247807359465],
+                [120.99021887294187, 32.5062907227037],
+                [120.98993992320432, 32.50586156926132],
+                [120.98993992320432, 32.5052822121141],
+                [120.98989700786008, 32.50485305867172],
+                [120.98500465861692, 32.506977368211516],
+                [120.98496174327268, 32.50693445286728],
+                [120.9849832009448, 32.50689153752304],
+                [120.98436092845334, 32.50478868565536],
+                [120.98067020884885, 32.493995476579435],
+                [120.97865318766965, 32.48815898976303],
+                [120.97867464534177, 32.48818044743515],
+                [120.97860863763644, 32.48814350315093]
+            ]
+            var ga_1_areaJson = [
+                [120.98963878253062, 32.5047217422224],
+                [120.98989627459605, 32.50519381100902],
+                [120.98993918994029, 32.506137948582264],
+                [120.99079749682505, 32.506352525303456],
+                [120.99195621111949, 32.50626669461498],
+                [120.99191329577525, 32.50523672635326],
+                [120.99139831164439, 32.50429258878002],
+                [120.99281451800425, 32.503391366551014],
+                [120.99324367144663, 32.503648858616444],
+                [120.99358699420054, 32.50321970517406],
+                [120.99431655505259, 32.5027047210432],
+                [120.99543235400279, 32.50218973691234],
+                [120.99654815295298, 32.50171766812572],
+                [120.99929473498423, 32.50030146176586],
+                [121.00028178790171, 32.50073061520824],
+                [121.0007109413441, 32.501588922093006],
+                [121.00169799426158, 32.50253305966625],
+                [121.00225589373667, 32.50283346707592],
+                [121.0030712852772, 32.50244722897777],
+                [121.00281379321177, 32.501631837437245],
+                [121.0021700630482, 32.501116853306385],
+                [121.0025133858021, 32.500344377110096],
+                [121.00212714770396, 32.499872308323475],
+                [121.00182674029429, 32.4992285781599],
+                [121.00247047045787, 32.498885255405995],
+                [121.00320003130992, 32.49854193265209],
+                [121.00298545458872, 32.49794111783275],
+                [121.00199840167124, 32.497383218357655],
+                [121.00144050219615, 32.49695406491527],
+                [121.00028178790171, 32.49678240353832],
+                [120.99963805773814, 32.496095758030506],
+                [120.99882266619761, 32.495409112522694],
+                [120.99912307360728, 32.49497995908031],
+                [120.99770686724742, 32.49352083737621],
+                [120.99693439105113, 32.4937354140974],
+                [120.99663398364146, 32.49330626065502],
+                [120.9946598778065, 32.491417985508534],
+                [120.9944453010853, 32.49094591672191],
+                [120.99229953387339, 32.49184713895092],
+                [120.9926428566273, 32.49274836117992],
+                [120.99259994128306, 32.49343500668773],
+                [120.99212787249644, 32.49356375272045],
+                [120.99315784075816, 32.494121652195545],
+                [120.99225661852915, 32.49528036648998],
+                [120.98835132220347, 32.49729738766918],
+                [120.9874930153187, 32.497898202488514],
+                [120.98813674548228, 32.499099832127186],
+                [120.98869464495738, 32.49991522366771],
+                [120.98899505236704, 32.50081644589672],
+                [120.98929545977671, 32.5018034988142],
+                [120.98959586718638, 32.5027047210432],
+                [120.9897246132191, 32.50446425015697],
+                [120.98981044390757, 32.50480757291088],
+                [120.9897246132191, 32.504893403599354],
+                [120.98963878253062, 32.5047217422224]
+            ]
+            var ga_2_areaJson = [
+                [120.9946762853166, 32.491040512471834],
+                [120.9946762853166, 32.4913409198815],
+                [120.99587791495527, 32.492542549520174],
+                [120.99665039115156, 32.4933579410607],
+                [120.99707954459394, 32.49365834847037],
+                [120.99823825888838, 32.493744179158845],
+                [120.99879615836348, 32.49438790932242],
+                [120.99888198905195, 32.49516038551871],
+                [120.99948280387129, 32.49606160774771],
+                [121.00029819541182, 32.49679116859976],
+                [121.00141399436201, 32.497005745320955],
+                [121.00201480918135, 32.49614743843619],
+                [121.00261562400068, 32.49494580879752],
+                [121.00295894675459, 32.494001671224275],
+                [121.00227230124678, 32.492757126241365],
+                [121.00192897849287, 32.49168424263541],
+                [121.00248687796797, 32.490997597127595],
+                [121.00283020072187, 32.49005345955435],
+                [121.00489013724531, 32.48863725319449],
+                [121.00557936021013, 32.48858247546639],
+                [121.00546134301348, 32.48817477969612],
+                [121.00504291840716, 32.48823915271248],
+                [121.00459488474966, 32.487487000640506],
+                [121.00382240855338, 32.48787323873865],
+                [121.00313576304556, 32.48697201650965],
+                [121.00266369425894, 32.486242455657596],
+                [121.00103291117789, 32.48705784719812],
+                [121.00090416514517, 32.48710076254236],
+                [121.00133331858756, 32.488001984771365],
+                [121.00017460429312, 32.48791615408289],
+                [120.99815758311392, 32.48813073080408],
+                [120.99682720744254, 32.48817364614832],
+                [120.99562557780386, 32.4877015773617],
+                [120.99584015452506, 32.486800355132694],
+                [120.99506767832877, 32.486757439788455],
+                [120.993308149215, 32.48761574667322],
+                [120.99287899577261, 32.48791615408289],
+                [120.99382313334586, 32.48890320700037],
+                [120.99356564128043, 32.48920361441004],
+                [120.99425228678824, 32.49010483663904],
+                [120.99450977885367, 32.491006058868045],
+                [120.99459560954215, 32.49134938162195],
+                [120.99468144023062, 32.49130646627771],
+                [120.9946762853166, 32.491040512471834]
+            ]
+            var ga_3_areaJson = [
+                [121.00561617787231, 32.48857990504978],
+                [121.00696801121582, 32.488000547902566],
+                [121.00692509587158, 32.487743055837136],
+                [121.00641011174072, 32.487485563771706],
+                [121.006281365708, 32.48735681773899],
+                [121.00595950062622, 32.48692766429661],
+                [121.00546597416748, 32.48634830714939],
+                [121.00542305882324, 32.485983526723366],
+                [121.00462912495483, 32.48469606639622],
+                [121.0042643445288, 32.48413816692112],
+                [121.00383519108642, 32.48343006374119],
+                [121.00334166462768, 32.482485926167946],
+                [121.00314854557861, 32.48139158488987],
+                [121.0030197995459, 32.480254328267556],
+                [121.00271939213623, 32.47810856105564],
+                [121.00186108525146, 32.47836605312107],
+                [121.0013461011206, 32.47740045787571],
+                [120.99709748204101, 32.477808153645974],
+                [120.99729060109009, 32.47870937587498],
+                [120.99587439473022, 32.479288733022194],
+                [120.99578856404175, 32.47969642879246],
+                [120.99544524128784, 32.479782259480935],
+                [120.99527357991089, 32.4801899552512],
+                [120.9932780164038, 32.48042598964451],
+                [120.99334238942016, 32.48081222774265],
+                [120.99329947407593, 32.481026804463845],
+                [120.99347113545288, 32.48113409282444],
+                [120.99355696614136, 32.48132721187351],
+                [120.99379300053467, 32.481305754201394],
+                [120.99688290531982, 32.48347297908543],
+                [120.99701165135254, 32.4835588097739],
+                [120.99664687092651, 32.484266912953835],
+                [120.99593876774658, 32.48435274364231],
+                [120.99583147938598, 32.486777460591775],
+                [120.99563836033691, 32.48757139446018],
+                [120.9958529370581, 32.48782888652561],
+                [120.99653958256592, 32.48806492091892],
+                [120.99692582066406, 32.48821512462376],
+                [120.9977626698767, 32.48810783626316],
+                [120.99812745030273, 32.48810783626316],
+                [120.99879263813843, 32.488022005574685],
+                [120.99950074131836, 32.48795763255833],
+                [121.00053070958008, 32.48795763255833],
+                [121.00113152439941, 32.48795763255833],
+                [121.00128172810425, 32.48795763255833],
+                [121.00093840535034, 32.48712078334568],
+                [121.00183962757934, 32.48664871455906],
+                [121.00261210377563, 32.48630539180515],
+                [121.00323437626709, 32.48705641032932],
+                [121.00370644505371, 32.487785971181374],
+                [121.00385664875854, 32.48791471721409],
+                [121.00424288685669, 32.4877001404929],
+                [121.00460766728271, 32.487485563771706],
+                [121.00499390538086, 32.48810783626316],
+                [121.00531577046264, 32.48819366695164],
+                [121.00542305882324, 32.48821512462376],
+                [121.00561617787231, 32.48857990504978]
+            ]
+            var ga_4_areaJson = [
+                [120.98344319396223, 32.48632787123267],
+                [120.98400109343733, 32.485641225724855],
+                [120.985202723076, 32.48534081831519],
+                [120.98670476012434, 32.485126241593996],
+                [120.98734849028791, 32.48529790297095],
+                [120.9877776437303, 32.487400754838625],
+                [120.98906510405745, 32.4889457072312],
+                [120.98940842681135, 32.487658246904054],
+                [120.99039547972883, 32.487615331559816],
+                [120.98992341094221, 32.48722909346167],
+                [120.99018090300764, 32.48679994001929],
+                [120.99082463317121, 32.48632787123267],
+                [120.99095337920393, 32.486671193986574],
+                [120.99206917815413, 32.48679994001929],
+                [120.99228375487532, 32.486671193986574],
+                [120.99245541625227, 32.486628278642335],
+                [120.99404328398909, 32.48675702467505],
+                [120.9938287072679, 32.48722909346167],
+                [120.9930562310716, 32.48782990828101],
+                [120.9936141305467, 32.488602384477296],
+                [120.99378579192366, 32.48920319929663],
+                [120.99438660674299, 32.490404828935304],
+                [120.99442952208723, 32.490919813066164],
+                [120.99241250090803, 32.49169228926245],
+                [120.99249833159651, 32.492893918901125],
+                [120.9921550088426, 32.49358056440894],
+                [120.9930562310716, 32.49422429457251],
+                [120.99258416228498, 32.495125516801515],
+                [120.99099629454817, 32.49602673903052],
+                [120.98936551146711, 32.49679921522681],
+                [120.98799222045149, 32.49752877607886],
+                [120.98734849028791, 32.497915014177],
+                [120.98460190825666, 32.49667046919409],
+                [120.9840869241258, 32.49628423109595],
+                [120.98365777068342, 32.49508260145728],
+                [120.98382943206038, 32.493666395097414],
+                [120.98400109343733, 32.49220727339331],
+                [120.984301500847, 32.49143479719702],
+                [120.9848594003221, 32.49057649031226],
+                [120.98541729979719, 32.489632352739015],
+                [120.98524563842024, 32.48898862257544],
+                [120.98395817809309, 32.48701451674048],
+                [120.98344319396223, 32.48632787123267]
+            ]
+            var ga_5_areaJson = [
+                [120.98742811854233, 32.48531565667866],
+                [120.98822205241073, 32.48501524926899],
+                [120.98850100214828, 32.48402819635151],
+                [120.9885224598204, 32.483620500581246],
+                [120.98779289896835, 32.48347029687641],
+                [120.98719208414902, 32.48327717782734],
+                [120.98669855769027, 32.482869482057076],
+                [120.98659126932968, 32.48246178628681],
+                [120.98719208414902, 32.48181805612324],
+                [120.98785727198471, 32.48158202172993],
+                [120.98800747568954, 32.48072371484516],
+                [120.98828642542709, 32.480165815370064],
+                [120.98865120585312, 32.479629373567086],
+                [120.9889730709349, 32.47872815133808],
+                [120.98948805506576, 32.47836337091206],
+                [120.99004595454086, 32.4781917095351],
+                [120.99051802332748, 32.47825608255146],
+                [120.99114029581894, 32.478620862977486],
+                [120.99150507624496, 32.47877106668232],
+                [120.99184839899887, 32.47844920160053],
+                [120.99182694132675, 32.47778401376484],
+                [120.99184839899887, 32.47720465661762],
+                [120.99193422968735, 32.47611031533955],
+                [120.99182694132675, 32.47557387353657],
+                [120.99184839899887, 32.475144720094185],
+                [120.99184839899887, 32.474930143372994],
+                [120.99247067149032, 32.474393701570015],
+                [120.99268524821152, 32.47383580209492],
+                [120.99285690958847, 32.47357831002949],
+                [120.99313585932602, 32.47396454812763],
+                [120.99317877467026, 32.47432932855366],
+                [120.99337189371933, 32.47501597406147],
+                [120.99352209742416, 32.475423669831734],
+                [120.99377958948959, 32.47553095819233],
+                [120.994573523358, 32.47523055078266],
+                [120.99556057627548, 32.47497305871723],
+                [120.99586098368515, 32.47505888940571],
+                [120.99605410273422, 32.47559533120869],
+                [120.99652617152084, 32.475895738618355],
+                [120.99695532496322, 32.475938653962594],
+                [120.9973844784056, 32.475402212159615],
+                [120.99841444666733, 32.47447953225849],
+                [120.99865048106064, 32.47422204019306],
+                [120.99912254984726, 32.475402212159615],
+                [121.00023834879745, 32.475166177766305],
+                [121.00019543345321, 32.47501597406147],
+                [121.00049584086288, 32.475402212159615],
+                [121.00073187525619, 32.47604594232319],
+                [121.00060312922348, 32.47630343438862],
+                [120.99993794138778, 32.47649655343769],
+                [120.9997233646666, 32.476646757142525],
+                [120.99993794138778, 32.477419233338814],
+                [120.9970411556517, 32.4778483867812],
+                [120.99725573237289, 32.478663778321724],
+                [120.99676220591415, 32.478899812715035],
+                [120.99624722178329, 32.479114389436226],
+                [120.99586098368515, 32.4792002201247],
+                [120.99573223765243, 32.47960791589497],
+                [120.99538891489853, 32.47977957727192],
+                [120.99530308421005, 32.48018727304218],
+                [120.99341480906357, 32.48044476510761],
+                [120.99326460535873, 32.48104557992695],
+                [120.9934577244078, 32.48134598733662],
+                [120.9940156238829, 32.48156056405781],
+                [120.99470226939071, 32.48201117517231],
+                [120.99622576411117, 32.48310551645039],
+                [120.99684803660263, 32.483641958253365],
+                [120.99646179850448, 32.48430714608906],
+                [120.99607556040634, 32.484371519105416],
+                [120.99579661066879, 32.48475775720356],
+                [120.99588244135727, 32.48621687890766],
+                [120.99510996516098, 32.48675332071064],
+                [120.99386542017807, 32.48728976251362],
+                [120.9940156238829, 32.48673186303852],
+                [120.9928998249327, 32.486624574677926],
+                [120.99214880640854, 32.4867104053664],
+                [120.99169819529403, 32.48675332071064],
+                [120.99094717676986, 32.48668894769428],
+                [120.99079697306503, 32.48632416726826],
+                [120.9901961582457, 32.4867104053664],
+                [120.9899815815245, 32.487118101136666],
+                [120.99038927729477, 32.48759016992329],
+                [120.98950951273788, 32.48767600061176],
+                [120.98903744395126, 32.488920545594674],
+                [120.98783581431259, 32.48748288156269],
+                [120.98768561060776, 32.4867104053664],
+                [120.9876212375914, 32.48649582864521],
+                [120.98742811854233, 32.48531565667866]
+            ]
+            var ga_6_areaJson = [
+                [120.99141987406851, 32.518976134475345],
+                [120.98867329203726, 32.51661579054224],
+                [120.98824413859488, 32.515671652969],
+                [120.9852400644982, 32.507217330154056],
+                [120.98893078410269, 32.50541488569605],
+                [120.98991783702017, 32.50489990156519],
+                [120.98991783702017, 32.506230277236575],
+                [120.9907332285607, 32.50640193861353],
+                [120.99202068888785, 32.50635902326929],
+                [120.99176319682242, 32.50429908674585],
+                [120.99292191111685, 32.50335494917261],
+                [120.99304250577052, 32.50394390160808],
+                [120.99364332058985, 32.503343086788746],
+                [120.99518827298243, 32.50231311852703],
+                [120.99905065396388, 32.50025318200359],
+                [121.00068143704493, 32.50145481164226],
+                [121.00222638943751, 32.503085594723316],
+                [121.00351384976466, 32.5020556264616],
+                [121.00231222012599, 32.50154064233074],
+                [121.00256971219142, 32.50008152062664],
+                [121.00179723599513, 32.49905155236492],
+                [121.00282720425685, 32.49879406029949],
+                [121.00368551114161, 32.49827907616863],
+                [121.0029988656338, 32.497849922726246],
+                [121.0029988656338, 32.49742076928386],
+                [121.00128225186427, 32.497163277218434],
+                [121.00359968045314, 32.493644218990895],
+                [121.00325635769923, 32.49355838830242],
+                [121.00179723599513, 32.49124095971355],
+                [121.0029988656338, 32.49098346764812],
+                [121.00291303494532, 32.49046848351726],
+                [121.00668958523829, 32.488151054928395],
+                [121.00806287625392, 32.48875186974773],
+                [121.01020864346583, 32.487636070797535],
+                [121.01098111966212, 32.48952434594402],
+                [121.01389936307032, 32.488151054928395],
+                [121.02402738431056, 32.50523136193523],
+                [121.02376989224513, 32.50548885400066],
+                [120.99141987406851, 32.518976134475345]
+            ]
+            var gz_1_areaJson = [
+                [120.991153392608, 32.51042309683267],
+                [120.98991957646115, 32.506249579605495],
+                [120.99078861218197, 32.50645342749063],
+                [120.99192586880429, 32.50635686796609],
+                [120.99181042906464, 32.504381628583324],
+                [120.99301205870331, 32.50348040635432],
+                [120.9931541110291, 32.5038547820686],
+                [120.9942699099793, 32.502996475183835],
+                [120.99543377918775, 32.50512924646408],
+                [121.00043599424852, 32.50300380337648],
+                [121.0021816933092, 32.50606235188027],
+                [121.00226752399767, 32.506105267224505],
+                [121.00735173526586, 32.50369913420956],
+                [121.0092507392484, 32.50726110778134],
+                [121.0103691156556, 32.506959566823866],
+                [121.01184969503183, 32.510500082723524],
+                [121.00119853828168, 32.51477975476349],
+                [120.99557662818647, 32.51722592938507],
+                [120.99480415199018, 32.5154664002713],
+                [120.99403167579389, 32.51340646374786],
+                [120.99364543769575, 32.5125481568631],
+                [120.99845195625043, 32.510831543093566],
+                [120.99613452766157, 32.50692624676788],
+                [120.99561954353071, 32.50718373883331],
+                [120.991153392608, 32.51042309683267]
+            ]
+            var gz_2_areaJson = [
+                [120.99541820969368, 32.50494984178108],
+                [120.99425949539925, 32.503018651290354],
+                [120.99885143723274, 32.50040081529182],
+                [121.00241341080452, 32.50306156663459],
+                [121.003400463722, 32.50216034440559],
+                [121.00237049546028, 32.50143078355354],
+                [121.002499241493, 32.50018623857063],
+                [121.00176968064095, 32.49911335496467],
+                [121.00378670182015, 32.498512540145335],
+                [121.00292839493538, 32.497267995162424],
+                [121.00923695053841, 32.49885586289924],
+                [121.01022400345589, 32.498727116866526],
+                [121.01545967545296, 32.50881222276252],
+                [121.01176895584847, 32.51044300584358],
+                [121.01039566483284, 32.506966862960276],
+                [121.00919403519417, 32.50709560899299],
+                [121.0074345060804, 32.50383404283088],
+                [121.00245632614876, 32.505979810042795],
+                [121.00043930496956, 32.50288990525764],
+                [120.99541820969368, 32.50494984178108]
+            ]
+            var gz_3_areaJson = [
+                [121.00160864334805, 32.496743830856715],
+                [121.00896862488491, 32.49856773298684],
+                [121.0091832016061, 32.498975428757106],
+                [121.01014879685147, 32.49869647901956],
+                [121.01089981537564, 32.498267325577174],
+                [121.01014879685147, 32.496722373184596],
+                [121.01107147675259, 32.49620738905374],
+                [121.00989130478604, 32.49507013243142],
+                [121.0161702513379, 32.49209711129512],
+                [121.01385282274903, 32.48827764565791],
+                [121.0110204100293, 32.48935052926387],
+                [121.01016210314454, 32.48776266152705],
+                [121.00797342058839, 32.48870679910029],
+                [121.00694345232667, 32.48827764565791],
+                [121.0029523253125, 32.4905092435583],
+                [121.00290940996827, 32.49102422768916],
+                [121.00200818773926, 32.49149629647578],
+                [121.00346730944337, 32.493599148343456],
+                [121.0035102247876, 32.493642063687695],
+                [121.00160864334805, 32.496743830856715]
+            ]
+            var gz_4_areaJson = [
+                [121.02398899536831, 32.505224975761806],
+                [121.01527718048794, 32.50878694933358],
+                [121.01009215620614, 32.498634069777815],
+                [121.01099337843515, 32.49818345866331],
+                [121.01017798689462, 32.49672433695921],
+                [121.0110577514515, 32.49627372584471],
+                [121.00981320646859, 32.495115011550276],
+                [121.01622905043222, 32.49208947978148],
+                [121.01622905043222, 32.492110937453596],
+                [121.02398899536831, 32.505224975761806]
+            ]
+            var gz_5_areaJson = [
+                [120.9178186335149, 32.54252343894567],
+                [120.94538616826596, 32.53066580800424],
+                [120.94239434797399, 32.52258698685167],
+                [120.94240755448337, 32.522582987165976],
+                [120.94188086511379, 32.52120042757084],
+                [120.93799915513493, 32.510718634673886],
+                [120.93091741717966, 32.51315419977006],
+                [120.93091129238952, 32.51312211753605],
+                [120.92893638463705, 32.5138355203365],
+                [120.90968018285169, 32.520458150720366],
+                [120.9178186335149, 32.54252343894567]
+            ]
+            var xb_1_areaJson = [
+                [120.92049132937468, 32.51680127807767],
+                [120.92600852856631, 32.514868954039144],
+                [120.92766076931949, 32.52079127154403],
+                [120.93274623761172, 32.51903174243026],
+                [120.9347418011188, 32.524868229246664],
+                [120.9238627613544, 32.528065422392416],
+                [120.92062265286441, 32.51868841967635],
+                [120.92049132937468, 32.51680127807767]
+            ]
+            var xb_2_areaJson = [
+                [120.93482979025627, 32.52481562284988],
+                [120.9327269383886, 32.518678728623804],
+                [120.92774875845696, 32.52082449583572],
+                [120.9263325520971, 32.5157604852156],
+                [120.92594631399895, 32.51481634764236],
+                [120.93774803366448, 32.51086813597244],
+                [120.9425974675634, 32.52254110960525],
+                [120.93852050986077, 32.523656908555445],
+                [120.93482979025627, 32.52481562284988]
+            ]
+            var xb_3_areaJson = [
+                [120.91789442728825, 32.542350356728036],
+                [120.91557699869938, 32.53608471646925],
+                [120.92845160197086, 32.53170735135694],
+                [120.92750746439762, 32.52681500211378],
+                [120.93428808878727, 32.52501255765577],
+                [120.9348889036066, 32.52973324552198],
+                [120.92922407816715, 32.53205067411085],
+                [120.93059736918278, 32.537114684730966],
+                [120.91789442728825, 32.542350356728036]
+            ]
+            var xb_4_areaJson = [
+                [120.94236732134814, 32.522593716002035],
+                [120.94535251522971, 32.53066066717103],
+                [120.93080421353294, 32.536947765101935],
+                [120.93035360241844, 32.53711942647889],
+                [120.92898031140281, 32.53181938146546],
+                [120.93528886700584, 32.52988819097474],
+                [120.93391557599021, 32.52514604543641],
+                [120.94236732134814, 32.522593716002035]
+            ]
+            var xb_5_areaJson = [
+                [120.915509943474, 32.53631538644453],
+                [120.92894244622059, 32.53159469857832],
+                [120.92756915520496, 32.52678818002363],
+                [120.91357875298328, 32.53125137582441],
+                [120.91490912865467, 32.534169619232614],
+                [120.915509943474, 32.53631538644453]
+            ]
+            var xb_6_areaJson = [
+                [120.93933074648727, 32.52802447082279],
+                [120.9398028152739, 32.527970826642495],
+                [120.9394809501921, 32.52691940070866],
+                [120.93907325442184, 32.52705887557743],
+                [120.93933074648727, 32.52802447082279]
+            ]
+            var xb_7_areaJson = [
+                [120.9359648884296, 32.525691667414236],
+                [120.936758822298, 32.52558974347167],
+                [120.93660325417514, 32.52510694584899],
+                [120.93595415959354, 32.525214234209585],
+                [120.9359648884296, 32.525691667414236]
+            ]
+            var xb_8_areaJson = [
+                [120.98209467133977, 32.53785186106854],
+                [120.98926153382756, 32.53613524729901],
+                [120.99059190949895, 32.5348907023161],
+                [120.98977651795842, 32.529483368942074],
+                [120.99471178254582, 32.52463393504315],
+                [120.99518385133244, 32.52407603556805],
+                [120.99139914966042, 32.52028762289122],
+                [120.98770843005593, 32.52080260702208],
+                [120.97577796435769, 32.52243339010313],
+                [120.97114310717996, 32.52320586629942],
+                [120.96341834521706, 32.52517997213438],
+                [120.95818267322, 32.52672492452696],
+                [120.94565139270242, 32.53101645895079],
+                [120.93672500110085, 32.53444968648985],
+                [120.9405873820823, 32.54989921041563],
+                [120.95457778430398, 32.54226027914122],
+                [120.97028480029519, 32.535822977505475],
+                [120.98324523425515, 32.53093062826231],
+                [120.9830735728782, 32.530844797573835],
+                [120.98324523425515, 32.53118812032774],
+                [120.98209467133977, 32.53785186106854]
+            ]
+            var zx_1_areaJson = [
+                [120.97048833392431, 32.523481415393555],
+                [120.97096040271093, 32.52727942335864],
+                [120.97147538684179, 32.52901749480029],
+                [120.97196891330053, 32.53180699217578],
+                [120.9722693207102, 32.533223198535644],
+                [120.97269847415258, 32.53489689696094],
+                [120.97812726519872, 32.5328369604375],
+                [120.97874953769018, 32.53260092604419],
+                [120.97681834719945, 32.52212958205005],
+                [120.97679688952734, 32.52212958205005],
+                [120.97048833392431, 32.523481415393555]
+            ]
+            var zx_2_areaJson = [
+                [120.9667412879305, 32.53728406298419],
+                [120.96588298104574, 32.53653304446002],
+                [120.96513196252157, 32.53541724550983],
+                [120.9643809439974, 32.53076093065997],
+                [120.96317931435873, 32.52526776659747],
+                [120.97041054986288, 32.52333657610675],
+                [120.97096844933797, 32.52730624544879],
+                [120.97139760278036, 32.52891557085773],
+                [120.97259923241903, 32.53481643069049],
+                [120.96918746255209, 32.536232637050354],
+                [120.9667412879305, 32.53728406298419]
+            ]
+            var zx_3_areaJson = [
+                [120.96111669562627, 32.539550529601776],
+                [120.96062316916753, 32.53753350842258],
+                [120.95813407920171, 32.52674029934665],
+                [120.96321954749395, 32.52528117764255],
+                [120.96437826178838, 32.53077434170505],
+                [120.96508636496831, 32.535602317931854],
+                [120.96673860572149, 32.53725455868503],
+                [120.96111669562627, 32.539550529601776]
+            ]
+            var zx_4_areaJson = [
+                [120.95167511038984, 32.52916811361853],
+                [120.95802658133711, 32.526850685029665],
+                [120.96105211310591, 32.53953216925208],
+                [120.95442169242109, 32.54199980154578],
+                [120.9527479939958, 32.53391025915686],
+                [120.95167511038984, 32.52916811361853]
+            ]
+            var zx_5_areaJson = [
+                [120.94936862014104, 32.54501955378314],
+                [120.94563498519231, 32.53102915156146],
+                [120.9515573026972, 32.52909796107074],
+                [120.95443263076116, 32.54227297175189],
+                [120.94936862014104, 32.54501955378314]
+            ]
+            var zx_6_areaJson = [
+                [120.94063224637152, 32.54975180071222],
+                [120.94934406125189, 32.54507402819025],
+                [120.94552459561469, 32.53104071062433],
+                [120.93672695004584, 32.534473938163394],
+                [120.94063224637152, 32.54975180071222]
+            ]
+            var zx_7_areaJson = [
+                [120.94097215365238, 32.53373107805868],
+                [120.94154078196354, 32.53368816271444],
+                [120.94125110338993, 32.53343067064901],
+                [120.94095069598026, 32.533248280436],
+                [120.94097215365238, 32.53373107805868]
+            ]
+            var zx_8_areaJson = [
+                [120.94847397801102, 32.53075847203578],
+                [120.94950394627274, 32.53052243764247],
+                [120.94943957325638, 32.530071826527966],
+                [120.94858126637162, 32.52996453816737],
+                [120.94847397801102, 32.53075847203578]
+            ]
+            var zx_9_areaJson = [
+                [120.94556640002997, 32.53053200087449],
+                [120.93895743701728, 32.51164924940964],
+                [120.94844172809394, 32.5092459901323],
+                [120.95483611438544, 32.510104297017065],
+                [120.95921347949775, 32.51353752455613],
+                [120.96011470172675, 32.513322947834936],
+                [120.96659491870673, 32.51293670973679],
+                [120.98436187122138, 32.51431000075242],
+                [120.99079917285712, 32.5196744187822],
+                [120.9892113051203, 32.52044689497849],
+                [120.98702262256415, 32.52018940291306],
+                [120.97689460132392, 32.521820185994116],
+                [120.9723884901789, 32.522335170124975],
+                [120.9659941038874, 32.524352191304175],
+                [120.9608442625788, 32.52525341353318],
+                [120.95234702441962, 32.528600810383764],
+                [120.94556640002997, 32.53053200087449]
+            ]
+            var ctt_1_areaJson = [
+                [120.97333757316215, 32.52218043222892],
+                [120.97076265250786, 32.51303946390617],
+                [120.96644966041191, 32.51297509088981],
+                [120.96876708900078, 32.51999174967277],
+                [120.96267311011894, 32.520614022164224],
+                [120.9621795836602, 32.52142941370475],
+                [120.96254436408623, 32.52245938196647],
+                [120.96024839316948, 32.52318894281852],
+                [120.95587102805717, 32.52441203012931],
+                [120.95717994605644, 32.5266436280297],
+                [120.96108524238213, 32.52520596399772],
+                [120.96567718421562, 32.524369114785074],
+                [120.9722646895562, 32.52239500895011],
+                [120.97333757316215, 32.52218043222892]
+            ]
+            var ctt_2_areaJson = [
+                [120.9600364986573, 32.5231487096833],
+                [120.95844863092049, 32.517955953030466],
+                [120.95879195367439, 32.5191146673249],
+                [120.95664618646248, 32.51962965145576],
+                [120.95462916528328, 32.50980203762519],
+                [120.9591352764283, 32.51357858791816],
+                [120.96119521295174, 32.51327818050849],
+                [120.96625922357185, 32.51293485775459],
+                [120.96861956750496, 32.519758397488474],
+                [120.96681712304695, 32.5200158895539],
+                [120.96282599603279, 32.520445042996286],
+                [120.96209643518074, 32.52151792660224],
+                [120.96256850396736, 32.52241914883125],
+                [120.9600364986573, 32.5231487096833]
+            ]
+            var ctt_3_areaJson = [
+                [120.95001029660763, 32.529179864209986],
+                [120.95730590512814, 32.526690774244166],
+                [120.95588969876827, 32.52441626099954],
+                [120.9598379104382, 32.523214631360865],
+                [120.95893668820919, 32.519223504346705],
+                [120.95666217496456, 32.519738488477564],
+                [120.95464515378536, 32.509996705335475],
+                [120.94842242887081, 32.509481721204615],
+                [120.94837951352658, 32.51390200166116],
+                [120.94687747647824, 32.51437407044778],
+                [120.94610500028195, 32.515704446119166],
+                [120.9473924606091, 32.51737814454446],
+                [120.94820785214962, 32.5194380810679],
+                [120.95048236539425, 32.52261381654153],
+                [120.94859409024777, 32.52342920808206],
+                [120.95001029660763, 32.529179864209986]
+            ]
+            var ctt_4_areaJson = [
+                [120.9499510785053, 32.5292714744299],
+                [120.94844047106989, 32.52336494685811],
+                [120.95054332293756, 32.52284996272725],
+                [120.94869796313532, 32.520704195515336],
+                [120.94642344989069, 32.51589767696065],
+                [120.9445351747442, 32.51452438594502],
+                [120.94324771441705, 32.51413814784688],
+                [120.94170276202448, 32.51409523250264],
+                [120.93990031756647, 32.51392357112569],
+                [120.94324771441705, 32.52366535426778],
+                [120.94560805835016, 32.5305318093459],
+                [120.9499510785053, 32.5292714744299]
+            ]
+            var ctt_5_areaJson = [
+                [120.94613729154213, 32.51549100294578],
+                [120.94639478360756, 32.51493310347068],
+                [120.94695268308266, 32.514117711930155],
+                [120.94836888944252, 32.51398896589744],
+                [120.94815431272133, 32.50965451612937],
+                [120.93918500577553, 32.51154279127586],
+                [120.93965707456215, 32.51381730452049],
+                [120.94399152433022, 32.51428937330711],
+                [120.94613729154213, 32.51549100294578]
+            ]
+            var ctt_6_areaJson = [
+                [120.92426966045173, 32.55940329871079],
+                [120.91770361278327, 32.542151330327],
+                [120.93654344890388, 32.534340737675635],
+                [120.94040582988532, 32.54897487006089],
+                [120.92426966045173, 32.55940329871079]
+            ]
+            var tw_1_areaJson = [
+                [120.93186226090886, 32.55374126727276],
+                [120.92983708835061, 32.54702388235167],
+                [120.9276913211387, 32.54766761251524],
+                [120.9271334216636, 32.546101202450544],
+                [120.93189702487405, 32.54395543523863],
+                [120.93292699313577, 32.54794656225279],
+                [120.9331844852012, 32.5477319855316],
+                [120.9346436069053, 32.55264579244688],
+                [120.93186226090886, 32.55374126727276]
+            ]
+            var tw_2_areaJson = [
+                [120.92769699981274, 32.54554670361886],
+                [120.92687087943615, 32.54240315465341],
+                [120.92923380082627, 32.54141496818812],
+                [120.92820383256455, 32.53815340202601],
+                [120.93496299928208, 32.53542827766688],
+                [120.93672252839585, 32.541586629565074],
+                [120.92769699981274, 32.54554670361886]
+            ]
+            var tw_3_areaJson = [
+                [120.92010613879658, 32.54837953145199],
+                [120.92029925784566, 32.548325887271695],
+                [120.92041727504231, 32.548594108173184],
+                [120.92053529223897, 32.54875504071408],
+                [120.92181202373006, 32.54819714123898],
+                [120.92160817584492, 32.548347344943814],
+                [120.92183348140217, 32.548561921665005],
+                [120.92217680415608, 32.54919492299252],
+                [120.92229482135274, 32.54944168622189],
+                [120.92344280681111, 32.54889451558285],
+                [120.92342134913899, 32.54864775235348],
+                [120.92739101848103, 32.54693113858395],
+                [120.92710133990742, 32.54587971265011],
+                [120.92736956080891, 32.54695259625607],
+                [120.92969771823384, 32.55424820477658],
+                [120.92760817265923, 32.54764883705214],
+                [120.9298183128875, 32.54702656456068],
+                [120.9320499107879, 32.55432217308119],
+                [120.92426077580865, 32.559407641373426],
+                [120.92010613879658, 32.54837953145199]
+            ]
+            var tw_4_areaJson = [
+                [120.92008231317146, 32.548321241288065],
+                [120.91770051156624, 32.542291635422586],
+                [120.92821477090462, 32.53778552427757],
+                [120.92922328149422, 32.54145478620994],
+                [120.92688439523323, 32.54239892378318],
+                [120.92780707513435, 32.545789235978006],
+                [120.9270775142823, 32.54602527037132],
+                [120.92735646401985, 32.54694795027244],
+                [120.92342971002205, 32.54860019102561],
+                [120.92338679467781, 32.54890059843528],
+                [120.92239974176033, 32.54943704023826],
+                [120.92164872323616, 32.54840707197654],
+                [120.921798926941, 32.54819249525535],
+                [120.9205758396302, 32.548793310074686],
+                [120.92027543222054, 32.548321241288065],
+                [120.92008231317146, 32.548321241288065]
+            ]
+            var tw_5_areaJson = [
+                [120.9608653012429, 32.43932163134086],
+                [120.97308802297177, 32.47289102582345],
+                [120.95613646199764, 32.4721614649714],
+                [120.95644717923535, 32.46271555504776],
+                [120.9567261289729, 32.45501225075699],
+                [120.95643056222124, 32.46273670939888],
+                [120.95667175152857, 32.45496676499614],
+                [120.95164219061763, 32.45475301850176],
+                [120.95162073294551, 32.45447943318224],
+                [120.95121303717525, 32.45448479760027],
+                [120.95118085066707, 32.45476374733782],
+                [120.94950715224178, 32.454715467575554],
+                [120.93956646662457, 32.454458805736934],
+                [120.93983984244008, 32.43880316683041],
+                [120.94565487158437, 32.439167947256436],
+                [120.94700670492787, 32.43805214830624],
+                [120.94773626577992, 32.43835255571591],
+                [120.948830607058, 32.439468354666104],
+                [120.95737076056142, 32.44026228853451],
+                [120.96086836111684, 32.43931815096127],
+                [120.96104218094278, 32.43975236550069],
+                [120.9608653012429, 32.43932163134086]
+            ]
+            var ly_1_areaJson = [
+                [120.94815075115318, 32.4444356142331],
+                [120.94945966915245, 32.439607638006294],
+                [120.94875156597251, 32.43943597662934],
+                [120.94759285167808, 32.438320177679145],
+                [120.9470564098751, 32.438084143285835],
+                [120.94572603420372, 32.43915702689179],
+                [120.93995392040367, 32.43877078879365],
+                [120.93978225902671, 32.444092291479194],
+                [120.9395462246334, 32.4544134317685],
+                [120.9444814892208, 32.454563635473335],
+                [120.9444814892208, 32.45314742911347],
+                [120.94478189663047, 32.45288993704804],
+                [120.94343006328697, 32.44952108252534],
+                [120.9454899998104, 32.44943525183686],
+                [120.94340860561485, 32.44413520682343],
+                [120.94812929348106, 32.44452144492158],
+                [120.94810783580894, 32.44452144492158],
+                [120.94815075115318, 32.4444356142331]
+            ]
+            var ly_2_areaJson = [
+                [120.94819387600143, 32.4444003304025],
+                [120.95639070675094, 32.444829483844885],
+                [120.95637182653583, 32.445171673050986],
+                [120.96130709112323, 32.4453004190837],
+                [120.96137146413959, 32.44587977623092],
+                [120.96138477043266, 32.447294849042976],
+                [120.96357345298881, 32.446779864912116],
+                [120.96089382143093, 32.43931146146685],
+                [120.9577180859573, 32.44025559904009],
+                [120.94960708589626, 32.43956895353228],
+                [120.94952125520778, 32.439697699564995],
+                [120.94819387600143, 32.4444003304025]
+            ]
+            var ly_3_areaJson = [
+                [120.95675033226294, 32.45497050101679],
+                [120.96657794609351, 32.4552065354101],
+                [120.96361678734107, 32.44670929725092],
+                [120.96136373176856, 32.447331569742374],
+                [120.9612993587522, 32.44527163321894],
+                [120.95621389045996, 32.44518580253046],
+                [120.95632117882056, 32.448554657053165],
+                [120.94971221580786, 32.44911255652826],
+                [120.94949763908667, 32.452567241739445],
+                [120.95153611793799, 32.452073715280704],
+                [120.95644992485327, 32.4517303925268],
+                [120.95675033226294, 32.45314659888666],
+                [120.95675033226294, 32.45497050101679]
+            ]
+            var ly_4_areaJson = [
+                [120.95655968591888, 32.46771677336896],
+                [120.9568171779843, 32.45522840819562],
+                [120.9663443844052, 32.4553142388841],
+                [120.96934845850188, 32.46299608550275],
+                [120.96394112512786, 32.46308191619123],
+                [120.96355488702972, 32.467673858024725],
+                [120.96042206690032, 32.467630942680486],
+                [120.95655968591888, 32.46771677336896]
+            ]
+            var ly_5_areaJson = [
+                [120.95617087036372, 32.4722079248077],
+                [120.95629961639644, 32.46765889831844],
+                [120.95840246826411, 32.467272660220296],
+                [120.95934660583735, 32.46770181366268],
+                [120.96359780237395, 32.467636307098516],
+                [120.96383383676726, 32.46306582293714],
+                [120.96941283151824, 32.46308728060926],
+                [120.97303917810638, 32.47285052142347],
+                [120.95617087036372, 32.4722079248077]
+            ]
+            var ly_6_areaJson = [
+                [120.9389299864151, 32.4899916569546],
+                [120.93983120864411, 32.49067830246241],
+                [120.94000287002106, 32.490656844790294],
+                [120.94021744674225, 32.490849963839366],
+                [120.9401530737259, 32.49097870987208],
+                [120.94465918487091, 32.49449776809962],
+                [120.95201101502873, 32.49830537135296],
+                [120.96488561830022, 32.50319772059613],
+                [120.9719237347553, 32.50560097987347],
+                [120.97724523744084, 32.50809006983929],
+                [120.98428335389592, 32.51358323390179],
+                [120.98694410523869, 32.5153856783598],
+                [120.9861716290424, 32.51143746668988],
+                [120.97822114251424, 32.48845176565906],
+                [120.9392239818867, 32.481880050251576],
+                [120.9389299864151, 32.4899916569546]
+            ]
+            var lft_1_areaJson = [
+                [120.93931475798519, 32.4820270608697],
+                [120.95553675810726, 32.48468781221247],
+                [120.95579425017269, 32.490824706438545],
+                [120.95489302794368, 32.49061012971735],
+                [120.95437804381282, 32.49215508210993],
+                [120.9495286099139, 32.491296775225166],
+                [120.94497958342464, 32.49442959535456],
+                [120.9388856045428, 32.49000931489802],
+                [120.93931475798519, 32.4820270608697]
+            ]
+            var lft_2_areaJson = [
+                [120.94496606762756, 32.494449919478875],
+                [120.9525191682135, 32.498441046493035],
+                [120.95736860211242, 32.50032932163952],
+                [120.95766900952209, 32.4888709247279],
+                [120.95582364971985, 32.48861343266247],
+                [120.95586656506408, 32.490673369185906],
+                [120.95479368145813, 32.49058753849743],
+                [120.95436452801574, 32.49226123692272],
+                [120.94955800946106, 32.49136001469372],
+                [120.94496606762756, 32.494449919478875]
+            ]
+            var lft_3_areaJson = [
+                [120.95742440474172, 32.50024855204808],
+                [120.96720910322804, 32.50393927165257],
+                [120.96737519068296, 32.50315379952461],
+                [120.96836224360044, 32.50199508523018],
+                [120.9686626510101, 32.5004501328376],
+                [120.96986428064878, 32.49993514870674],
+                [120.97136631769712, 32.49122333382637],
+                [120.96510067743833, 32.490064619531935],
+                [120.96424237055356, 32.49173831795723],
+                [120.9576763228851, 32.49100875710518],
+                [120.95742440474172, 32.50024855204808]
+            ]
+            var lft_4_areaJson = [
+                [120.97008216809101, 32.498936121612985],
+                [120.9823988718874, 32.5009746004643],
+                [120.97819316815205, 32.488464777618844],
+                [120.9719704432375, 32.48737043634077],
+                [120.97008216809101, 32.498936121612985]
+            ]
+            var lft_5_areaJson = [
+                [120.96742420370926, 32.503676718490105],
+                [120.97574978049148, 32.50710994602917],
+                [120.98270206625808, 32.51200229527233],
+                [120.98716526205887, 32.51586467625378],
+                [120.98270206625808, 32.500930136458855],
+                [120.9701707857405, 32.4992993533778],
+                [120.9687116640364, 32.50084430577038],
+                [120.96793918784012, 32.50299007298229],
+                [120.96742420370926, 32.503676718490105]
+            ]
+            var lft_6_areaJson = [
+                [120.89389837915527, 32.51446945503658],
+                [120.89389332910206, 32.51450776578512],
+                [120.89882859368946, 32.515881056800744],
+                [120.8988376536076, 32.51586642154835],
+                [120.90221117351325, 32.516820548390356],
+                [120.9023828348902, 32.5177646859636],
+                [120.90564440105231, 32.519567130421606],
+                [120.90470026347907, 32.520082114552466],
+                [120.9049577555445, 32.52119791350266],
+                [120.90555857036384, 32.52222788176438],
+                [120.90547273967536, 32.52145540556809],
+                [120.90573023174079, 32.52205622038743],
+                [120.91783235881599, 32.517335532521216],
+                [120.93285272929938, 32.51201402983567],
+                [120.93800257060798, 32.51072656950852],
+                [120.93800257060798, 32.49853861174485],
+                [120.91869066570075, 32.49459040007493],
+                [120.91791818950446, 32.50892412505051],
+                [120.89525888774665, 32.50497591338059],
+                [120.89524117013357, 32.50508418768269],
+                [120.89513787408497, 32.5050663900527],
+                [120.89469786790583, 32.508404367963344],
+                [120.89371393535407, 32.51441728911301],
+                [120.89389837915527, 32.51446945503658]
+            ]
+            var sjk_1_areaJson = [
+                [120.92876956916268, 32.513356794796735],
+                [120.92919872260507, 32.51146851965025],
+                [120.92842624640878, 32.51103936620787],
+                [120.92705295539315, 32.5112968582733],
+                [120.92619464850839, 32.51121102758482],
+                [120.92439220405038, 32.50975190588072],
+                [120.92705295539315, 32.50897942968443],
+                [120.92902706122811, 32.50906526037291],
+                [120.92971370673592, 32.50700532384947],
+                [120.9312586591285, 32.50219880529478],
+                [120.9327177808326, 32.50305711217955],
+                [120.93306110358651, 32.501340498410016],
+                [120.93340442634042, 32.499366392575055],
+                [120.93426273322518, 32.49747811742857],
+                [120.93812511420663, 32.49842225500181],
+                [120.93838260627206, 32.510352720700055],
+                [120.9294562146705, 32.51301347204283],
+                [120.92876956916268, 32.513356794796735]
+            ]
+            var sjk_2_areaJson = [
+                [120.89389837915527, 32.51446945503658],
+                [120.89389332910206, 32.51450776578512],
+                [120.89882859368946, 32.515881056800744],
+                [120.8988376536076, 32.51586642154835],
+                [120.90221117351325, 32.516820548390356],
+                [120.9023828348902, 32.5177646859636],
+                [120.90564440105231, 32.519567130421606],
+                [120.90470026347907, 32.520082114552466],
+                [120.9049577555445, 32.52119791350266],
+                [120.90555857036384, 32.52222788176438],
+                [120.90547273967536, 32.52145540556809],
+                [120.90573023174079, 32.52205622038743],
+                [120.91783235881599, 32.517335532521216],
+                [120.93285272929938, 32.51201402983567],
+                [120.93800257060798, 32.51072656950852],
+                [120.93800257060798, 32.49853861174485],
+                [120.91869066570075, 32.49459040007493],
+                [120.91791818950446, 32.50892412505051],
+                [120.89525888774665, 32.50497591338059],
+                [120.89524117013357, 32.50508418768269],
+                [120.89513787408497, 32.5050663900527],
+                [120.89469786790583, 32.508404367963344],
+                [120.89371393535407, 32.51441728911301],
+                [120.89389837915527, 32.51446945503658]
+            ]
+            var sjk_3_areaJson = [
+                [120.91786959548618, 32.509226496234795],
+                [120.91864207168247, 32.50881880046453],
+                [120.91922142882969, 32.5085613083991],
+                [120.91992953200962, 32.50858276607122],
+                [120.92016556640293, 32.508024866596124],
+                [120.92085221191074, 32.50817507030096],
+                [120.92211821456577, 32.50884025813665],
+                [120.92385628600742, 32.50929086925115],
+                [120.92465021987583, 32.50959127666082],
+                [120.92445710082676, 32.509720022693536],
+                [120.92510083099033, 32.51042812587347],
+                [120.92572310348179, 32.51083582164373],
+                [120.92598059554722, 32.51111477138128],
+                [120.92673161407139, 32.511264975086114],
+                [120.92782595534946, 32.511200602069756],
+                [120.92829802413608, 32.511200602069756],
+                [120.92883446593906, 32.51139372111883],
+                [120.92907050033237, 32.511951620593926],
+                [120.92855551620151, 32.513453657642266],
+                [120.92743971725132, 32.51386135341253],
+                [120.92353442092563, 32.51540630580511],
+                [120.91845668500443, 32.51718389194758],
+                [120.91731942838211, 32.51769887607844],
+                [120.91714776700516, 32.51778470676692],
+                [120.91714776700516, 32.51767741840632],
+                [120.91786959548618, 32.509226496234795]
+            ]
+            var sjk_4_areaJson = [
+                [120.89389837915527, 32.51446945503658],
+                [120.89389332910206, 32.51450776578512],
+                [120.89882859368946, 32.515881056800744],
+                [120.8988376536076, 32.51586642154835],
+                [120.90221117351325, 32.516820548390356],
+                [120.9023828348902, 32.5177646859636],
+                [120.90564440105231, 32.519567130421606],
+                [120.90470026347907, 32.520082114552466],
+                [120.9049577555445, 32.52119791350266],
+                [120.90555857036384, 32.52222788176438],
+                [120.90547273967536, 32.52145540556809],
+                [120.90573023174079, 32.52205622038743],
+                [120.91783235881599, 32.517335532521216],
+                [120.93285272929938, 32.51201402983567],
+                [120.93800257060798, 32.51072656950852],
+                [120.93800257060798, 32.49853861174485],
+                [120.91869066570075, 32.49459040007493],
+                [120.91791818950446, 32.50892412505051],
+                [120.89525888774665, 32.50497591338059],
+                [120.89524117013357, 32.50508418768269],
+                [120.89513787408497, 32.5050663900527],
+                [120.89469786790583, 32.508404367963344],
+                [120.89371393535407, 32.51441728911301],
+                [120.89389837915527, 32.51446945503658]
+            ]
+            var sjk_5_areaJson = [
+                [120.89385988556982, 32.5141226772629],
+                [120.89883806550147, 32.515667629655475],
+                [120.89995386445166, 32.51373643916475],
+                [120.900554679271, 32.5115477566086],
+                [120.90102674805762, 32.51171941798555],
+                [120.90188505494238, 32.51197691005098],
+                [120.90647699677588, 32.512706470903034],
+                [120.90815069520117, 32.51309270900118],
+                [120.90827944123389, 32.51201982539522],
+                [120.90827944123389, 32.51163358729708],
+                [120.91746332490088, 32.51296396296846],
+                [120.91780664765479, 32.508929920610065],
+                [120.89527609192969, 32.504938793595905],
+                [120.89385988556982, 32.5141226772629]
+            ]
+            var sjk_6_areaJson = [
+                [120.9158016123357, 32.45373159171667],
+                [120.93919047494556, 32.454332406536004],
+                [120.93953379769947, 32.43875413657751],
+                [120.93004950662281, 32.437809999004266],
+                [120.93009242196705, 32.43918329001989],
+                [120.92923411508228, 32.438797051921746],
+                [120.92717417855884, 32.438582475200555],
+                [120.92597254892017, 32.438582475200555],
+                [120.92618712564136, 32.43768125297155],
+                [120.92537173410084, 32.437552506938836],
+                [120.92502841134693, 32.438797051921746],
+                [120.92095145364429, 32.43948369742956],
+                [120.92047938485767, 32.43836789847936],
+                [120.91794737954761, 32.438539559856316],
+                [120.91696032663013, 32.4389687132987],
+                [120.91387042184498, 32.438582475200555],
+                [120.91271170755054, 32.43849664451208],
+                [120.9123254694524, 32.440556581035516],
+                [120.91254004617359, 32.44167237998571],
+                [120.91292628427173, 32.44235902549352],
+                [120.91292628427173, 32.44351773978796],
+                [120.91296919961597, 32.44416146995153],
+                [120.91399916787769, 32.445062692180535],
+                [120.91498622079517, 32.44695096732702],
+                [120.91515788217212, 32.448066766277215],
+                [120.91584452767994, 32.44888215781774],
+                [120.91700324197437, 32.449826295390984],
+                [120.91678866525318, 32.450341279521844],
+                [120.91721781869556, 32.45115667106237],
+                [120.91730364938404, 32.45171457053747],
+                [120.9158016123357, 32.45373159171667]
+            ]
+            var wy_1_areaJson = [
+                [120.92515405616261, 32.44257711465054],
+                [120.92532571753956, 32.438671818324856],
+                [120.92523988685109, 32.437684765407376],
+                [120.92614110908009, 32.4375989347189],
+                [120.92596944770314, 32.43862890298062],
+                [120.92832979163624, 32.438671818324856],
+                [120.93000349006154, 32.43910097176724],
+                [120.93008932075001, 32.43785642678433],
+                [120.93961652717091, 32.43880056435757],
+                [120.9394877811382, 32.44313501412564],
+                [120.9308617969463, 32.4430920987814],
+                [120.92511114081837, 32.442920437404446],
+                [120.92515405616261, 32.44257711465054]
+            ]
+            var wy_2_areaJson = [
+                [120.92455303183927, 32.45382403216339],
+                [120.9251538466586, 32.44305228075958],
+                [120.93099033347501, 32.44309519610382],
+                [120.93081867209806, 32.453909862851866],
+                [120.93081867209806, 32.454167354917296],
+                [120.92455303183927, 32.45382403216339]
+            ]
+            var wy_3_areaJson = [
+                [120.91591910577233, 32.45375006385878],
+                [120.92450217461999, 32.45392172523573],
+                [120.92536048150475, 32.43842928596571],
+                [120.92390135980065, 32.43924467750624],
+                [120.92119769311364, 32.43945925422743],
+                [120.9205968782943, 32.43847220130995],
+                [120.91840819573815, 32.438558031998426],
+                [120.91699198937829, 32.43890135475233],
+                [120.91291503167565, 32.43851511665419],
+                [120.91248587823327, 32.439201762162],
+                [120.91252879357751, 32.441047121964246],
+                [120.91295794701989, 32.442334582291394],
+                [120.91312960839684, 32.4441370267494],
+                [120.91488913751061, 32.44649737068251],
+                [120.91553286767419, 32.44860022255018],
+                [120.917120735411, 32.44975893684462],
+                [120.91690615868981, 32.45066015907362],
+                [120.9173353121322, 32.451775958023816],
+                [120.91591910577233, 32.45375006385878]
+            ]
+            var wy_4_areaJson = [
+                [120.89543828149463, 32.505015428081414],
+                [120.91758259912159, 32.508963639751336],
+                [120.91904172082569, 32.489737565532586],
+                [120.89895733972217, 32.48544603110876],
+                [120.89543828149463, 32.505015428081414]
+            ]
+            var xys_1_areaJson = [
+                [120.90816752171929, 32.49668954797819],
+                [120.91825262761529, 32.49930738397673],
+                [120.9189392731231, 32.48982309290007],
+                [120.90966955876763, 32.48780607172087],
+                [120.90816752171929, 32.49668954797819]
+            ]
+            var xys_2_areaJson = [
+                [120.90822395286061, 32.50717543656521],
+                [120.91015514335133, 32.49745511109524],
+                [120.91839488944508, 32.49951504761868],
+                [120.9175151248882, 32.508870592662625],
+                [120.90822395286061, 32.50717543656521]
+            ]
+            var xys_3_areaJson = [
+                [120.89754071435429, 32.49417745167904],
+                [120.90794768533208, 32.496645083972744],
+                [120.90964284142949, 32.48780452305966],
+                [120.89908566674687, 32.48548709447079],
+                [120.89754071435429, 32.49417745167904]
+            ]
+            var xys_4_areaJson = [
+                [120.89547530866082, 32.504881014309674],
+                [120.90814038537313, 32.50728891957065],
+                [120.90871974252035, 32.50467108357211],
+                [120.90910598061849, 32.50256823170444],
+                [120.89654819226678, 32.49955951162413],
+                [120.89547530866082, 32.504881014309674]
+            ]
+            var xys_5_areaJson = [
+                [120.93898404960342, 32.511625524641914],
+                [120.94851125602432, 32.509136434676094],
+                [120.95494855766006, 32.51016640293781],
+                [120.95906843070694, 32.51325630772297],
+                [120.96576322440811, 32.51291298496906],
+                [120.98430265311904, 32.51420044529621],
+                [120.97880948905654, 32.509136434676094],
+                [120.96988309745498, 32.504844900252266],
+                [120.95537771110244, 32.4999525510091],
+                [120.95142949943252, 32.49823593723957],
+                [120.94524968986221, 32.4944593869466],
+                [120.93881238822647, 32.490167852522774],
+                [120.93898404960342, 32.511625524641914]
+            ]
+            var zy_1_areaJson = [
+                [120.93894597491719, 32.49695890242749],
+                [120.94010468921162, 32.49683015639477],
+                [120.93997594317891, 32.502752473899655],
+                [120.94104882678486, 32.50292413527661],
+                [120.94070550403096, 32.506014040061764],
+                [120.94160672625996, 32.50318162734204],
+                [120.94370957812764, 32.503524950095944],
+                [120.9451069042724, 32.50382422395781],
+                [120.94431297040398, 32.50367402025297],
+                [120.94377910605802, 32.50678424916244],
+                [120.94516570336671, 32.50680457328676],
+                [120.94544465310426, 32.50995885108827],
+                [120.93902880914064, 32.51156817649721],
+                [120.93894597491719, 32.49695890242749]
+            ]
+            var zy_2_areaJson = [
+                [120.94550118899758, 32.50993161388472],
+                [120.94837651706155, 32.50915913768843],
+                [120.9505651996177, 32.509459545098096],
+                [120.9525822207969, 32.509802867852],
+                [120.95301137423928, 32.50838666149214],
+                [120.95193849063332, 32.50791459270552],
+                [120.95193849063332, 32.506755878411084],
+                [120.9529255435508, 32.50679879375532],
+                [120.9529255435508, 32.506240894280225],
+                [120.954041342501, 32.5063267249687],
+                [120.95524297213967, 32.503022243462354],
+                [120.95592961764748, 32.502764751396924],
+                [120.95614419436868, 32.50143437572554],
+                [120.95537171817239, 32.50044732280806],
+                [120.9447287128013, 32.494997074089795],
+                [120.94387040591653, 32.49688534923628],
+                [120.94399915194924, 32.503279735527784],
+                [120.94494328952248, 32.50366597362593],
+                [120.94434247470315, 32.50392346569136],
+                [120.94369874453957, 32.506712963066846],
+                [120.94528661227639, 32.506712963066846],
+                [120.94550118899758, 32.50993161388472]
+            ]
+            var zy_3_areaJson = [
+                [120.960169561588, 32.513130052370684],
+                [120.96077037640734, 32.5106838777491],
+                [120.96119952984972, 32.51102720050301],
+                [120.96149993725939, 32.51055513171639],
+                [120.96102786847277, 32.51029763965096],
+                [120.9618432600133, 32.507336480898516],
+                [120.96227241345568, 32.506864412111895],
+                [120.96227241345568, 32.50604902057137],
+                [120.96321655102892, 32.50544820575203],
+                [120.96343112775011, 32.50351701526131],
+                [120.96291614361925, 32.503602845949786],
+                [120.96300197430773, 32.50300203113045],
+                [120.95542999350668, 32.500232857879276],
+                [120.95594497763754, 32.5010482494198],
+                [120.95620246970297, 32.50156323355066],
+                [120.95577331626059, 32.50304381292688],
+                [120.95525833212973, 32.50304381292688],
+                [120.95495792472006, 32.50443856161463],
+                [120.95472189032675, 32.504502934630985],
+                [120.95450731360556, 32.505468529876346],
+                [120.95446439826132, 32.50568310659754],
+                [120.95418544852377, 32.50641266744959],
+                [120.9528765305245, 32.50628392141687],
+                [120.95283361518027, 32.50677744787561],
+                [120.95191093527914, 32.506734532531375],
+                [120.95184656226279, 32.50787178915369],
+                [120.95306964957358, 32.50819365423548],
+                [120.95259758078696, 32.509738606628055],
+                [120.95259758078696, 32.50980297964441],
+                [120.960169561588, 32.513130052370684]
+            ]
+            var zy_4_areaJson = [
+                [120.96025612554051, 32.51317285592251],
+                [120.96083548268773, 32.51066230828457],
+                [120.9610286017368, 32.51096271569424],
+                [120.96132900914647, 32.51079105431729],
+                [120.96135046681859, 32.510597935268216],
+                [120.96098568639256, 32.51049064690762],
+                [120.96143629750706, 32.50924610192471],
+                [120.9615865012119, 32.50830196435147],
+                [120.96190836629368, 32.507143250057034],
+                [120.96223023137547, 32.50675701195889],
+                [120.96212294301488, 32.506349316188626],
+                [120.96263792714574, 32.505877247402005],
+                [120.96255209645726, 32.50546955163174],
+                [120.96310999593236, 32.505641213008694],
+                [120.96343186101414, 32.503624191829495],
+                [120.96287396153905, 32.5035169034689],
+                [120.96302416524388, 32.5029590039938],
+                [120.9692601964515, 32.50466375537947],
+                [120.97488210654672, 32.50719576068953],
+                [120.97938821769174, 32.509470273934156],
+                [120.98436639762338, 32.51414804645613],
+                [120.97063348746713, 32.513203908882886],
+                [120.96617029166634, 32.512989332161695],
+                [120.96025612554051, 32.51317285592251]
+            ]
+            var zy_5_areaJson = [
+                [120.9391097991711, 32.481795959752894],
+                [120.97850608518185, 32.48840492276559],
+                [120.97335624387325, 32.47286956815133],
+                [120.95627593686642, 32.472268753331996],
+                [120.95593261411251, 32.47690361050973],
+                [120.95095443418087, 32.47570198087106],
+                [120.94528960874142, 32.473813705724574],
+                [120.94237136533322, 32.47141044644723],
+                [120.93953895261349, 32.47089546231637],
+                [120.9391097991711, 32.481795959752894]
+            ]
+            var yfk_1_areaJson = [
+                [120.97468609578462, 32.47739415143846],
+                [120.97846264607759, 32.488294648874984],
+                [120.96122398398687, 32.485664950492584],
+                [120.96208229087163, 32.48347626793643],
+                [120.9625972750025, 32.47978554833194],
+                [120.96603050254156, 32.47948514092227],
+                [120.96645965598394, 32.477167712333404],
+                [120.97468609578462, 32.47739415143846]
+            ]
+            var yfk_2_areaJson = [
+                [120.94643375971873, 32.48296634490261],
+                [120.94632904881514, 32.48152754732282],
+                [120.94424765461959, 32.48120568224103],
+                [120.94435494298018, 32.480154256307195],
+                [120.94323914402999, 32.479918221913884],
+                [120.94345372075118, 32.47749350496442],
+                [120.95027726048507, 32.47905991502912],
+                [120.95218699330367, 32.479682187520574],
+                [120.95407526845015, 32.48075507112653],
+                [120.95577042454757, 32.480926732503484],
+                [120.95609228962935, 32.480905274831365],
+                [120.95613520497359, 32.479167203389714],
+                [120.9599546706108, 32.47921011873395],
+                [120.96257250660933, 32.479639272176335],
+                [120.9620789801506, 32.483608941518376],
+                [120.96122067326583, 32.48551867433698],
+                [120.94643375971873, 32.48296634490261]
+            ]
+            var yfk_3_areaJson = [
+                [120.94335810399468, 32.479872097454816],
+                [120.94443098760064, 32.480172504864484],
+                [120.94430224156793, 32.481374134503156],
+                [120.94649092412408, 32.48171745725706],
+                [120.94644800877984, 32.482919086895734],
+                [120.9391094849151, 32.48171745725706],
+                [120.93962446904595, 32.470945705853254],
+                [120.9423710510772, 32.4713319439514],
+                [120.94490305638726, 32.47352062650755],
+                [120.95138327336724, 32.475880970440656],
+                [120.95597521520074, 32.476868023358136],
+                [120.95601813054498, 32.480902065716535],
+                [120.95421568608697, 32.48077331968382],
+                [120.95215574956353, 32.47952877470091],
+                [120.9434868500274, 32.47746883817747],
+                [120.94335810399468, 32.479872097454816]
+            ]
+            var yfk_4_areaJson = [
+                    [120.89918354670436, 32.48530337918139],
+                    [120.91901301319946, 32.48957232238529],
+                    [120.91879843647827, 32.49442175628422],
+                    [120.9382738513834, 32.498401020914514],
+                    [120.93956131171055, 32.470634793192346],
+                    [120.93930381964512, 32.4638541688027],
+                    [120.92999118994541, 32.4702485550942],
+                    [120.90192455481358, 32.46986231699606],
+                    [120.89918354670436, 32.48530337918139]
+                ]
+                //周新庄村
+            var zxz_1_areaJson = [
+                [120.90469443870992, 32.47060426713779],
+                [120.90681874824972, 32.47236379625156],
+                [120.91032965509821, 32.47647180691457],
+                [120.9131191524737, 32.47887506619191],
+                [120.91646654932428, 32.48123541012502],
+                [120.91678252622802, 32.48154624304975],
+                [120.91795196935851, 32.48225434622968],
+                [120.91871371671874, 32.482383092262396],
+                [120.91949692175109, 32.48294099173749],
+                [120.91963639661986, 32.48247965178693],
+                [120.91957686426151, 32.475505605027216],
+                [120.92161534311283, 32.47546268968298],
+                [120.91959832193363, 32.47016264466955],
+                [120.9129464435767, 32.47074200181677],
+                [120.90469443870992, 32.47060426713779]
+            ]
+            var zxz_2_areaJson = [
+                [120.92651152683706, 32.48528131486728],
+                [120.9267715963595, 32.481986428649186],
+                [120.9376854000891, 32.482178414150454],
+                [120.9375781117285, 32.48194237975714],
+                [120.93875828369505, 32.481920922085024],
+                [120.93867245300657, 32.48973151473639],
+                [120.9310764370764, 32.486663067623354],
+                [120.92651152683706, 32.48528131486728]
+            ]
+            var zxz_3_areaJson = [
+                [120.92955510080493, 32.49651988243209],
+                [120.92936198175586, 32.48952468132125],
+                [120.92852513254321, 32.489417392960654],
+                [120.92856804788745, 32.48652060722457],
+                [120.93498389185108, 32.48828013633834],
+                [120.93861023843921, 32.48973925804244],
+                [120.93824545801318, 32.498343784562216],
+                [120.92955510080493, 32.49651988243209]
+            ]
+            var zxz_4_areaJson = [
+                [120.91902701141346, 32.49430252580358],
+                [120.91954199554432, 32.483487859055536],
+                [120.92846838714588, 32.48640610246374],
+                [120.92842547180165, 32.489538922593134],
+                [120.92919794799793, 32.489496007248896],
+                [120.92954127075184, 32.496534123703974],
+                [120.92846838714588, 32.49636246232702],
+                [120.91902701141346, 32.49430252580358]
+            ]
+            var zxz_5_areaJson = [
+                [120.89924161253465, 32.48523685086183],
+                [120.9001857501079, 32.47972222912721],
+                [120.91934745131029, 32.48444291699342],
+                [120.91917578993333, 32.48952838528566],
+                [120.89924161253465, 32.48523685086183]
+            ]
+            var zxz_6_areaJson = [
+                [120.9020955876785, 32.47015324090988],
+                [120.90269640249784, 32.47011032556564],
+                [120.90488508505399, 32.47148361658127],
+                [120.91024950308378, 32.47693386529953],
+                [120.91372564596708, 32.47993793939621],
+                [120.9180171803909, 32.482770352115935],
+                [120.91939047140653, 32.48337116693527],
+                [120.91951921743924, 32.48457279657394],
+                [120.90025022787626, 32.4795946166423],
+                [120.9020955876785, 32.47015324090988]
+            ]
+            var zxz_7_areaJson = [
+                [120.92664048237378, 32.481903998604125],
+                [120.93878552479322, 32.481861083259886],
+                [120.93934342426832, 32.47083183979065],
+                [120.93925759357984, 32.464179961433715],
+                [120.92998787922437, 32.47027394031555],
+                [120.92561051411207, 32.47031685565979],
+                [120.92634007496412, 32.47426506732971],
+                [120.92930123371656, 32.47430798267395],
+                [120.92951581043775, 32.47585293506653],
+                [120.92694088978345, 32.47611042713196],
+                [120.92664048237378, 32.481903998604125]
+            ]
+            var zxz_8_areaJson = [
+                [120.93662529901619, 32.48184974778184],
+                [120.93873887971992, 32.48184974778184],
+                [120.93880325273628, 32.47944648850449],
+                [120.9379234881794, 32.479124623422706],
+                [120.93795567468757, 32.479124623422706],
+                [120.93662529901619, 32.48184974778184]
+            ]
+            var zxz_9_areaJson = [
+                [120.92668576567102, 32.48519703284001],
+                [120.92871351568628, 32.48577638998723],
+                [120.9287886175387, 32.484113420397996],
+                [120.92684669821192, 32.48408123388982],
+                [120.92668576567102, 32.48519703284001]
+            ]
+            var zxz_10_areaJson = [
+                [120.92254701240904, 32.48359730271933],
+                [120.92337313278563, 32.48362948922751],
+                [120.92299762352354, 32.48258879212973],
+                [120.92237535103209, 32.482502961441256],
+                [120.92254701240904, 32.48359730271933]
+            ]
+            var zxz_11_areaJson = [
+                [120.93049366445614, 32.48759390594393],
+                [120.93152363271786, 32.48766900779635],
+                [120.93152363271786, 32.48740078689486],
+                [120.93065459699703, 32.48707892181307],
+                [120.93065459699703, 32.48718621017367],
+                [120.93061168165279, 32.487046735304894],
+                [120.93049366445614, 32.48759390594393]
+            ]
+            var zxz_12_areaJson = [
+                    [120.90209531476559, 32.46973674802194],
+                    [120.9038977592236, 32.46982257871041],
+                    [120.9059147804028, 32.46458690671334],
+                    [120.90630101850094, 32.46299903897653],
+                    [120.91608571698727, 32.45368640927682],
+                    [120.93913125684323, 32.45450180081735],
+                    [120.95119046857418, 32.454802208227015],
+                    [120.95121450370331, 32.45448993843348],
+                    [120.9515900129654, 32.45447920959742],
+                    [120.95165438598175, 32.45473670166285],
+                    [120.95665402358551, 32.454962007220104],
+                    [120.95601287087895, 32.47211628253155],
+                    [120.95586266717412, 32.47640781695538],
+                    [120.95086302957036, 32.47565679843121],
+                    [120.94466176232793, 32.47338228518658],
+                    [120.9423872490833, 32.47119360263043],
+                    [120.93964066705205, 32.470936110565],
+                    [120.93933210826333, 32.46377884336546],
+                    [120.93027697062905, 32.470173229656965],
+                    [120.90317293427755, 32.47018055784961],
+                    [120.90209531476559, 32.46973674802194]
+                ]
+                //杨楝园村
+            var yly_1_areaJson = [
+                [120.92398335600807, 32.47063685273125],
+                [120.9234683718772, 32.46943522309258],
+                [120.92415501738502, 32.463126667489554],
+                [120.93509843016578, 32.46342707489922],
+                [120.93505551482154, 32.46428538178399],
+                [120.93548466826392, 32.46505785798028],
+                [120.93325307036353, 32.46655989502862],
+                [120.93054940367652, 32.46664572571709],
+                [120.92977692748023, 32.47089434479668],
+                [120.92398335600807, 32.47063685273125]
+            ]
+            var yly_2_areaJson = [
+                [120.91536810065223, 32.46229786490395],
+                [120.92932889382274, 32.46301556337214],
+                [120.92937438662399, 32.45442063214062],
+                [120.91598479922165, 32.45390564800976],
+                [120.91598479922165, 32.453948563354],
+                [120.91611354525436, 32.453948563354],
+                [120.91536810065223, 32.46229786490395]
+            ]
+            var yly_3_areaJson = [
+                [120.93902166393853, 32.470689475156156],
+                [120.9481652097183, 32.4714179024604],
+                [120.94932392401273, 32.45892953728706],
+                [120.93951776785428, 32.458865164270705],
+                [120.93902166393853, 32.470689475156156]
+            ]
+            var yly_4_areaJson = [
+                    [121.01047328073336, 32.53884798236846],
+                    [121.02454951364352, 32.53189569660186],
+                    [121.03536418039157, 32.524685918769826],
+                    [121.04085734445407, 32.52202516742705],
+                    [121.05742266733004, 32.517733633003225],
+                    [121.05871012765719, 32.5244284267044],
+                    [121.06231501657321, 32.52580171772002],
+                    [121.0824852283652, 32.51987940021514],
+                    [121.08368685800387, 32.51756197162627],
+                    [121.0810261066611, 32.510953008613576],
+                    [121.059396773165, 32.50314241596221],
+                    [121.05622103769137, 32.495503484687795],
+                    [121.02635195810153, 32.5053740138626],
+                    [121.01210406381442, 32.51181131549834],
+                    [120.99304965097262, 32.51859193988799],
+                    [121.01047328073336, 32.53884798236846]
+                ]
+                //送桥村
+            var yk_1_areaJson = [
+                [121.0581733715982, 32.51707845556919],
+                [121.04873199586578, 32.49845319616978],
+                [121.05619926576324, 32.495792444827],
+                [121.06632728700347, 32.502229746462746],
+                [121.07945938234039, 32.51029783117954],
+                [121.07945938234039, 32.51004033911411],
+                [121.07945938234039, 32.51029783117954],
+                [121.0581733715982, 32.51707845556919]
+            ]
+            var yk_2_areaJson = [
+                [121.03590556760456, 32.52442121030416],
+                [121.0449177898946, 32.52073049069967],
+                [121.05049678464557, 32.51922845365133],
+                [121.05749198575641, 32.51755475522604],
+                [121.05418750425007, 32.510130400672814],
+                [121.03242942472126, 32.51789807797994],
+                [121.03264400144245, 32.517855162635705],
+                [121.03590556760456, 32.52442121030416]
+            ]
+            var yk_3_areaJson = [
+                [121.03249658469863, 32.517349358679695],
+                [121.05395425681778, 32.509839173437996],
+                [121.0515080821962, 32.50516140091602],
+                [121.03000749473281, 32.51267158615772],
+                [121.03000749473281, 32.51271450150196],
+                [121.03249658469863, 32.517349358679695]
+            ]
+            var yk_4_areaJson = [
+                [121.03002884765293, 32.51201331140127],
+                [121.05131485839512, 32.50467478753652],
+                [121.0482678689542, 32.49866663934316],
+                [121.02715351958896, 32.506648893371484],
+                [121.0271964349332, 32.506863470092675],
+                [121.03002884765293, 32.51201331140127]
+            ]
+            var yk_5_areaJson = [
+                [121.01064988752033, 32.538540358558556],
+                [121.02618524213459, 32.53090142728414],
+                [121.0352832951131, 32.5244641256484],
+                [121.03458849822624, 32.52327209129798],
+                [121.00643603240593, 32.53340011253822],
+                [121.00656477843864, 32.53340011253822],
+                [121.01064988752033, 32.538540358558556]
+            ]
+            var yk_6_areaJson = [
+                [121.00613851670929, 32.53311270106022],
+                [121.00210447435089, 32.52864950525944],
+                [121.00935716752716, 32.526246245982094],
+                [121.0121037495584, 32.53113859522526],
+                [121.01180334214874, 32.53113859522526],
+                [121.00613851670929, 32.53311270106022]
+            ]
+            var yk_7_areaJson = [
+                [121.01224580188419, 32.53088131071653],
+                [121.03439011951114, 32.52315654875364],
+                [121.02992692371036, 32.51225605131712],
+                [121.00640931506778, 32.52015247465696],
+                [121.00640931506778, 32.52015247465696],
+                [121.01224580188419, 32.53088131071653]
+            ]
+            var yk_8_areaJson = [
+                [121.00168594499256, 32.52869799257841],
+                [121.00949653764393, 32.52612307192411],
+                [121.00537666459705, 32.51809790255155],
+                [121.02850803514148, 32.50998690249052],
+                [121.02631935258533, 32.5054807913455],
+                [120.99932560105945, 32.5164671194705],
+                [120.99323162217762, 32.51861288668241],
+                [121.00168594499256, 32.52869799257841]
+            ]
+            var yk_9_areaJson = [
+                [120.99826302728154, 32.52351813609295],
+                [120.99873509606816, 32.52313189799481],
+                [120.99815573892094, 32.52308898265057],
+                [120.9978767891834, 32.52313189799481],
+                [120.99809136590459, 32.52338939006024],
+                [120.99826302728154, 32.52351813609295]
+            ]
+            var yk_10_areaJson = [
+                [121.02752366443302, 32.5139820528182],
+                [121.0276631393018, 32.513847942367455],
+                [121.02747002025272, 32.513874764457604],
+                [121.0274485625806, 32.513842577949426],
+                [121.02748611350681, 32.51391767980184],
+                [121.02752366443302, 32.5139820528182]
+            ]
+            var yk_11_areaJson = [
+                [121.02818348785068, 32.512131328597924],
+                [121.02788308044101, 32.51200258256521],
+                [121.02846243758823, 32.51168071748342],
+                [121.02846243758823, 32.5116592598113],
+                [121.02818348785068, 32.512131328597924]
+            ]
+            var yk_12_areaJson = [
+                    [120.93619754869296, 32.574939786872854],
+                    [120.94890049058749, 32.573394834480276],
+                    [120.95920017320468, 32.56996160694121],
+                    [120.97258976060702, 32.5608635539627],
+                    [120.97799709398105, 32.55657201953887],
+                    [120.98337739576091, 32.53078835939211],
+                    [120.95531076062908, 32.54175322984499],
+                    [120.94990342725505, 32.54473584626955],
+                    [120.94097703565349, 32.550164637315696],
+                    [120.93119233716716, 32.55582946275515],
+                    [120.92503398526897, 32.55952018235964],
+                    [120.92434733976116, 32.55952018235964],
+                    [120.92436879743327, 32.55954164003176],
+                    [120.93619754869296, 32.574939786872854]
+                ]
+                //南渔村
+            var ny_1_areaJson = [
+                [120.97710555306806, 32.55725537619568],
+                [120.97045367471112, 32.5487581380365],
+                [120.9696382831706, 32.54596864066101],
+                [120.97487395516767, 32.543350804662474],
+                [120.97036784402265, 32.535797704076536],
+                [120.97504561654462, 32.53416692099548],
+                [120.97856467477216, 32.54493867239929],
+                [120.9786075901164, 32.54489575705505],
+                [120.97710555306806, 32.55725537619568]
+            ]
+            var ny_2_areaJson = [
+                [120.96545682406838, 32.547554959736615],
+                [120.96047864413674, 32.53974436708525],
+                [120.97026334262307, 32.53596781679228],
+                [120.97472653842385, 32.543306340657026],
+                [120.97481236911233, 32.5433921713455],
+                [120.96545682406838, 32.547554959736615]
+            ]
+            var ny_3_areaJson = [
+                [120.96938100060918, 32.56040789777928],
+                [120.9762474556873, 32.5562880247324],
+                [120.96989598474003, 32.54813410932713],
+                [120.96955266198613, 32.54590251142674],
+                [120.96569028100468, 32.54736163313084],
+                [120.96045460900761, 32.53963687116795],
+                [120.95779385766484, 32.54083850080662],
+                [120.95702138146855, 32.541010162183575],
+                [120.96938100060918, 32.56040789777928]
+            ]
+            var ny_4_areaJson = [
+                [120.93627459949036, 32.574817858155086],
+                [120.94721801227112, 32.573616228516414],
+                [120.9473038429596, 32.57314415972979],
+                [120.93335635608216, 32.55451890033038],
+                [120.92563159411927, 32.55906792681964],
+                [120.92451579516907, 32.559582910950496],
+                [120.93030936664124, 32.56722184222491],
+                [120.93030936664124, 32.56722184222491],
+                [120.9363175148346, 32.574860773499324],
+                [120.93627459949036, 32.574817858155086]
+            ]
+            var ny_5_areaJson = [
+                [120.96253021977712, 32.565042244079315],
+                [120.9695683362322, 32.56062196362277],
+                [120.95716580174734, 32.54100965130588],
+                [120.94823941014577, 32.54573033917209],
+                [120.94819649480154, 32.54594491589328],
+                [120.95175846837331, 32.550579773071014],
+                [120.96253021977712, 32.565042244079315]
+            ]
+            var ny_6_areaJson = [
+                [120.95469322404362, 32.568753591129116],
+                [120.96216049394108, 32.564547887393765],
+                [120.94765510758855, 32.545836797305874],
+                [120.94104614457585, 32.55021416241818],
+                [120.94619598588444, 32.557080617496304],
+                [120.95469322404362, 32.568753591129116]
+            ]
+            var ny_7_areaJson = [
+                [120.94744053086735, 32.57335894400769],
+                [120.95439281663396, 32.56880991751843],
+                [120.94083156785466, 32.55035631949597],
+                [120.93345012864567, 32.55481951529675],
+                [120.9403165837238, 32.56408922965222],
+                [120.94744053086735, 32.57335894400769]
+            ]
+            var ny_8_areaJson = [
+                [120.97012665471532, 32.546724608489804],
+                [120.9701051970432, 32.546209624358944],
+                [120.9706630965183, 32.5463812857359],
+                [120.97012665471532, 32.546724608489804]
+            ]
+            var ny_9_areaJson = [
+                    [120.93626449916633, 32.575314162587134],
+                    [120.93961189601691, 32.58063566527268],
+                    [120.93326042506965, 32.585270522450415],
+                    [120.93248794887336, 32.595999358509985],
+                    [120.93394707057746, 32.59720098814866],
+                    [120.93368957851203, 32.59908926329514],
+                    [120.93437622401984, 32.597286818837134],
+                    [120.93514870021613, 32.597286818837134],
+                    [120.93583534572394, 32.598745940541235],
+                    [120.93686531398566, 32.599604247426],
+                    [120.9385819277552, 32.60029089293381],
+                    [120.93755195949348, 32.6021791680803],
+                    [120.93918274257453, 32.600720046376196],
+                    [120.94235847804816, 32.6036382897844],
+                    [120.94192932460578, 32.60561239561936],
+                    [120.94304512355598, 32.60432493529221],
+                    [120.94398926112922, 32.6050974114885],
+                    [120.94536255214484, 32.604754088734595],
+                    [120.94450424526008, 32.60312330565354],
+                    [120.94304512355598, 32.602264998768774],
+                    [120.94338844630988, 32.601235030507056],
+                    [120.94433258388312, 32.601235030507056],
+                    [120.94510506007941, 32.60235082945725],
+                    [120.94630668971809, 32.603724120472876],
+                    [120.94785164211066, 32.602007506703345],
+                    [120.9455342135218, 32.59994757017991],
+                    [120.9663910708216, 32.60046255431077],
+                    [120.99840591762336, 32.58209478697678],
+                    [121.00501488063605, 32.577545760487524],
+                    [121.02630089137824, 32.56698858580491],
+                    [121.03328794111003, 32.5640155646686],
+                    [121.03912442792644, 32.563157257783836],
+                    [121.04324430097331, 32.56058233712954],
+                    [121.04478925336589, 32.55749243234438],
+                    [121.05251401532878, 32.554917511690086],
+                    [121.05526059736003, 32.553715882051414],
+                    [121.09285443891277, 32.54478949044985],
+                    [121.08718961347331, 32.528996643770164],
+                    [121.0839280473112, 32.52367514108462],
+                    [121.08512967694988, 32.52213018869204],
+                    [121.08427137006511, 32.518010315645164],
+                    [121.08289807904949, 32.51955526803774],
+                    [121.06298535932292, 32.5255634162311],
+                    [121.05835050214519, 32.52453344796938],
+                    [121.05749219526042, 32.51766699289126],
+                    [121.03775113691081, 32.52333181833071],
+                    [121.01045697797527, 32.53878134225649],
+                    [120.99655240644206, 32.522988495576804],
+                    [120.9902009354948, 32.52933996652407],
+                    [120.99002927411784, 32.53534811471743],
+                    [120.98161786664714, 32.53809469674868],
+                    [120.97835630048503, 32.555432495820945],
+                    [120.96136182416667, 32.568650421846336],
+                    [120.9488305436491, 32.572941956270164],
+                    [120.94865888227214, 32.572941956270164],
+                    [120.93626449916633, 32.575314162587134]
+                ]
+                //四海社区
+            var shsq_1_areaJson = [
+                [121.03180721563871, 32.55529728387863],
+                [121.03614166540677, 32.55147781824142],
+                [121.0448105649429, 32.5576147124675],
+                [121.04343727392728, 32.560189633121794],
+                [121.04069069189603, 32.56224956964523],
+                [121.0384161786514, 32.56336536859543],
+                [121.03330925268705, 32.563923268070525],
+                [121.00295995293153, 32.579275098923965],
+                [120.96588109550966, 32.60107609379701],
+                [120.94579671440614, 32.60090443242006],
+                [120.94408010063661, 32.60141941655092],
+                [120.94665502129091, 32.603479353074356],
+                [120.94442342339052, 32.60313603032045],
+                [120.94511006889833, 32.60468098271303],
+                [120.94184850273622, 32.605024305466934],
+                [120.93326543388856, 32.59644123661928],
+                [120.93343709526552, 32.58493992436342],
+                [120.94013188896669, 32.57996174443178],
+                [120.93635533867372, 32.574811903123184],
+                [120.94733351541967, 32.573190715330384],
+                [120.95651739908666, 32.57031538726642],
+                [120.97826732723642, 32.555540646464586],
+                [120.98178638546396, 32.53820284739232],
+                [120.98976863949228, 32.53519877329564],
+                [120.99036945431162, 32.52901896372533],
+                [120.99689258663584, 32.52301081553197],
+                [121.01122631161142, 32.53949030771947],
+                [121.03180721563871, 32.55529728387863]
+            ]
+            var shsq_2_areaJson = [
+                [121.01106542041363, 32.538817041200495],
+                [121.03183644702496, 32.555296533387995],
+                [121.03621381213726, 32.5516058137835],
+                [121.0151852934605, 32.536070459169245],
+                [121.01106542041363, 32.538817041200495]
+            ]
+            var shsq_3_areaJson = [
+                [121.01333073475917, 32.540860485384556],
+                [121.01719311574061, 32.53817827636966],
+                [121.01519755223353, 32.53656895096073],
+                [121.01122788289149, 32.53884346420536],
+                [121.01333073475917, 32.540860485384556]
+            ]
+            var shsq_4_areaJson = [
+                [120.97889959529991, 32.56545688498505],
+                [120.98465025142784, 32.56206657279023],
+                [120.98134576992149, 32.558161276464546],
+                [120.97602426723594, 32.561937826757514],
+                [120.97889959529991, 32.56545688498505]
+            ]
+            var shsq_5_areaJson = [
+                [121.04494624667372, 32.557315215020814],
+                [121.05533175997938, 32.55448280230109],
+                [121.05292850070204, 32.53474174395148],
+                [121.02700763278212, 32.54469810381476],
+                [121.04494624667372, 32.557315215020814]
+            ]
+            var shsq_6_areaJson = [
+                [121.02701609841718, 32.54453365883804],
+                [121.05285113564862, 32.53474896035171],
+                [121.0529369663371, 32.52865498146988],
+                [121.04332392922772, 32.52685253701187],
+                [121.01585810891522, 32.5366372354982],
+                [121.02701609841718, 32.54453365883804]
+            ]
+            var shsq_7_areaJson = [
+                [121.05613374047483, 32.554217263608614],
+                [121.09304093651976, 32.54451839581076],
+                [121.08832024865355, 32.53258793011252],
+                [121.05433129601683, 32.54477588787619],
+                [121.05613374047483, 32.554217263608614]
+            ]
+            var shsq_8_areaJson = [
+                [121.05419140214003, 32.54421077200086],
+                [121.08809452408828, 32.53296695181043],
+                [121.08448963517226, 32.5246413750282],
+                [121.05298977250136, 32.53476939626844],
+                [121.05419140214003, 32.54421077200086]
+            ]
+            var shsq_9_areaJson = [
+                [120.98543949073334, 32.55348490875514],
+                [120.98000212930013, 32.54712777006885],
+                [120.98068877480794, 32.54523949492236],
+                [120.98678275368978, 32.54523949492236],
+                [120.99390670083334, 32.53682808745166],
+                [120.99668804682977, 32.52613030435246],
+                [121.00101434521879, 32.53626792088095],
+                [121.00414716534819, 32.54154650822226],
+                [121.00837948166968, 32.54098634165155],
+                [121.01925552496905, 32.54912612757735],
+                [121.01500690588946, 32.55285976252608],
+                [121.02316082129474, 32.559039572096395],
+                [121.02904022345538, 32.55620715937667],
+                [121.03685081610675, 32.562558630323934],
+                [121.0315293134212, 32.56444690547042],
+                [121.00466430792804, 32.57745025477462],
+                [120.98543949073334, 32.55348490875514]
+            ]
+            var shsq_10_areaJson = [
+                [120.98223414620854, 32.58274667555981],
+                [120.99558081826665, 32.574635675498776],
+                [120.99141802987553, 32.570172479697995],
+                [120.97854342660405, 32.57871263320141],
+                [120.98223414620854, 32.58274667555981]
+            ]
+            var shsq_11_areaJson = [
+                [120.97522295659562, 32.57491575878413],
+                [120.97170389836808, 32.57045256298335],
+                [120.98543680852433, 32.56242739361079],
+                [120.98874129003067, 32.566547266657665],
+                [120.97522295659562, 32.57491575878413]
+            ]
+
+
+
+
+
+
+            var all_areajson = [];
+            // all_areajson.push(areaJson);
+            //甜港村
+            all_areajson.push(cy_areaJson);
+            //古坳村
+            all_areajson.push(fl_areaJson);
+            //耿庄村
+            all_areajson.push(hz_areaJson);
+            //新坝村
+            all_areajson.push(jdc_areaJson);
+            //闸西村
+            all_areajson.push(jdsq_areaJson);
+            //同文村
+            all_areajson.push(lw_areaJson);
+            //楼窑村
+            all_areajson.push(sy_areaJson);
+            //六份头村
+            all_areajson.push(tj_areaJson);
+            //三江口村
+            all_areajson.push(xx_areaJson);
+            //王鸭村
+            all_areajson.push(yh_areaJson);
+            //香橼树村
+            all_areajson.push(bj_areaJson);
+            //许璐村
+            all_areajson.push(areaJson);
+            //池塘头村
+            all_areajson.push(xh_areaJson);
+            //张埭村
+            all_areajson.push(zl_areaJson);
+            //油坊口村
+            all_areajson.push(lq_areaJson);
+            //周新庄村
+            all_areajson.push(zxz_areaJson);
+            //杨楝园村
+            all_areajson.push(yjy_areaJson);
+            //送桥村
+            all_areajson.push(yk_areaJson);
+            //南渔村
+            all_areajson.push(ny_areaJson);
+            //四海社区
+            all_areajson.push(sh_areaJson);
+
+            // all_areajson.push(xl_1_areaJson);
+            // all_areajson.push(xl_2_areaJson);
+            // all_areajson.push(xl_3_areaJson);
+            // all_areajson.push(xl_4_areaJson);
+            // all_areajson.push(xl_5_areaJson);
+            // all_areajson.push(xl_6_areaJson);
+            // all_areajson.push(xl_7_areaJson);
+            // all_areajson.push(xl_8_areaJson);
+            // all_areajson.push(xl_9_areaJson);
+            // all_areajson.push(tx_1_areaJson);
+            // all_areajson.push(tx_2_areaJson);
+            // all_areajson.push(tx_3_areaJson);
+            // all_areajson.push(tx_4_areaJson);
+            // all_areajson.push(tx_5_areaJson);
+            // all_areajson.push(tx_6_areaJson);
+            // all_areajson.push(tx_7_areaJson);
+            // all_areajson.push(tx_8_areaJson);
+            // all_areajson.push(ga_1_areaJson);
+            // all_areajson.push(ga_2_areaJson);
+            // all_areajson.push(ga_3_areaJson);
+            // all_areajson.push(ga_4_areaJson);
+            // all_areajson.push(ga_5_areaJson);
+            // all_areajson.push(ga_6_areaJson);
+            // all_areajson.push(gz_1_areaJson);
+            // all_areajson.push(gz_2_areaJson);
+            // all_areajson.push(gz_3_areaJson);
+            // all_areajson.push(gz_4_areaJson);
+            // all_areajson.push(gz_5_areaJson);
+            // all_areajson.push(xb_1_areaJson);
+            // all_areajson.push(xb_2_areaJson);
+            // all_areajson.push(xb_3_areaJson);
+            // all_areajson.push(xb_4_areaJson);
+            // all_areajson.push(xb_5_areaJson);
+            // all_areajson.push(xb_6_areaJson);
+            // all_areajson.push(xb_7_areaJson);
+            // all_areajson.push(xb_8_areaJson);
+            // all_areajson.push(zx_1_areaJson);
+            // all_areajson.push(zx_2_areaJson);
+            // all_areajson.push(zx_3_areaJson);
+            // all_areajson.push(zx_4_areaJson);
+            // all_areajson.push(zx_5_areaJson);
+            // all_areajson.push(zx_6_areaJson);
+            // all_areajson.push(zx_7_areaJson);
+            // all_areajson.push(zx_8_areaJson);
+            // all_areajson.push(zx_9_areaJson);
+            // all_areajson.push(ctt_1_areaJson);
+            // all_areajson.push(ctt_2_areaJson);
+            // all_areajson.push(ctt_3_areaJson);
+            // all_areajson.push(ctt_4_areaJson);
+            // all_areajson.push(ctt_5_areaJson);
+            // all_areajson.push(ctt_6_areaJson);
+            // all_areajson.push(tw_1_areaJson);
+            // all_areajson.push(tw_2_areaJson);
+            // all_areajson.push(tw_3_areaJson);
+            // all_areajson.push(tw_4_areaJson);
+            // all_areajson.push(tw_5_areaJson);
+            // all_areajson.push(ly_1_areaJson);
+            // all_areajson.push(ly_2_areaJson);
+            // all_areajson.push(ly_3_areaJson);
+            // all_areajson.push(ly_4_areaJson);
+            // all_areajson.push(ly_5_areaJson);
+            // all_areajson.push(ly_6_areaJson);
+            // all_areajson.push(lft_1_areaJson);
+            // all_areajson.push(lft_2_areaJson);
+            // all_areajson.push(lft_3_areaJson);
+            // all_areajson.push(lft_4_areaJson);
+            // all_areajson.push(lft_5_areaJson);
+            // all_areajson.push(lft_6_areaJson);
+            // all_areajson.push(sjk_1_areaJson);
+            // all_areajson.push(sjk_2_areaJson);
+            // all_areajson.push(sjk_3_areaJson);
+            // all_areajson.push(sjk_4_areaJson);
+            // all_areajson.push(sjk_5_areaJson);
+            // all_areajson.push(sjk_6_areaJson);
+            // all_areajson.push(wy_1_areaJson);
+            // all_areajson.push(wy_2_areaJson);
+            // all_areajson.push(wy_3_areaJson);
+            // all_areajson.push(wy_4_areaJson);
+            // all_areajson.push(xys_1_areaJson);
+            // all_areajson.push(xys_2_areaJson);
+            // all_areajson.push(xys_3_areaJson);
+            // all_areajson.push(xys_4_areaJson);
+            // all_areajson.push(xys_5_areaJson);
+            // all_areajson.push(zy_1_areaJson);
+            // all_areajson.push(zy_2_areaJson);
+            // all_areajson.push(zy_3_areaJson);
+            // all_areajson.push(zy_4_areaJson);
+            // all_areajson.push(zy_5_areaJson);
+            // all_areajson.push(yfk_1_areaJson);
+            // all_areajson.push(yfk_2_areaJson);
+            // all_areajson.push(yfk_3_areaJson);
+            // all_areajson.push(yfk_4_areaJson);
+            // all_areajson.push(zxz_1_areaJson);
+            // all_areajson.push(zxz_2_areaJson);
+            // all_areajson.push(zxz_3_areaJson);
+            // all_areajson.push(zxz_4_areaJson);
+            // all_areajson.push(zxz_5_areaJson);
+            // all_areajson.push(zxz_6_areaJson);
+            // all_areajson.push(zxz_7_areaJson);
+            // all_areajson.push(zxz_8_areaJson);
+            // all_areajson.push(zxz_9_areaJson);
+            // all_areajson.push(zxz_10_areaJson);
+            // all_areajson.push(zxz_11_areaJson);
+            // all_areajson.push(zxz_12_areaJson);
+            // all_areajson.push(yly_1_areaJson);
+            // all_areajson.push(yly_2_areaJson);
+            // all_areajson.push(yly_3_areaJson);
+            // all_areajson.push(yly_4_areaJson);
+            // all_areajson.push(yk_1_areaJson);
+            // all_areajson.push(yk_2_areaJson);
+            // all_areajson.push(yk_3_areaJson);
+            // all_areajson.push(yk_4_areaJson);
+            // all_areajson.push(yk_5_areaJson);
+            // all_areajson.push(yk_6_areaJson);
+            // all_areajson.push(yk_7_areaJson);
+            // all_areajson.push(yk_8_areaJson);
+            // all_areajson.push(yk_9_areaJson);
+            // all_areajson.push(yk_10_areaJson);
+            // all_areajson.push(yk_11_areaJson);
+            // all_areajson.push(yk_12_areaJson);
+            // all_areajson.push(ny_1_areaJson);
+            // all_areajson.push(ny_2_areaJson);
+            // all_areajson.push(ny_3_areaJson);
+            // all_areajson.push(ny_4_areaJson);
+            // all_areajson.push(ny_5_areaJson);
+            // all_areajson.push(ny_6_areaJson);
+            // all_areajson.push(ny_7_areaJson);
+            // all_areajson.push(ny_8_areaJson);
+            // all_areajson.push(ny_9_areaJson);
+            // all_areajson.push(shsq_1_areaJson);
+            // all_areajson.push(shsq_2_areaJson);
+            // all_areajson.push(shsq_3_areaJson);
+            // all_areajson.push(shsq_4_areaJson);
+            // all_areajson.push(shsq_5_areaJson);
+            // all_areajson.push(shsq_6_areaJson);
+            // all_areajson.push(shsq_7_areaJson);
+            // all_areajson.push(shsq_8_areaJson);
+            // all_areajson.push(shsq_9_areaJson);
+            // all_areajson.push(shsq_10_areaJson);
+            // all_areajson.push(shsq_11_areaJson);
+
+
+
+
+
+            var dmzxzb = [{
+                xay: [121.035000, 32.492970],
+                name: "浒路村"
+            }, {
+                xay: [121.019550, 32.476460],
+                name: "甜港村"
+            }, {
+                xay: [120.990720, 32.494130],
+                name: "古坳村"
+            }, {
+                xay: [121.000670, 32.508600],
+                name: "耿庄村"
+            }, {
+                xay: [120.924110, 32.524670],
+                name: "新坝村"
+            }, {
+                xay: [120.962390, 32.532050],
+                name: "闸西村"
+            }, {
+                xay: [120.930980, 32.545940],
+                name: "同文村"
+            }, {
+                xay: [120.958100, 32.451260],
+                name: "楼窑村"
+            }, {
+                xay: [120.964970, 32.495860],
+                name: "六份头村"
+            }, {
+                xay: [120.919990, 32.512220],
+                name: "三江口村"
+            }, {
+                xay: [120.927890, 32.446330],
+                name: "王鸭村"
+            }, {
+                xay: [120.906260, 32.498610],
+                name: "香橼树村"
+            }, {
+                xay: [120.956040, 32.519890],
+                name: "池塘头村"
+            }, {
+                xay: [120.957070, 32.507590],
+                name: "张埭村"
+            }, {
+                xay: [121.029170, 32.517870],
+                name: "送桥村"
+            }, {
+                xay: [120.926860, 32.483410],
+                name: "周新庄村"
+            }, {
+                xay: [120.935780, 32.461980],
+                name: "杨楝园村"
+            }, {
+                xay: [121.010970, 32.551730],
+                name: "四海社区"
+            }, {
+                xay: [120.963940, 32.480520],
+                name: "油坊口村"
+            }, {
+                xay: [120.955010, 32.556220],
+                name: "南渔村"
+            }, {
+                xay: [121.004280, 32.553320],
+                name: "四海社区"
+            }]
+
+
+
+
+
+            for (var k = 0; k < all_areajson.length; k++) {
+                //如果有区域坐标信息，画出此行政区的多边形。
+                var points = [];
+                var iconMaker = [];
+                if (all_areajson[k].length > 0) {
+                    for (var i = 0; i < all_areajson[k].length; i++) {
+                        var point = all_areajson[k][i];
+
+                        iconMaker[i] = new T.Marker(new T.LngLat(all_areajson[k][i][0], all_areajson[k][i][1]), {
+                            icon: icon0
+                        });
+                        map.addOverLay(iconMaker[i]);
+                        points.push(new T.LngLat(all_areajson[k][i][0], all_areajson[k][i][1]));
+                    }
+
+                }
+                //创建线对象 区域面积画线
+                var line = new T.Polyline(points, style);
+
+                //mapline = line;
+                //向地图上添加面
+                map.addOverLay(line);
+                //创建面对象 区域面积背景
+                var polygon = new T.Polygon(points, style);
+                map.addOverLay(polygon);
+
+                var latlng = new T.LngLat(dmzxzb[k].xay[0], dmzxzb[k].xay[1]);
+                var label = new T.Label({
+                    text: dmzxzb[k].name,
+                    position: latlng,
+                    offset: new T.Point(-29, 0)
+                });
+                label.setBorderLine(0)
+                label.setBackgroundColor("#ffffff00");
+                label.setFontColor("#ffffff");
+
+                map.addOverLay(label);
+            }
+
+
+        }
+
+        var map; //地图对象
+        var zoom = 12; //地图级别
+        var drivingRoute; //驾车路线规划对象
+        var obj; //搜索结果
+        var startLngLat; //起点经纬度
+        var endLngLat; //终点经纬度
+        var startTool; //起点标注工具
+        var endTool; //终点标注工具
+        var _CarTrack; //轨迹对象
+        var startIcon = "http://lbs.tianditu.gov.cn/images/bus/start.png"; //起点图标
+        var endIcon = "http://lbs.tianditu.gov.cn/images/bus/end.png"; //终点图标
+        var infoWin = null;
+        map = new T.Map('mapdiv_gk_zhzf');
+        map.centerAndZoom(new T.LngLat(120.97333757316215, 32.52218043222892), zoom);
+        map.setStyle('indigo');
+        ykArea();
+
+        var cp = new T.CoordinatePickup(map, {
+            callback: getLngLat
+        })
+        cp.addEvent();
+
+        function openwin() {
+            //window.open('dollare.html','newwindow','height=650,width=1354,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no, status=no')
+            var url = 'http://58.220.24.15:8081/zhsq/userLoginToTask.action?loginId=admin&credential=ySMSP8zng5A='; //转向网页的地址;
+            var name = 'add'; //网页名称，可为空;
+            var iWidth = 1024; //弹出窗口的宽度;
+            var iHeight = 700; //弹出窗口的高度;
+            //获得窗口的垂直位置
+            var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
+            //获得窗口的水平位置
+            var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
+            window.open(url, name, 'height=' + iHeight + ',,innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no');
+        }
+
+        function getweater() {
+
+            $.ajax({
+                url: "http://wthrcdn.etouch.cn/weather_mini?city=如东",
+                dataType: "jsonp",
+                type: "post",
+                data: {
+
+                },
+                success: function(data) {
+                    console.log(data.data.forecast[0]);
+                    var forecast = data.data.forecast[0];
+                    var str = forecast.fengli,
+                        fengli = str.slice(9, 13);
+                    console.log(fengli);
+                    $("#nowTime_zhzF>span:nth-child(4)").text("最" + forecast.high);
+                    $("#nowTime_zhzF>span:nth-child(5)").text("最" + forecast.low);
+                    $("#nowTime_zhzF>span:nth-child(6)").text(forecast.fengxiang);
+                    $("#nowTime_zhzF>span:nth-child(7)").text(fengli);
+                    $("#nowTime_zhzF>span:nth-child(8)").text(forecast.type);
+
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

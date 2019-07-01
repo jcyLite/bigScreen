@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <style>
+        .video{
+            text-align: center;
+        }
+        .vediodiv{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+<div class="" style="display:inline-block">
+    <object type='application/x-vlc-plugin' id='vlc' events='false' classid='clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921' codebase="http://downloads.videolan.org/pub/videolan/vlc/latest/win32/axvlc.cab" width="600" height="480">
+          <param name='mrl' value='' />
+          <param name='volume' value='50' />
+          <param name='autoplay' value='true' />
+          <param name='loop' value='false' />
+          <param name='fullscreen' value='false' />
+    </object>
+
+	<!-- <object type='application/x-vlc-plugin' id='vlc2' events='false' classid='clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921' codebase="http://downloads.videolan.org/pub/videolan/vlc/latest/win32/axvlc.cab" width="600" height="480">
+          <param name='mrl' value='' />
+          <param name='volume' value='50' />
+          <param name='autoplay' value='true' />
+          <param name='loop' value='false' />
+          <param name='fullscreen' value='false' />
+    </object> -->
+
+</div>
+<script src="http://vjs.zencdn.net/5.5.3/video.js"></script>	
+<script>
+    $(function(){
+        initPlayUrl("vlc",window.localStorage.vidio1);
+        //initPlayUrl("vlc2",window.localStorage.vidio2);
+    });
+
+    var itemId;
+    var vlc;
+    function initPlayUrl(id,rtspUrl){
+	    vlc=document.getElementById(id);
+	    itemId= vlc.playlist.add(rtspUrl);
+	    vlc.playlist.playItem(itemId);
+    }
+</script>
+
+</body>
+</html>
